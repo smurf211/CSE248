@@ -7,6 +7,7 @@ public class Demo {
 		
 		bag.importFileBoy("inputData/boys_names.txt", "inputData/lastNames.txt", "inputData/girls_names.txt");
 		bag.displayBag();
+		System.out.println("hello world");
 
 	}
 
