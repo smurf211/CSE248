@@ -33,64 +33,19 @@ public class DemoGui extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		
 		
-		Label nameLbl = new Label("Name: ");
-		TextField nameField = new TextField();
-
-		// second set of controls
-		Label phoneLbl = new Label("Phone");
-		TextField phoneField = new TextField();
-
-		// 3rd controls
-		Button okBtn = new Button("Ok");
-
-		Button exitBtn = new Button("exit");
-
-		// container
-		HBox pane1 = new HBox(30);
-
-		pane1.getChildren().addAll(nameLbl, nameField);
-		pane1.setAlignment(Pos.CENTER);
-
-		// second container
-		HBox pane2 = new HBox(30);
-
-		pane2.getChildren().addAll(phoneLbl, phoneField);
-		pane2.setAlignment(Pos.CENTER);
-
-		// third container
-		HBox pane3 = new HBox(30);
-		pane3.getChildren().add(exitBtn);
-
-		pane3.getChildren().add(okBtn);
-		pane3.setAlignment(Pos.CENTER);
-
-		// fourth container
-		TextArea displayArea = new TextArea();
-
-		okBtn.setOnAction(e -> {
-			// whatever is in here will be invoked when button is clicked.
-			String name = nameField.getText();
-			String phone = phoneField.getText();
-			displayArea.appendText(name + ": " + phone + "\n");
-			nameField.clear();
-			phoneField.clear();
-			
-
-		});
-
-		exitBtn.setOnAction(e -> {
-			Platform.exit();
-		});
-
-		// parent container
-		VBox pane = new VBox(30);
-		pane.getChildren().addAll(pane1, pane2, pane3, displayArea);
-		// pane.setAlignment(Pos.CENTER);
+		BorderPane root = new BorderPane();
+		LoginScreen loginScreen = new LoginScreen();
+		root.setCenter(loginScreen.createLoginScreen());
+		
+	
+		
+		
 
 		// add container to the scene.
-		Scene scene = new Scene(pane, 500, 500);
+		Scene scene = new Scene(root, 600, 200);
 
 		// add the scene to the primary stage
+		scene.getStylesheets().add("mike.css");
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Welcome");
 
