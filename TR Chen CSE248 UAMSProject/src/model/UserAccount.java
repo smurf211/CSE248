@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class UserAccount {
 
@@ -12,6 +13,7 @@ public class UserAccount {
 	private String password;
 	private double GPA;
 
+	
 	private static int idCounter = 0;
 
 	public UserAccount(String firstName, String lastName, String gender) {
@@ -28,6 +30,26 @@ public class UserAccount {
 		generateGPA();
 		generatePassword();
 	}
+	
+	
+	public UserAccount(String userName, String password, String firstName, String lastName, String gender) {
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		
+		iD = String.valueOf(++idCounter);
+		for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
+			iD = '0' + iD;
+
+		}
+		generateGPA();
+		
+		
+		
+		
+	}
 
 	public String createUserName() {
 
@@ -36,7 +58,7 @@ public class UserAccount {
 		if (lastName.length() >= 4) {
 			userName = lastName.substring(0, 4);
 			userName = userName.concat(firstName.substring(0, 1));
-			userName = userName.concat(iD.substring(iD.length() - 1));
+			userName = userName.concat(iD.substring(iD.length() - 2, iD.length()));
 
 		}
 
@@ -44,7 +66,7 @@ public class UserAccount {
 
 			userName = lastName;
 			userName = userName.concat(firstName.substring(0, 1));
-			userName = userName.concat(iD.substring(iD.length() - 1));
+			userName = userName.concat(iD.substring(iD.length() - 2, iD.length()));
 
 		}
 
