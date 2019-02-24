@@ -20,7 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+import model.UserAccountBag;
 
 public class DemoGui extends Application {
 
@@ -31,18 +31,21 @@ public class DemoGui extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		
+
 		BorderPane root = new BorderPane();
 		LoginScreen loginScreen = new LoginScreen();
+		SignUpScreen signUpScreen = new SignUpScreen(loginScreen.getBag());
 		root.setCenter(loginScreen.createLoginScreen());
-		
-	
-		
-		
+		root.setTop(loginScreen.getMenuBar());
+
+		loginScreen.getSignUpButton().setOnAction(e -> {
+
+			root.setCenter(signUpScreen.createSignUpScreen());
+
+		});
 
 		// add container to the scene.
-		Scene scene = new Scene(root, 600, 200);
+		Scene scene = new Scene(root, 600, 400);
 
 		// add the scene to the primary stage
 		scene.getStylesheets().add("mike.css");
@@ -51,9 +54,7 @@ public class DemoGui extends Application {
 
 		// request display on the screen
 		primaryStage.show();
-		
+
 	}
-	
-	
 
 }
