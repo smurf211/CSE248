@@ -50,8 +50,6 @@ public class LoginScreen {
 
 		bag.fillBagHash(3000);
 
-		// bag.displayBag();
-
 		loginButton.setOnAction(e -> {
 
 			String userName = usernameField.getText();
@@ -75,7 +73,6 @@ public class LoginScreen {
 	}
 
 	public VBox switchToLoginScreen() {
-		
 
 		HBox loginBox = new HBox();
 		loginBox.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField);
@@ -87,8 +84,6 @@ public class LoginScreen {
 		buttonBox.setAlignment(Pos.CENTER);
 
 		bag.fillBagHash(3000);
-
-		// bag.displayBag();
 
 		loginButton.setOnAction(e -> {
 

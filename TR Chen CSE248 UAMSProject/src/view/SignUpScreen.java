@@ -28,9 +28,7 @@ public class SignUpScreen {
 	TextField lastNameField = new TextField();
 
 	Label genderLbl = new Label("Gender: ");
-	ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female"
-
-	);
+	ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	ComboBox genderBox = new ComboBox(genderList);
 
 	Button createUserButton = new Button("Create User");
@@ -77,21 +75,22 @@ public class SignUpScreen {
 			firstname = firstNameField.getText();
 			lastname = lastNameField.getText();
 			gender = genderBox.getValue().toString();
-			
+
 			String returnValue = bag.createAccountString(userName, password, firstname, lastname, gender);
 
 			if (returnValue.equals("success")) {
 
 				alert.SuccessAlert("User Created!");
 
-			} 
-			if(returnValue.equals("badUser")) {
+			}
+			if (returnValue.equals("badUser")) {
 				alert.SuccessAlert("That username is already taken.... please try again.");
 			}
-			
-			if (returnValue.equals("badPass")){
-				alert.SuccessAlert("Please enter a password that is at least 8 characters long, contains a capital letter, a number and a symbol.");
-				
+
+			if (returnValue.equals("badPass")) {
+				alert.SuccessAlert(
+						"Please enter a password that is at least 8 characters long, contains a capital letter, a number and a symbol.");
+
 			}
 
 		});

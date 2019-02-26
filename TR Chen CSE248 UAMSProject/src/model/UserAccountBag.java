@@ -9,19 +9,12 @@ import java.util.Map.Entry;
 
 public class UserAccountBag {
 
-	private UserAccount[] userAccountArr;
 	private int nElems;
 	HashMap<UserAccount, String> userAccountHash = new HashMap<UserAccount, String>();
 
 	public UserAccountBag() {
 
-		// userAccountArr = new UserAccount[maxSize];
 		nElems = 0;
-
-	}
-
-	public void insert(String firstName, String lastName, String gender) {
-		userAccountArr[nElems++] = new UserAccount(firstName, lastName, gender);
 
 	}
 
@@ -31,7 +24,7 @@ public class UserAccountBag {
 		nElems++;
 
 	}
-	
+
 	public boolean searchAccount(String userName, String password, HashMap<UserAccount, String> map) {
 
 		UserAccount user = null;
@@ -51,7 +44,7 @@ public class UserAccountBag {
 		return false;
 
 	}
-	
+
 	public boolean searchAccount(String userName, HashMap<UserAccount, String> map) {
 
 		if (map.containsValue(userName)) {
@@ -162,124 +155,6 @@ public class UserAccountBag {
 
 	}
 
-	public void fillBag(int maxSize) {
-
-		NameWarehouse nameWarehouse = new NameWarehouse();
-
-		nameWarehouse.importFiles("inputData/boys_names.txt", "inputData/girls_names.txt", "inputData/lastNames.txt");
-
-		int j = 0;
-		int q = 0;
-		int h = 0;
-		String male = "male";
-		String female = "female";
-		String[] boysFirstNames = nameWarehouse.getBoysFirstNames();
-		String[] girlsFirstNames = nameWarehouse.getGirlsFirstNames();
-		String[] lastNames = nameWarehouse.getLastNames();
-
-		for (int i = 0; i < maxSize / 2; i++) {
-
-			if (q == nameWarehouse.getBoySize()) {
-
-				q = q - nameWarehouse.getBoySize();
-
-			}
-
-			if (j == nameWarehouse.getLastNameSize()) {
-
-				j = j - (nameWarehouse.getLastNameSize());
-			}
-
-			insert(boysFirstNames[q], lastNames[j], male);
-			j++;
-			q++;
-
-		}
-
-		for (int x = 0; x < maxSize / 2; x++) {
-
-			if (h == nameWarehouse.getGirlSize()) {
-
-				h = h - nameWarehouse.getGirlSize();
-
-			}
-
-			if (j == nameWarehouse.getLastNameSize()) {
-
-				j = j - nameWarehouse.getLastNameSize();
-			}
-
-			insert(girlsFirstNames[h], lastNames[j], female);
-			j++;
-			h++;
-
-		}
-
-	}
-
-	public void importFileBoy(String file1, String file2, String file3) {
-
-		String firstNameMale;
-		String firstNameFemale;
-		String lastName;
-		String male = "male";
-		String female = "female";
-
-		Scanner input1 = null;
-		try {
-			input1 = new Scanner(new File(file1));
-		} catch (FileNotFoundException e) {
-			System.out.println("File not Found!");
-		}
-
-		Scanner input2 = null;
-		try {
-			input2 = new Scanner(new File(file2));
-		} catch (FileNotFoundException e) {
-			System.out.println("File not Found!");
-		}
-
-		Scanner input3 = null;
-		try {
-			input3 = new Scanner(new File(file3));
-		} catch (FileNotFoundException e) {
-			System.out.println("File not Found!");
-		}
-
-		while (input1.hasNext() && input2.hasNext()) {
-
-			input1.next();
-			firstNameMale = input1.next();
-			lastName = input2.next();
-
-			insert(firstNameMale, lastName, male);
-
-			if (input3.hasNext()) {
-				firstNameFemale = input3.next();
-				lastName = input2.next();
-
-				insert(firstNameFemale, lastName, female);
-
-			}
-		}
-
-	}
-
-	public void displayBag() {
-
-		int counter = 0;
-
-		for (int i = 0; i < nElems; i++) {
-
-			System.out.println(userAccountArr[counter].emitFirstName() + " " + userAccountArr[counter].emitLastName()
-					+ " " + userAccountArr[counter].getGender() + " " + userAccountArr[counter].emitUserName() + " "
-					+ userAccountArr[counter].emitID() + " " + userAccountArr[counter].emitGPA() + " "
-					+ userAccountArr[counter].emitPassword());
-
-			counter++;
-		}
-	}
-
 	public void displayBagHash() {
 
 		System.out.println(Arrays.asList(userAccountHash));
@@ -292,14 +167,6 @@ public class UserAccountBag {
 
 	public HashMap<UserAccount, String> getUserAccountHash() {
 		return userAccountHash;
-	}
-
-	public UserAccount[] getUserAccountArr() {
-		return userAccountArr;
-	}
-
-	public void setUserAccountArr(UserAccount[] userAccountArr) {
-		this.userAccountArr = userAccountArr;
 	}
 
 }

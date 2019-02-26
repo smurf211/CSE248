@@ -15,19 +15,7 @@ public class CheckCredentials {
 	Pattern patternNumbers = Pattern.compile(numbers);
 	Pattern patternSymbols = Pattern.compile(symbols);
 
-	public boolean checkUserName(String userName, UserAccount[] array, int nElems) {
 
-		for (int i = 0; i < nElems; i++) {
-
-			if (userName.toLowerCase().equals(array[i].emitUserName().toLowerCase())) {
-				return false;
-			}
-
-		}
-
-		return true;
-
-	}
 
 	public boolean checkUserNameHash(String userName, HashMap<UserAccount, String> map) {
 
