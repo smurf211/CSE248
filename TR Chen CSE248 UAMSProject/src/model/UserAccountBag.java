@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 public class UserAccountBag {
 
@@ -26,8 +27,38 @@ public class UserAccountBag {
 
 	public void insertHash(String firstName, String lastName, String gender) {
 		UserAccount user = new UserAccount(firstName, lastName, gender);
-		userAccountHash.put(user, user.getUserName().toLowerCase());
+		userAccountHash.put(user, user.emitUserName().toLowerCase());
 		nElems++;
+
+	}
+	
+	public boolean searchAccount(String userName, String password, HashMap<UserAccount, String> map) {
+
+		UserAccount user = null;
+		for (Entry<UserAccount, String> entry : map.entrySet()) {
+			if (userName.toLowerCase().equals(entry.getValue())) {
+
+				user = entry.getKey();
+				break;
+			}
+		}
+
+		if (user.emitPassword().equals(password)) {
+			return true;
+
+		}
+
+		return false;
+
+	}
+	
+	public boolean searchAccount(String userName, HashMap<UserAccount, String> map) {
+
+		if (map.containsValue(userName)) {
+
+			return false;
+		}
+		return true;
 
 	}
 
@@ -40,7 +71,7 @@ public class UserAccountBag {
 			// userAccountArr[nElems++] = new UserAccount(userName, password, firstName,
 			// lastName, gender);
 			UserAccount user = new UserAccount(userName, password, firstName, lastName, gender);
-			userAccountHash.put(user, user.getUserName());
+			userAccountHash.put(user, user.emitUserName());
 			return true;
 		}
 
@@ -58,7 +89,7 @@ public class UserAccountBag {
 			if (create.checkPassword(password)) {
 
 				UserAccount user = new UserAccount(userName, password, firstName, lastName, gender);
-				userAccountHash.put(user, user.getUserName());
+				userAccountHash.put(user, user.emitUserName());
 
 				return "success";
 
@@ -240,10 +271,10 @@ public class UserAccountBag {
 
 		for (int i = 0; i < nElems; i++) {
 
-			System.out.println(userAccountArr[counter].getFirstName() + " " + userAccountArr[counter].getLastName()
-					+ " " + userAccountArr[counter].getGender() + " " + userAccountArr[counter].getUserName() + " "
-					+ userAccountArr[counter].getiD() + " " + userAccountArr[counter].getGPA() + " "
-					+ userAccountArr[counter].getPassword());
+			System.out.println(userAccountArr[counter].emitFirstName() + " " + userAccountArr[counter].emitLastName()
+					+ " " + userAccountArr[counter].getGender() + " " + userAccountArr[counter].emitUserName() + " "
+					+ userAccountArr[counter].emitID() + " " + userAccountArr[counter].emitGPA() + " "
+					+ userAccountArr[counter].emitPassword());
 
 			counter++;
 		}

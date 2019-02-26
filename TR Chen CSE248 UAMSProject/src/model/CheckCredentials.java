@@ -19,7 +19,7 @@ public class CheckCredentials {
 
 		for (int i = 0; i < nElems; i++) {
 
-			if (userName.toLowerCase().equals(array[i].getUserName().toLowerCase())) {
+			if (userName.toLowerCase().equals(array[i].emitUserName().toLowerCase())) {
 				return false;
 			}
 
@@ -67,7 +67,7 @@ public class CheckCredentials {
 			}
 		}
 
-		if (user.getPassword().equals(password)) {
+		if (user.emitPassword().equals(password)) {
 			return true;
 
 		}

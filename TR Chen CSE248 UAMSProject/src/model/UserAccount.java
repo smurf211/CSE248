@@ -114,53 +114,40 @@ public class UserAccount {
 
 	}
 
-	public String getFirstName() {
+	public String emitFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
 
-	public String getLastName() {
+	public String emitLastName() {
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
-	public String getiD() {
+
+	public String emitID() {
 		return iD;
 	}
 
-	public void setiD(String iD) {
-		this.iD = iD;
-	}
 
-	public String getUserName() {
+
+	public String emitUserName() {
 		return userName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+	
 
-	public String getPassword() {
+	public String emitPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 
-	public double getGPA() {
+	public double emitGPA() {
 		return GPA;
 	}
 
-	public void setGPA(double gPA) {
-		GPA = gPA;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -172,8 +159,6 @@ public class UserAccount {
 		return gender;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+
 
 }
