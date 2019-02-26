@@ -1,9 +1,11 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CreateFunctions {
+public class CheckCredentials {
 	String capitals = "[A-Z]+";
 	String numbers = "[0-9]+";
 	String lowercase = "[a-z]+";
@@ -27,6 +29,16 @@ public class CreateFunctions {
 
 	}
 
+	public boolean checkUserNameHash(String userName, HashMap<UserAccount, String> map) {
+
+		if (map.containsValue(userName)) {
+
+			return false;
+		}
+		return true;
+
+	}
+
 	public boolean checkPassword(String password) {
 
 		Matcher matcherCapitals = patternCapitals.matcher(password);
@@ -44,20 +56,22 @@ public class CreateFunctions {
 
 	}
 
-	public boolean login(String username, String password, UserAccount[] array, int nElems) {
+	public boolean login(String userName, String password, HashMap<UserAccount, String> map) {
 
-		for (int i = 0; i < nElems; i++) {
+		UserAccount user = null;
+		for (Entry<UserAccount, String> entry : map.entrySet()) {
+			if (userName.toLowerCase().equals(entry.getValue())) {
 
-			if (username.toLowerCase().equals(array[i].getUserName().toLowerCase())) {
-
-				if (password.equals(array[i].getPassword())) {
-
-					return true;
-				}
-
+				user = entry.getKey();
+				break;
 			}
+		}
+
+		if (user.getPassword().equals(password)) {
+			return true;
 
 		}
+
 		return false;
 
 	}

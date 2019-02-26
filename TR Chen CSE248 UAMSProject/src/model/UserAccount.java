@@ -13,7 +13,6 @@ public class UserAccount {
 	private String password;
 	private double GPA;
 
-	
 	private static int idCounter = 0;
 
 	public UserAccount(String firstName, String lastName, String gender) {
@@ -30,25 +29,21 @@ public class UserAccount {
 		generateGPA();
 		generatePassword();
 	}
-	
-	
+
 	public UserAccount(String userName, String password, String firstName, String lastName, String gender) {
 		this.userName = userName;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
-		
+
 		iD = String.valueOf(++idCounter);
 		for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
 			iD = '0' + iD;
 
 		}
 		generateGPA();
-		
-		
-		
-		
+
 	}
 
 	public String createUserName() {
@@ -101,19 +96,16 @@ public class UserAccount {
 		Random random = new Random();
 
 		char[] password = new char[length];
-		
-		
-			password[0] = Capital_chars.charAt(random.nextInt(Capital_chars.length()));
-			password[1] = Small_chars.charAt(random.nextInt(Small_chars.length()));
-			password[2] = numbers.charAt(random.nextInt(numbers.length()));
-			password[3] = symbols.charAt(random.nextInt(symbols.length()));
-		
+
+		password[0] = Capital_chars.charAt(random.nextInt(Capital_chars.length()));
+		password[1] = Small_chars.charAt(random.nextInt(Small_chars.length()));
+		password[2] = numbers.charAt(random.nextInt(numbers.length()));
+		password[3] = symbols.charAt(random.nextInt(symbols.length()));
 
 		for (int i = 4; i < length; i++) {
 			// Use of charAt() method : to get character value
 			// Use of nextInt() as it is scanning the value as int
-			
-			
+
 			password[i] = values.charAt(random.nextInt(valuesNoSymbols.length()));
 
 		}

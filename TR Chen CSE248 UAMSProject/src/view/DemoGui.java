@@ -44,15 +44,18 @@ public class DemoGui extends Application {
 
 		});
 
-		// add container to the scene.
+		signUpScreen.getBackButton().setOnAction(e -> {
+
+			root.setCenter(loginScreen.switchToLoginScreen());
+
+		});
+
 		Scene scene = new Scene(root, 600, 400);
 
-		// add the scene to the primary stage
 		scene.getStylesheets().add("mike.css");
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Welcome");
 
-		// request display on the screen
 		primaryStage.show();
 
 	}

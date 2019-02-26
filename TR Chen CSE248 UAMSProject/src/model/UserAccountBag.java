@@ -2,16 +2,19 @@ package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class UserAccountBag {
 
 	private UserAccount[] userAccountArr;
 	private int nElems;
+	HashMap<UserAccount, String> userAccountHash = new HashMap<UserAccount, String>();
 
-	public UserAccountBag(int maxSize) {
+	public UserAccountBag() {
 
-		userAccountArr = new UserAccount[maxSize];
+		// userAccountArr = new UserAccount[maxSize];
 		nElems = 0;
 
 	}
@@ -21,13 +24,23 @@ public class UserAccountBag {
 
 	}
 
+	public void insertHash(String firstName, String lastName, String gender) {
+		UserAccount user = new UserAccount(firstName, lastName, gender);
+		userAccountHash.put(user, user.getUserName().toLowerCase());
+		nElems++;
+
+	}
+
 	public boolean createAccount(String userName, String password, String firstName, String lastName, String gender) {
 
-		CreateFunctions create = new CreateFunctions();
+		CheckCredentials create = new CheckCredentials();
 
-		if (create.checkUserName(userName, userAccountArr, nElems) && create.checkPassword(password)) {
+		if (create.checkUserNameHash(userName, userAccountHash) && create.checkPassword(password)) {
 
-			userAccountArr[nElems++] = new UserAccount(userName, password, firstName, lastName, gender);
+			// userAccountArr[nElems++] = new UserAccount(userName, password, firstName,
+			// lastName, gender);
+			UserAccount user = new UserAccount(userName, password, firstName, lastName, gender);
+			userAccountHash.put(user, user.getUserName());
 			return true;
 		}
 
@@ -35,12 +48,95 @@ public class UserAccountBag {
 
 	}
 
+	public String createAccountString(String userName, String password, String firstName, String lastName,
+			String gender) {
+
+		CheckCredentials create = new CheckCredentials();
+
+		if (create.checkUserNameHash(userName, userAccountHash)) {
+
+			if (create.checkPassword(password)) {
+
+				UserAccount user = new UserAccount(userName, password, firstName, lastName, gender);
+				userAccountHash.put(user, user.getUserName());
+
+				return "success";
+
+			} else {
+				return "badPass";
+			}
+
+		} else {
+			return "badUser";
+		}
+
+	}
+
+	public void fillBagHash(int maxSize) {
+
+		NameWarehouse nameWarehouse = new NameWarehouse();
+
+		nameWarehouse.importFiles("inputData/boys_names.txt", "inputData/girls_names.txt", "inputData/lastNames.txt");
+
+		int j = 0;
+		int q = 0;
+		int h = 0;
+		String male = "male";
+		String female = "female";
+		String[] boysFirstNames = nameWarehouse.getBoysFirstNames();
+		String[] girlsFirstNames = nameWarehouse.getGirlsFirstNames();
+		String[] lastNames = nameWarehouse.getLastNames();
+
+		HashMap<UserAccount, String> userAccountHash = new HashMap<>();
+
+		for (int i = 0; i < maxSize / 2; i++) {
+
+			if (q == nameWarehouse.getBoySize()) {
+
+				q = q - nameWarehouse.getBoySize();
+
+			}
+
+			if (j == nameWarehouse.getLastNameSize()) {
+
+				j = j - (nameWarehouse.getLastNameSize());
+			}
+
+			insertHash(boysFirstNames[q], lastNames[j], male);
+			// insert(boysFirstNames[q], lastNames[j], male);
+			j++;
+			q++;
+
+		}
+
+		for (int x = 0; x < maxSize / 2; x++) {
+
+			if (h == nameWarehouse.getGirlSize()) {
+
+				h = h - nameWarehouse.getGirlSize();
+
+			}
+
+			if (j == nameWarehouse.getLastNameSize()) {
+
+				j = j - nameWarehouse.getLastNameSize();
+			}
+
+			insertHash(girlsFirstNames[h], lastNames[j], female);
+			// insert(girlsFirstNames[h], lastNames[j], female);
+			j++;
+			h++;
+
+		}
+
+	}
+
 	public void fillBag(int maxSize) {
 
 		NameWarehouse nameWarehouse = new NameWarehouse();
-		
-		nameWarehouse.importFiles("inputData/boys_names.txt", "inputData/girls_names.txt", "inputData/lastNames.txt" );
-		
+
+		nameWarehouse.importFiles("inputData/boys_names.txt", "inputData/girls_names.txt", "inputData/lastNames.txt");
+
 		int j = 0;
 		int q = 0;
 		int h = 0;
@@ -52,50 +148,41 @@ public class UserAccountBag {
 
 		for (int i = 0; i < maxSize / 2; i++) {
 
-			if (q == nameWarehouse.getBoySize()  ) {
+			if (q == nameWarehouse.getBoySize()) {
 
-				q = q - nameWarehouse.getBoySize() ;
+				q = q - nameWarehouse.getBoySize();
 
 			}
-			
-			if(j == nameWarehouse.getLastNameSize() ) {
-				
-				j = j - (nameWarehouse.getLastNameSize() ) ;
+
+			if (j == nameWarehouse.getLastNameSize()) {
+
+				j = j - (nameWarehouse.getLastNameSize());
 			}
-			
-			
+
 			insert(boysFirstNames[q], lastNames[j], male);
 			j++;
 			q++;
 
 		}
-		
-		
-		for(int x = 0; x < maxSize /2; x++) {
-			
-			
+
+		for (int x = 0; x < maxSize / 2; x++) {
+
 			if (h == nameWarehouse.getGirlSize()) {
 
 				h = h - nameWarehouse.getGirlSize();
 
 			}
-			
-			if(j == nameWarehouse.getLastNameSize()) {
-				
+
+			if (j == nameWarehouse.getLastNameSize()) {
+
 				j = j - nameWarehouse.getLastNameSize();
 			}
-			
+
 			insert(girlsFirstNames[h], lastNames[j], female);
 			j++;
 			h++;
-			
+
 		}
-		
-		
-		
-		
-		
-		
 
 	}
 
@@ -162,8 +249,18 @@ public class UserAccountBag {
 		}
 	}
 
+	public void displayBagHash() {
+
+		System.out.println(Arrays.asList(userAccountHash));
+
+	}
+
 	public int getnElems() {
 		return nElems;
+	}
+
+	public HashMap<UserAccount, String> getUserAccountHash() {
+		return userAccountHash;
 	}
 
 	public UserAccount[] getUserAccountArr() {

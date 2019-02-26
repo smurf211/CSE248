@@ -1,5 +1,6 @@
 package view;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.CreateFunctions;
+import model.CheckCredentials;
 import model.UserAccountBag;
 
 public class LoginScreen {
@@ -27,14 +28,54 @@ public class LoginScreen {
 	Menu fileMenu = new Menu("File");
 	MenuItem displayMenuItem = new MenuItem("Display Users");
 	MenuBar menuBar = new MenuBar();
-	
-	UserAccountBag bag = new UserAccountBag(5000);
-	
-	CreateFunctions function = new CreateFunctions();
+
+	UserAccountBag bag = new UserAccountBag();
+
+	CheckCredentials function = new CheckCredentials();
 
 	public VBox createLoginScreen() {
 		buildFileMenu();
 		buildMenuBar();
+
+		HBox loginBox = new HBox();
+		loginBox.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField);
+		loginBox.setPadding(new Insets(20, 0, 0, 0));
+		HBox buttonBox = new HBox();
+		loginBox.setAlignment(Pos.CENTER);
+		buttonBox.setPadding(new Insets(10, 0, 0, 0));
+		buttonBox.getChildren().addAll(loginButton, signUpButton);
+		VBox box = new VBox();
+		box.getChildren().addAll(loginBox, buttonBox);
+		buttonBox.setAlignment(Pos.CENTER);
+
+		bag.fillBagHash(3000);
+
+		// bag.displayBag();
+
+		loginButton.setOnAction(e -> {
+
+			String userName = usernameField.getText();
+			String password = passwordField.getText();
+
+			if (function.login(userName, password, bag.getUserAccountHash())) {
+
+				alert.SuccessAlert("Success!");
+
+			}
+
+			else {
+
+				alert.SuccessAlert("Failure!");
+			}
+
+		});
+
+		return box;
+
+	}
+
+	public VBox switchToLoginScreen() {
+		
 
 		HBox loginBox = new HBox();
 		loginBox.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField);
@@ -45,58 +86,49 @@ public class LoginScreen {
 		box.getChildren().addAll(loginBox, buttonBox);
 		buttonBox.setAlignment(Pos.CENTER);
 
-		
-		bag.fillBag(3000);
-		
-	//	bag.displayBag();
+		bag.fillBagHash(3000);
+
+		// bag.displayBag();
 
 		loginButton.setOnAction(e -> {
 
 			String userName = usernameField.getText();
 			String password = passwordField.getText();
 
-			if(function.login(userName, password, bag.getUserAccountArr(), bag.getnElems())) {
-				
+			if (function.login(userName, password, bag.getUserAccountHash())) {
+
 				alert.SuccessAlert("Success!");
-				
+
 			}
-			
+
 			else {
-				
+
 				alert.SuccessAlert("Failure!");
 			}
-			
 
 		});
 
 		return box;
 
 	}
-	
+
 	private void buildFileMenu() {
-		
+
 		fileMenu.getItems().addAll(displayMenuItem);
-		
-		displayMenuItem.setOnAction(e ->{
-			
-			bag.displayBag();
+
+		displayMenuItem.setOnAction(e -> {
+
+			bag.displayBagHash();
 		});
-		
-		
-		
+
 	}
-	
+
 	private void buildMenuBar() {
 		menuBar = new MenuBar();
-		
+
 		menuBar.getMenus().addAll(fileMenu);
 
-		
 	}
-
-
-	
-	
 
 	public MenuBar getMenuBar() {
 		return menuBar;
@@ -113,9 +145,5 @@ public class LoginScreen {
 	public UserAccountBag getBag() {
 		return bag;
 	}
-	
-	
-	
-	
 
 }
