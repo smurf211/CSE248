@@ -1,5 +1,21 @@
 package model;
 
+/**
+ * 
+ * 
+ * UserAccount class to create new users.
+ * 
+ * @see <A href="../src/model/UserAccount.java">Java
+ *      sourceCode</A>
+ * 
+ * 
+ * @author Mike <A href="mailto:spadm98@sunysuffolk.edu">
+ *         spadm98@sunysuffolk.edu </A>
+ * 
+ * @version v1.0, 2/26/2019
+ * 
+ */
+
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -45,6 +61,16 @@ public class UserAccount {
 		generateGPA();
 
 	}
+	
+	/**
+	 *  create username based on first, last name and id.
+	 *  
+	 *  
+	 *  
+	 * @param none
+	 * @return String username
+	 * @author mike
+	 */
 
 	public String createUserName() {
 
@@ -67,6 +93,16 @@ public class UserAccount {
 
 		return userName;
 	}
+	
+	/**
+	 *  generate random GPA for users
+	 *  
+	 *  
+	 *  
+	 * @param none
+	 * @return void
+	 * @author mike
+	 */
 
 	public void generateGPA() {
 
@@ -79,6 +115,17 @@ public class UserAccount {
 		GPA = roundOff;
 
 	}
+	
+	/**
+	 *  generate random password
+	 *  
+	 *  
+	 *  
+	 * @param none
+	 * @return void
+	 * @author mike
+	 */
+
 
 	public void generatePassword() {
 

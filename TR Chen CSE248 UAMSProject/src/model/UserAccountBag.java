@@ -1,5 +1,22 @@
 package model;
 
+/**
+ * 
+ * 
+ * The UserAccountBag class stores all users generated from NameWarehouse and stores them in a HashMap
+ * 
+ * @see <A href="../src/model/UserAccountBag.java">Java
+ *      sourceCode</A>
+ * 
+ * 
+ * @author Mike <A href="mailto:spadm98@sunysuffolk.edu">
+ *         spadm98@sunysuffolk.edu </A>
+ * 
+ * @version v1.0, 2/26/2019
+ * 
+ */
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -17,6 +34,16 @@ public class UserAccountBag {
 		nElems = 0;
 
 	}
+	
+	/**
+	 *  insert new user into HashMap
+	 *  
+	 *  
+	 *  
+	 * @param String firstName, String lastName, String gender
+	 * @return void
+	 * @author mike
+	 */
 
 	public void insertHash(String firstName, String lastName, String gender) {
 		UserAccount user = new UserAccount(firstName, lastName, gender);
@@ -24,6 +51,16 @@ public class UserAccountBag {
 		nElems++;
 
 	}
+	
+	/**
+	 *  searchAccount in hashMap
+	 *  
+	 *  
+	 *  
+	 * @param String userName, String password, HashMap<UserAccount, String> map
+	 * @return return true if user and password match, false if no match.
+	 * @author mike
+	 */
 
 	public boolean searchAccount(String userName, String password, HashMap<UserAccount, String> map) {
 
@@ -44,6 +81,16 @@ public class UserAccountBag {
 		return false;
 
 	}
+	
+	/**
+	 *  searchAccount in hashMap
+	 *  
+	 *  
+	 *  
+	 * @param String userName, HashMap<UserAccount, String> map
+	 * @return return true if user matches, false if no match
+	 * @author mike
+	 */
 
 	public boolean searchAccount(String userName, HashMap<UserAccount, String> map) {
 
@@ -54,6 +101,16 @@ public class UserAccountBag {
 		return true;
 
 	}
+	
+	/**
+	 *  create account, checks for duplicate username and correct password
+	 *  
+	 *  
+	 *  
+	 * @param String userName, String password, String firstName, String lastName, String gender
+	 * @return return true if userName and password valid. false if else
+	 * @author mike
+	 */
 
 	public boolean createAccount(String userName, String password, String firstName, String lastName, String gender) {
 
@@ -61,8 +118,7 @@ public class UserAccountBag {
 
 		if (create.checkUserNameHash(userName, userAccountHash) && create.checkPassword(password)) {
 
-			// userAccountArr[nElems++] = new UserAccount(userName, password, firstName,
-			// lastName, gender);
+			
 			UserAccount user = new UserAccount(userName, password, firstName, lastName, gender);
 			userAccountHash.put(user, user.emitUserName());
 			return true;
@@ -71,6 +127,17 @@ public class UserAccountBag {
 		return false;
 
 	}
+	
+	/**
+	 *  create account, checks for duplicate username and correct password
+	 *  
+	 *  
+	 *  
+	 * @param String userName, String password, String firstName, String lastName, String gender
+	 * @return return "success" if username and password valid, return "badPass" if password is no good, 
+	 * return "badUser" if username is duplicate.
+	 * @author mike
+	 */
 
 	public String createAccountString(String userName, String password, String firstName, String lastName,
 			String gender) {
@@ -95,6 +162,16 @@ public class UserAccountBag {
 		}
 
 	}
+	
+	/**
+	 *  fill HashMap from namewarehouse
+	 *  
+	 *  
+	 *  
+	 * @param int maxSize
+	 * @return void
+	 * @author mike
+	 */
 
 	public void fillBagHash(int maxSize) {
 
@@ -154,6 +231,16 @@ public class UserAccountBag {
 		}
 
 	}
+	
+	/**
+	 *  displayHashMap, will not be in order
+	 *  
+	 *  
+	 *  
+	 * @param void
+	 * @return void
+	 * @author mike
+	 */
 
 	public void displayBagHash() {
 

@@ -1,5 +1,21 @@
 package model;
 
+/**
+ * 
+ * 
+ * The NameWarehouse class loads firstNames for boys and girls and last names into an array from .txt files to be used later.
+ * 
+ * @see <A href="../src/model/NameWarehouse.java">Java
+ *      sourceCode</A>
+ * 
+ * 
+ * @author Mike <A href="mailto:spadm98@sunysuffolk.edu">
+ *         spadm98@sunysuffolk.edu </A>
+ * 
+ * @version v1.0, 2/26/2019
+ * 
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -13,6 +29,16 @@ public class NameWarehouse {
 	int boySize = 0;
 	int girlSize = 0;
 	int lastNameSize = 0;
+	
+	/**
+	 *  Displays boys names from array
+	 *  
+	 *  
+	 *  
+	 * @param none
+	 * @return println
+	 * @author mike
+	 */
 
 	public void displayBoys() {
 
@@ -22,6 +48,16 @@ public class NameWarehouse {
 		}
 
 	}
+	
+	/**
+	 *  Displays girls names from array
+	 *  
+	 *  
+	 *  
+	 * @param none
+	 * @return println
+	 * @author mike
+	 */
 
 	public void displayGirls() {
 
@@ -31,6 +67,16 @@ public class NameWarehouse {
 		}
 
 	}
+	
+	/**
+	 *  Displays last names from array
+	 *  
+	 *  
+	 *  
+	 * @param none
+	 * @return println
+	 * @author mike
+	 */
 
 	public void displaylastNames() {
 
@@ -40,6 +86,16 @@ public class NameWarehouse {
 		}
 
 	}
+	
+	/**
+	 *  Import names from given txt files.
+	 *  
+	 *  
+	 *  
+	 * @param String boys, String girls, String lasts
+	 * @return void
+	 * @author mike
+	 */
 
 	public void importFiles(String boys, String girls, String lasts) {
 
