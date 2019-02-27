@@ -45,6 +45,22 @@ public class UserAccount {
 		generateGPA();
 		generatePassword();
 	}
+	
+	public UserAccount(String password, String firstName, String lastName, String gender) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.password = password;
+		iD = String.valueOf(++idCounter);
+		for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
+			iD = '0' + iD;
+
+		}
+		userName = createUserName();
+		generateGPA();
+		generatePassword();
+	}
 
 	public UserAccount(String userName, String password, String firstName, String lastName, String gender) {
 		this.userName = userName;
@@ -93,6 +109,10 @@ public class UserAccount {
 
 		return userName;
 	}
+	
+	
+	
+	
 	
 	/**
 	 *  generate random GPA for users

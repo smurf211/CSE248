@@ -16,7 +16,6 @@ package model;
  * 
  */
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -34,13 +33,14 @@ public class UserAccountBag {
 		nElems = 0;
 
 	}
-	
+
 	/**
-	 *  insert new user into HashMap
-	 *  
-	 *  
-	 *  
-	 * @param String firstName, String lastName, String gender
+	 * insert new user into HashMap
+	 * 
+	 * 
+	 * 
+	 * @param String
+	 *            firstName, String lastName, String gender
 	 * @return void
 	 * @author mike
 	 */
@@ -51,13 +51,14 @@ public class UserAccountBag {
 		nElems++;
 
 	}
-	
+
 	/**
-	 *  searchAccount in hashMap
-	 *  
-	 *  
-	 *  
-	 * @param String userName, String password, HashMap<UserAccount, String> map
+	 * searchAccount in hashMap
+	 * 
+	 * 
+	 * 
+	 * @param String
+	 *            userName, String password, HashMap<UserAccount, String> map
 	 * @return return true if user and password match, false if no match.
 	 * @author mike
 	 */
@@ -81,13 +82,14 @@ public class UserAccountBag {
 		return false;
 
 	}
-	
+
 	/**
-	 *  searchAccount in hashMap
-	 *  
-	 *  
-	 *  
-	 * @param String userName, HashMap<UserAccount, String> map
+	 * searchAccount in hashMap
+	 * 
+	 * 
+	 * 
+	 * @param String
+	 *            userName, HashMap<UserAccount, String> map
 	 * @return return true if user matches, false if no match
 	 * @author mike
 	 */
@@ -101,13 +103,15 @@ public class UserAccountBag {
 		return true;
 
 	}
-	
+
 	/**
-	 *  create account, checks for duplicate username and correct password
-	 *  
-	 *  
-	 *  
-	 * @param String userName, String password, String firstName, String lastName, String gender
+	 * create account, checks for duplicate username and correct password
+	 * 
+	 * 
+	 * 
+	 * @param String
+	 *            userName, String password, String firstName, String lastName,
+	 *            String gender
 	 * @return return true if userName and password valid. false if else
 	 * @author mike
 	 */
@@ -118,7 +122,6 @@ public class UserAccountBag {
 
 		if (create.checkUserNameHash(userName, userAccountHash) && create.checkPassword(password)) {
 
-			
 			UserAccount user = new UserAccount(userName, password, firstName, lastName, gender);
 			userAccountHash.put(user, user.emitUserName());
 			return true;
@@ -127,22 +130,30 @@ public class UserAccountBag {
 		return false;
 
 	}
-	
+
 	/**
-	 *  create account, checks for duplicate username and correct password
-	 *  
-	 *  
-	 *  
-	 * @param String userName, String password, String firstName, String lastName, String gender
-	 * @return return "success" if username and password valid, return "badPass" if password is no good, 
-	 * return "badUser" if username is duplicate.
+	 * create account, create username, checks for duplicate username and correct password
+	 * 
+	 * 
+	 * 
+	 * @param String
+	 *            userName, String password, String firstName, String lastName,
+	 *            String gender
+	 * @return return "success" if username and password valid, return "badPass" if
+	 *         password is no good, return "badUser" if username is duplicate, return "badName" if first or last name blank.
 	 * @author mike
 	 */
 
+	
 	public String createAccountString(String userName, String password, String firstName, String lastName,
 			String gender) {
 
 		CheckCredentials create = new CheckCredentials();
+
+		if (firstName.equals("") || lastName.equals("")) {
+
+			return "badName";
+		}
 
 		if (create.checkUserNameHash(userName, userAccountHash)) {
 
@@ -164,11 +175,57 @@ public class UserAccountBag {
 	}
 	
 	/**
-	 *  fill HashMap from namewarehouse
-	 *  
-	 *  
-	 *  
-	 * @param int maxSize
+	 * create account, auto generate userName without duplication, checks for valid password, first, last name.
+	 * 
+	 * 
+	 * 
+	 * @param String password, String firstName, String lastName, String gender
+	 * @return return "success" if username and password valid, return "badPass" if
+	 *         password is no good, return "badUser" if username is duplicate, return "badName" if first or last name blank
+	 * @author mike
+	 */
+
+
+	public String createAccountStringAuto(String password, String firstName, String lastName, String gender) {
+		
+		
+
+		CheckCredentials create = new CheckCredentials();
+
+		if (firstName.equals("") || lastName.equals("")) {
+
+			return "badName";
+		}
+		
+		UserAccount user = new UserAccount(password, firstName, lastName, gender);
+		
+
+		if (create.checkUserNameHash(user.emitUserName(), userAccountHash)) {
+
+			if (create.checkPassword(password)) {
+
+				
+				userAccountHash.put(user, user.emitUserName());
+
+				return "success";
+
+			} else {
+				return "badPass";
+			}
+
+		} else {
+			return "badUser";
+		}
+
+	}
+
+	/**
+	 * fill HashMap from namewarehouse
+	 * 
+	 * 
+	 * 
+	 * @param int
+	 *            maxSize
 	 * @return void
 	 * @author mike
 	 */
@@ -231,12 +288,12 @@ public class UserAccountBag {
 		}
 
 	}
-	
+
 	/**
-	 *  displayHashMap, will not be in order
-	 *  
-	 *  
-	 *  
+	 * displayHashMap, will not be in order
+	 * 
+	 * 
+	 * 
 	 * @param void
 	 * @return void
 	 * @author mike

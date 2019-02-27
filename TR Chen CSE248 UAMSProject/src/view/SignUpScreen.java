@@ -30,6 +30,8 @@ public class SignUpScreen {
 	Label genderLbl = new Label("Gender: ");
 	ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	ComboBox genderBox = new ComboBox(genderList);
+	
+	
 
 	Button createUserButton = new Button("Create User");
 	Button backButton = new Button("Back");
@@ -38,6 +40,8 @@ public class SignUpScreen {
 	String firstname;
 	String lastname;
 	String gender;
+	
+	
 
 	UserAccountBag bag;
 	Alerts alert = new Alerts();
@@ -45,11 +49,13 @@ public class SignUpScreen {
 	public SignUpScreen(UserAccountBag bag) {
 
 		this.bag = bag;
+		
 	}
 
 	public HBox createSignUpScreen() {
 
 		buttonActions();
+		genderBox.getSelectionModel().selectFirst();
 
 		VBox labelBox = new VBox();
 		labelBox.getChildren().addAll(userNameLbl, passwordLbl, firstNameLbl, lastNameLbl, genderLbl, createUserButton,
@@ -81,6 +87,7 @@ public class SignUpScreen {
 			if (returnValue.equals("success")) {
 
 				alert.SuccessAlert("User Created!");
+				
 
 			}
 			if (returnValue.equals("badUser")) {
@@ -91,6 +98,11 @@ public class SignUpScreen {
 				alert.SuccessAlert(
 						"Please enter a password that is at least 8 characters long, contains a capital letter, a number and a symbol.");
 
+			}
+			
+			if(returnValue.equals("badName")) {
+				
+				alert.SuccessAlert("Please enter a first and last name.");
 			}
 
 		});

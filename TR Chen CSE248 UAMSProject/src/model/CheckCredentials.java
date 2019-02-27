@@ -62,6 +62,45 @@ public class CheckCredentials {
 
 	}
 	
+	/**
+	 *  checks length of firstname, must be at least 2 characters
+	 *  
+	 *  
+	 *  
+	 * @param String firstName
+	 * @return true if firstName.length() >= 2
+	 * @author mike
+	 */
+	
+	
+	public boolean checkFirstName(String firstName) {
+		
+		if(firstName.length() < 2) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 *  checks length of lastname, must be at least 3 characters
+	 *  
+	 *  
+	 *  
+	 * @param String lastName
+	 * @return true if lastName.length() >= 3
+	 * @author mike
+	 */
+	
+	public boolean checkLastName(String lastName) {
+		
+		if(lastName.length() < 2) {
+			return false;
+		}
+		return true;
+	}
+			
+			
+	
 	
 	/**
 	 *  Checks if the password contains the appropriate character combinations
