@@ -63,7 +63,7 @@ public class LoginScreen {
 
 			else {
 
-				alert.SuccessAlert("Failure!");
+				alert.SuccessAlert("Bad username and/or password.");
 			}
 
 		});
@@ -76,9 +76,11 @@ public class LoginScreen {
 
 		HBox loginBox = new HBox();
 		loginBox.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField);
+		loginBox.setPadding(new Insets(20, 0, 0, 0));
 		HBox buttonBox = new HBox();
 		loginBox.setAlignment(Pos.CENTER);
 		buttonBox.getChildren().addAll(loginButton, signUpButton);
+		buttonBox.setPadding(new Insets(10, 0, 0, 0));
 		VBox box = new VBox();
 		box.getChildren().addAll(loginBox, buttonBox);
 		buttonBox.setAlignment(Pos.CENTER);
