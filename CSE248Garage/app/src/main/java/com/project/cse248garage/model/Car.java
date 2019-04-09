@@ -1,19 +1,13 @@
 package com.project.cse248garage.model;
 
-public class Car {
+public class Car extends Vehicle{
 
-    public String attendantFirstName;
-    public String attendantLastName;
-    public String licensePlate;
+
     public static double earlyBird = 20.00;
     public static double perHour = 2.50;
 
 
-    public Car(String attendantFirstName, String attendantLastName, String licensePlate) {
-        this.attendantFirstName = attendantFirstName;
-        this.attendantLastName = attendantLastName;
-        this.licensePlate = licensePlate;
+    public Car(String licensePlate, String attendantFirstName, String attendantLastName) {
+        super(licensePlate, attendantFirstName, attendantLastName);
     }
-
-
 }
