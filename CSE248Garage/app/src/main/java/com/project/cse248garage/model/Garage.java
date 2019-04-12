@@ -79,6 +79,11 @@ public class Garage {
 
     public void park(Vehicle vehicle, String category, Boolean earlyBird){
 
+        if(findClosestSpace(category).equals(null)){
+
+
+        }
+
         ParkingSpace openSpace = findClosestSpace(category);
 
         openSpace = new ParkingSpace(category, false, earlyBird, vehicle);

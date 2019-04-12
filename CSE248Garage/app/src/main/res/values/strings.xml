@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">CSE248 Garage</string>
+    <string name="edit_message">Enter name</string>
+    <string name="button_login">Login</string>
+    <string name="welcome_message">Weclome to Mikes Garage</string>
+    <string name="setupGarage">Setup your Garage</string>
+    <string name="carSpaces">Car Spaces</string>
+    <string name="truckSpaces">Truck Spaces</string>
+    <string name="motorcycleSpaces">Motorcycle Spaces</string>
+    <string name="carSpacesHint">Enter number of Car Spaces</string>
+    <string name="truckSpacesHint">Enter number of Truck Spaces</string>
+    <string name="motorcycleSpacesHint">Enter number of motorcycle spaces</string>
+    <string name="createGarageButton">Create Garage</string>
+    <string name="paymentScheme">Payment Scheme</string>
+    <string name="Car">Car</string>
+    <string name="Truck">Truck</string>
+    <string name="Motorcycle">Motorcycle</string>
+    <string name="category">Category</string>
+    <string name="earlybird">EarlyBird</string>
+    <string name="perhour">PerHour</string>
 </resources>

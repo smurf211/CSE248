@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 public class UserAccountBag {
 
 	private int nElems;
-	HashMap<Manager, String> userAccountHash = new HashMap<Manager, String>();
+	public HashMap<Manager, String> userAccountHash = new HashMap<Manager, String>();
 
 	public UserAccountBag() {
 
@@ -95,6 +95,8 @@ public class UserAccountBag {
 	}
 
 	public boolean createAttendantAccount(String userName, String password, String firstName, String lastName) {
+
+
 
 		CheckCredentials create = new CheckCredentials();
 
