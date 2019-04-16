@@ -1,9 +1,10 @@
 package com.project.cse248garage.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Reciept extends Ticket {
+public class Reciept extends Ticket implements Serializable {
     String timeIn;
     String dateIn;
     String timeOut;

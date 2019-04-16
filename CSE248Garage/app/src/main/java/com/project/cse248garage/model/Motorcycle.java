@@ -1,6 +1,8 @@
 package com.project.cse248garage.model;
 
-public class Motorcycle extends Vehicle{
+import java.io.Serializable;
+
+public class Motorcycle extends Vehicle implements Serializable {
 
     public static double earlyBird = 10.00;
     public static double perHour = 1.00;

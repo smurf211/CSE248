@@ -8,20 +8,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.project.cse248garage.R;
+import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.UserAccountBag;
 
 public class CreateAttendantActivity extends AppCompatActivity {
+    //UserAccountBag bag;
+    Garage garage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_attendant);
+        // bag  = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
+        garage  = (Garage) getIntent().getSerializableExtra("Garage");
+
     }
 
 
 //problem here
     public void createAttendant(View view){
-        UserAccountBag bag  = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
+
 
 
         EditText userNameField = findViewById(R.id.username_field);
@@ -34,19 +40,19 @@ public class CreateAttendantActivity extends AppCompatActivity {
         String firstName = firstname_field.getText().toString();
         String lastName = lastname_field.getText().toString();
 
-        bag.createAttendantAccount(userName, password, firstName, lastName);
+        garage.getBag().createAttendantAccount(userName, password, firstName, lastName);
 
        TextView displayAttendant = findViewById(R.id.display_field);
 
 
-         displayAttendant.setText(bag.getUser(userName, password, bag.getUserAccountHash()).toString());
+         displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toString());
 
 
     }
 
     public void nextView(View view){
         Intent intent = new Intent(this, MainActivity.class);
-
+        intent.putExtra("Garage", garage);
         startActivity(intent);
 
 

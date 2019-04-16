@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
@@ -32,6 +34,7 @@ public class UserAccountBag implements Serializable {
 	public UserAccountBag() {
 
 		nElems = 0;
+		createManagerAccount("smurf211", "MjsRas1118!", "mike", "spadaro", true);
 
 	}
 
@@ -85,6 +88,50 @@ public class UserAccountBag implements Serializable {
 		return null;
 
 	}
+
+	public User getUser(String userName, HashMap<User, String> map) {
+
+		User user = null;
+		for (Entry<User, String> entry : map.entrySet()) {
+			if (userName.toLowerCase().equals(entry.getValue())) {
+
+				user = entry.getKey();
+				break;
+			}
+		}
+
+		if(user != null){
+			return user;
+		}
+
+
+
+
+			return null;
+
+
+	}
+
+	public User getLoggedInUser(HashMap<User, String> map) {
+
+		String userName;
+		User user;
+		Iterator it = userAccountHash.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			//System.out.println(pair.getKey() + " = " + pair.getValue());
+			//userName = (String) pair.getValue();
+			user = (User) pair.getKey();
+			if(user.isLoggedIn()){
+				return user;
+			}
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+
+
+	return null;
+	}
+
 
 
 
@@ -199,6 +246,22 @@ public class UserAccountBag implements Serializable {
 		} else {
 			return "badUser";
 		}
+
+	}
+
+	public void logoutAttendants(){
+	String userName;
+	User user;
+		Iterator it = userAccountHash.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			//System.out.println(pair.getKey() + " = " + pair.getValue());
+			//userName = (String) pair.getValue();
+			user = (User) pair.getKey();
+			user.setLoggedIn(false);
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+
 
 	}
 

@@ -1,22 +1,42 @@
 package com.project.cse248garage.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Date;
 
-public class Garage {
+public class Garage implements Serializable {
 
     public int exit = 0;
     public ParkingSpace[] carBag;
     public ParkingSpace[] truckSpaceBag;
     public ParkingSpace[] motorcycleSpaceBag;
 
+    UserAccountBag bag;
+
+    public Garage(){
+        bag = new UserAccountBag();
+    }
+
 
     public Garage(int carSize, int motorcycleSize, int truckSize){
 
 
+        carBag = new ParkingSpace[carSize];
+        loadCarSpaces(carSize);
+
+
+        truckSpaceBag = new ParkingSpace[truckSize];
+        loadTruckSpaces(truckSize);
+
+        motorcycleSpaceBag = new ParkingSpace[motorcycleSize];
+        loadMotorcycleSpaces(motorcycleSize);
+
+    }
+
+    public void setSpaces(int carSize, int motorcycleSize, int truckSize){
         carBag = new ParkingSpace[carSize];
         loadCarSpaces(carSize);
 
@@ -79,14 +99,13 @@ public class Garage {
 
     public void park(Vehicle vehicle, String category, Boolean earlyBird){
 
-        if(findClosestSpace(category).equals(null)){
 
-
-        }
 
         ParkingSpace openSpace = findClosestSpace(category);
 
-        openSpace = new ParkingSpace(category, false, earlyBird, vehicle);
+        openSpace.setFree(false);
+        openSpace.setEarlyBird(earlyBird);
+        openSpace.setVehicle(vehicle);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
@@ -251,7 +270,9 @@ public class Garage {
 
     }
 
-
+    public UserAccountBag getBag() {
+        return bag;
+    }
 
     @Override
     public String toString() {

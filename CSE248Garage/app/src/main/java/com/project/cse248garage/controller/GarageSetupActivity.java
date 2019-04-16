@@ -14,6 +14,8 @@ import com.project.cse248garage.model.Truck;
 import com.project.cse248garage.model.UserAccountBag;
 
 public class GarageSetupActivity extends AppCompatActivity {
+    //UserAccountBag bag;
+    Garage garage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class GarageSetupActivity extends AppCompatActivity {
        // String message = intent.getStringExtra("Extra_Message");
       //  TextView textView = findViewById(R.id.display_username);
       //  textView.setText(message);
+          garage = (Garage) getIntent().getSerializableExtra("Garage");
+
 
     }
 
@@ -39,7 +43,7 @@ public class GarageSetupActivity extends AppCompatActivity {
         int truckSpaces = Integer.parseInt(truckSpaceField.getText().toString());
         int motorcycleSpaces = Integer.parseInt(motorcycleSpaceField.getText().toString());
 
-        Garage garage = new Garage(carSpaces, truckSpaces, motorcycleSpaces);
+         garage.setSpaces(carSpaces, truckSpaces, motorcycleSpaces);
 
         EditText carEarlyBird = findViewById(R.id.car_earlybird);
         carEarlyBird.setText(String.valueOf(Car.earlyBird));
@@ -64,12 +68,13 @@ public class GarageSetupActivity extends AppCompatActivity {
 
     public void nextView(View view){
 
+
         Intent intent = new Intent(this, CreateAttendantActivity.class);
-        UserAccountBag bag  = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
 
 
 
-        intent.putExtra("UserAccountBag", bag);
+
+        intent.putExtra("Garage", garage);
         startActivity(intent);
     }
 }

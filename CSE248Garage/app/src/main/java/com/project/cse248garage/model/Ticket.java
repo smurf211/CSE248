@@ -1,6 +1,8 @@
 package com.project.cse248garage.model;
 
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
 
     String licensePlate;
     String category;

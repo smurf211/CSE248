@@ -1,6 +1,8 @@
 package com.project.cse248garage.model;
 
-public abstract class Vehicle {
+import java.io.Serializable;
+
+public abstract class Vehicle implements Serializable {
 
     String licensePlate;
     public String attendantFirstName;

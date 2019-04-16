@@ -16,7 +16,8 @@ import com.project.cse248garage.model.UserAccountBag;
 public class MainActivity extends AppCompatActivity {
 
     CheckCredentials checkCredentials = new CheckCredentials();
-    UserAccountBag bag = new UserAccountBag();
+    Garage garage;
+    //UserAccountBag bag;
 
 
     @Override
@@ -29,8 +30,29 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        bag.createManagerAccount("smurf211", "MjsRas1118!", "Mike", "Spadaro", true );
-   // bag.displayBagHash();
+
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("Garage")) {
+            garage = (Garage) getIntent().getSerializableExtra("Garage");
+        }
+        else{
+            garage = new Garage();
+        }
+
+      //  if(intent.hasExtra("UserAccountBag")) {
+       //     bag = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
+      //  }
+      //  else{
+      //      bag = new UserAccountBag();
+      //  }
+
+
+
+
+
+
+
     }
 
     public void adminLogin(View view){
@@ -43,26 +65,27 @@ public class MainActivity extends AppCompatActivity {
     String userName = userNameField.getText().toString();
     String password = passwordField.getText().toString();
 
-System.out.println(checkCredentials.login(userName, password, bag.getUserAccountHash() ));
+     //System.out.println(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() ));
 
-        if(checkCredentials.login(userName, password, bag.getUserAccountHash() )) {
+        if(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() )) {
 
 
 
-            User user = bag.getUser(userName, password, bag.getUserAccountHash());
+            User user = garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash());
 
 
             if(user.isAdmin()) {
 
                 Intent intent1 = new Intent(this, GarageSetupActivity.class);
-                intent1.putExtra("UserAccountBag", bag);
+                intent1.putExtra("Garage", garage);
 
                 startActivity(intent1);
             }
 
             else {
-                System.out.println(bag.getUser(userName, password, bag.getUserAccountHash()));
+               // System.out.println(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()));
                 Intent intent2 = new Intent(this, AttendantOptionsActivity.class);
+                intent2.putExtra("Garage", garage);
                 startActivity(intent2);
             }
 

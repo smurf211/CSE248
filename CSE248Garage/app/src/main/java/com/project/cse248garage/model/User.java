@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String lastName;
     private String iD;
     private boolean admin;
+    private boolean loggedIn;
 
     private String userName;
     private String password;
@@ -165,6 +166,14 @@ public class User implements Serializable {
 
     public boolean isAdmin() {
         return admin;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     @Override

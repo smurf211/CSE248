@@ -1,9 +1,10 @@
 package com.project.cse248garage.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ParkingSpace {
+public class ParkingSpace implements Serializable {
 
     String category;
     public static int carDistance = 1;
@@ -133,6 +134,10 @@ public class ParkingSpace {
 
     }
 
+    public void setEarlyBird(boolean earlyBird) {
+        this.earlyBird = earlyBird;
+    }
+
     public boolean isFree() {
         return free;
     }
@@ -171,6 +176,10 @@ public class ParkingSpace {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     @Override

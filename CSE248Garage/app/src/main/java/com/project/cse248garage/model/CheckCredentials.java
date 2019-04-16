@@ -110,6 +110,7 @@ public class CheckCredentials {
 		}
 
 		if ((user != null) && user.emitPassword().equals(password)) {
+			user.setLoggedIn(true);
 			return true;
 
 		}
