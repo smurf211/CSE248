@@ -18,4 +18,22 @@
     <string name="category">Category</string>
     <string name="earlybird">EarlyBird</string>
     <string name="perhour">PerHour</string>
+    <string name="next">Next</string>
+    <string name="CreateAttendants">Create Attendants</string>
+    <string name="userName">User Name</string>
+    <string name="password">Password</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="createAttendant">Create Attendant</string>
+    <string name="Finish">Finish</string>
+    <string name="parkVehicle">Park Vehicle</string>
+    <string name="enterLicense">License Plate</string>
+    <string name="licenseHint">enter a license plate number...</string>
+    <string name="enterCategory">Category</string>
+    <string name="categoryHint">car, truck or motorcycle</string>
+    <string name="Park">Park</string>
+    <string name="removeVehicle">Remove Vehicle</string>
+    <string name="earlyBird">EarlyBird</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>

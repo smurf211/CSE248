@@ -18,15 +18,16 @@ package com.project.cse248garage.model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
-public class UserAccountBag {
+public class UserAccountBag implements Serializable {
 
 	private int nElems;
-	public HashMap<Manager, String> userAccountHash = new HashMap<Manager, String>();
+	public HashMap<User, String> userAccountHash = new HashMap<User, String>();
 
 	public UserAccountBag() {
 
@@ -45,10 +46,10 @@ public class UserAccountBag {
 
 
 
-	public boolean searchAccount(String userName, String password, HashMap<Manager, String> map) {
+	public boolean searchAccount(String userName, String password, HashMap<User, String> map) {
 
-		Manager user = null;
-		for (Entry<Manager, String> entry : map.entrySet()) {
+		User user = null;
+		for (Entry<User, String> entry : map.entrySet()) {
 			if (userName.toLowerCase().equals(entry.getValue())) {
 
 				user = entry.getKey();
@@ -65,9 +66,29 @@ public class UserAccountBag {
 
 	}
 
+	public User getUser(String userName, String password, HashMap<User, String> map) {
+
+		User user = null;
+		for (Entry<User, String> entry : map.entrySet()) {
+			if (userName.toLowerCase().equals(entry.getValue())) {
+
+				user = entry.getKey();
+				break;
+			}
+		}
+
+		if (user.emitPassword().equals(password)) {
+			return user;
+
+		}
+
+		return null;
+
+	}
 
 
-	public boolean searchAccount(String userName, HashMap<Manager, String> map) {
+
+	public boolean searchAccount(String userName, HashMap<User, String> map) {
 
 		if (map.containsValue(userName)) {
 
@@ -76,6 +97,8 @@ public class UserAccountBag {
 		return true;
 
 	}
+
+
 
 
 
@@ -102,7 +125,7 @@ public class UserAccountBag {
 
 		if (create.checkUserNameHash(userName, userAccountHash) && create.checkPassword(password)) {
 
-			Manager user = new Manager(userName, password, firstName, lastName, false);
+			Attendant user = new Attendant(userName, password, firstName, lastName, false);
 			userAccountHash.put(user, user.emitUserName());
 			return true;
 		}
@@ -194,7 +217,7 @@ public class UserAccountBag {
 		return nElems;
 	}
 
-	public HashMap<Manager, String> getUserAccountHash() {
+	public HashMap<User, String> getUserAccountHash() {
 		return userAccountHash;
 	}
 

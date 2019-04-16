@@ -1,5 +1,6 @@
 package com.project.cse248garage.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.Motorcycle;
 import com.project.cse248garage.model.Truck;
+import com.project.cse248garage.model.UserAccountBag;
 
 public class GarageSetupActivity extends AppCompatActivity {
 
@@ -58,5 +60,16 @@ public class GarageSetupActivity extends AppCompatActivity {
         //EditText displayGarage = findViewById(R.id.garage_display);
        // displayGarage.setText(garage.toString());
 
+    }
+
+    public void nextView(View view){
+
+        Intent intent = new Intent(this, CreateAttendantActivity.class);
+        UserAccountBag bag  = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
+
+
+
+        intent.putExtra("UserAccountBag", bag);
+        startActivity(intent);
     }
 }

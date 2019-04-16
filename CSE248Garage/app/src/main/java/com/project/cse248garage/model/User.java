@@ -1,13 +1,14 @@
 package com.project.cse248garage.model;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class User {
+public class User implements Serializable {
 
     private String firstName;
     private String lastName;
     private String iD;
-    private boolean admin = true;
+    private boolean admin;
 
     private String userName;
     private String password;
@@ -162,16 +163,19 @@ public class User {
         return password;
     }
 
-
-
-
-
-
+    public boolean isAdmin() {
+        return admin;
+    }
 
     @Override
     public String toString() {
-        return "UserAccount [firstName=" + firstName + ", lastName=" + lastName + ", iD=" + iD +
-                ", userName=" + userName + ", password=" + password + "]";
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", iD='" + iD + '\'' +
+                ", admin=" + admin +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
-
 }

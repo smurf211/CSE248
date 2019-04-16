@@ -9,27 +9,28 @@ public class Demo {
     public static void main(String[] args) throws InterruptedException{
 
 
-        Garage garage = new Garage(5, 5, 5);
-        Manager manager = new Manager("john", "johnson", true);
+      //  Garage garage = new Garage(5, 5, 5);
+      //  Manager manager = new Manager("john", "johnson", true);
         UserAccountBag bag = new UserAccountBag();
-        bag.insertHash("john", "johnson", true);
+       // bag.insertHash("john", "johnson", true);
 
          System.out.println(bag.createManagerAccount("jackg45", "MjsRas1118!", "eric", "poop", true ));
-         bag.displayBagHash();
-        System.out.println(garage.toString());
+       //  bag.displayBagHash();
+       // System.out.println(garage.toString());
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
+     //   SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+     //   Date date = new Date();
 
-        String time = String.valueOf(java.time.LocalTime.now());
+      //  String time = String.valueOf(java.time.LocalTime.now());
 
-        Reciept.sleep(5500);
+        //Reciept.sleep(5500);
 
-       Reciept reciept = new Reciept("gfsdgdfg", "car", "mike", "johnson", "4/27/19",time , 2.50 );
+     //  Reciept reciept = new Reciept("gfsdgdfg", "car", "mike", "johnson", "4/27/19",time , 2.50 );
 
-       reciept.getTimeSeconds();
+      // reciept.getTimeSeconds();
 
-
+    CheckCredentials check = new CheckCredentials();
+    check.login("jackg45", "MjsRas1118!", bag.getUserAccountHash());
 
 
 

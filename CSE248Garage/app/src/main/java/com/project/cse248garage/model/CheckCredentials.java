@@ -44,7 +44,7 @@ public class CheckCredentials {
 
 
 
-	public boolean checkUserNameHash(String userName, HashMap<Manager, String> map) {
+	public boolean checkUserNameHash(String userName, HashMap<User, String> map) {
 
 		if (map.containsValue(userName)) {
 
@@ -98,10 +98,10 @@ public class CheckCredentials {
 	}
 	
 
-	public boolean login(String userName, String password, HashMap<Manager, String> map) {
+	public boolean login(String userName, String password, HashMap<User, String> map) {
 
-		Manager user = null;
-		for (Entry<Manager, String> entry : map.entrySet()) {
+		User user = null;
+		for (Entry<User, String> entry : map.entrySet()) {
 			if (userName.toLowerCase().equals(entry.getValue())) {
 
 				user = entry.getKey();
@@ -109,7 +109,7 @@ public class CheckCredentials {
 			}
 		}
 
-		if (user.emitPassword().equals(password)) {
+		if ((user != null) && user.emitPassword().equals(password)) {
 			return true;
 
 		}
