@@ -18,6 +18,7 @@ public class ParkingSpace implements Serializable {
     LocalTime time;
     LocalDate date;
     Ticket ticket;
+    public String spaceID;
 
 
     public ParkingSpace(String category, boolean free, int distance){
@@ -180,6 +181,26 @@ public class ParkingSpace implements Serializable {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isEarlyBird() {
+        return earlyBird;
+    }
+
+    public String getSpaceID() {
+        return spaceID;
+    }
+
+    public void setSpaceID(String spaceID) {
+        this.spaceID = spaceID;
     }
 
     @Override

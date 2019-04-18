@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     CheckCredentials checkCredentials = new CheckCredentials();
     Garage garage;
-    //UserAccountBag bag;
+
 
 
     @Override
@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
 
 
@@ -40,15 +38,6 @@ public class MainActivity extends AppCompatActivity {
             garage = new Garage();
         }
 
-      //  if(intent.hasExtra("UserAccountBag")) {
-       //     bag = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
-      //  }
-      //  else{
-      //      bag = new UserAccountBag();
-      //  }
-
-
-
 
 
 
@@ -59,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     EditText userNameField = findViewById(R.id.username_field);
     EditText passwordField = findViewById(R.id.password_field);
 
     String userName = userNameField.getText().toString();
     String password = passwordField.getText().toString();
 
-     //System.out.println(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() ));
+     System.out.println(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() ));
 
         if(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() )) {
 
@@ -75,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(user.isAdmin()) {
-
+                user.setLoggedIn(false);
                 Intent intent1 = new Intent(this, GarageSetupActivity.class);
                 intent1.putExtra("Garage", garage);
 

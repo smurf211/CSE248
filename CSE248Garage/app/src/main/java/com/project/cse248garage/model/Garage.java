@@ -56,7 +56,7 @@ public class Garage implements Serializable {
         for(int i =0; i < carSize; i++){
 
             carBag[i] = new ParkingSpace("car", true, ParkingSpace.carDistance++);
-
+            carBag[i].setSpaceID("c"+ String.valueOf(carBag[i].carDistance));
 
         }
 
@@ -71,7 +71,7 @@ public class Garage implements Serializable {
         for(int i =0; i < truckSize; i++){
 
             truckSpaceBag[i] = new ParkingSpace("truck",true, ParkingSpace.truckDistance++);
-
+            truckSpaceBag[i].setSpaceID("t"+ String.valueOf(truckSpaceBag[i].truckDistance));
 
         }
 
@@ -86,7 +86,7 @@ public class Garage implements Serializable {
         for(int i =0; i < motorcycleSize; i++){
 
             motorcycleSpaceBag[i] = new ParkingSpace("motorcycle", true, ParkingSpace.motorcycleDistance++);
-
+            motorcycleSpaceBag[i].setSpaceID("m"+ String.valueOf(motorcycleSpaceBag[i].carDistance));
 
         }
 
@@ -107,6 +107,7 @@ public class Garage implements Serializable {
         openSpace.setEarlyBird(earlyBird);
         openSpace.setVehicle(vehicle);
 
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
 
@@ -121,7 +122,7 @@ public class Garage implements Serializable {
 
         Ticket ticket = new Ticket(openSpace.getVehicle().getLicensePlate(), openSpace.getCategory(),
                 openSpace.getVehicle().getAttendantFirstName(),
-                openSpace.getVehicle().getAttendantLastName(), date1, time, openSpace.getPrice());
+                openSpace.getVehicle().getAttendantLastName(), date1, time, openSpace.getPrice(category, earlyBird), earlyBird, openSpace.getSpaceID());
         openSpace.setTicket(ticket);
 
 
@@ -197,11 +198,20 @@ public class Garage implements Serializable {
 
     ParkingSpace currentSpace = findByPlate(licensePlate);
 
+      //  SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+      //  Date date1 = new Date();
+
+
+
+     //   currentSpace.setTime(java.time.LocalTime.now());
+      //  currentSpace.setDate(java.time.LocalDate.now());
+
     String date = String.valueOf(getRecieptDate(currentSpace));
      String time =   String.valueOf(getRecieptTime(currentSpace));
         Reciept reciept = new Reciept(currentSpace.getVehicle().getLicensePlate(), currentSpace.getCategory(),
                 currentSpace.getVehicle().getAttendantFirstName(),
-                currentSpace.getVehicle().getAttendantLastName(), date, time, currentSpace.getPrice());
+                currentSpace.getVehicle().getAttendantLastName(), date, time,
+                currentSpace.getTicket().getPaymentScheme(), currentSpace.getTicket().isEarlyBird(), currentSpace.getSpaceID());
 
         currentSpace.removeVehicle();
 

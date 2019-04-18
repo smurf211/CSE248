@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Garage;
+import com.project.cse248garage.model.User;
 
 public class AttendantOptionsActivity extends AppCompatActivity {
     Garage garage;
@@ -30,6 +31,20 @@ public class AttendantOptionsActivity extends AppCompatActivity {
         intent.putExtra("Garage", garage);
 
         startActivity(intent);
+
+    }
+
+
+    public void logOut(View view){
+
+
+        User user =  garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
+        user.setLoggedIn(false);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Garage", garage);
+
+        startActivity(intent);
+
 
     }
 

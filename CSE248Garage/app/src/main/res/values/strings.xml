@@ -36,4 +36,7 @@
     <string name="earlyBird">EarlyBird</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="printTicket">Print Ticket</string>
+    <string name="done">done</string>
+    <string name="logOut">Log Out</string>
 </resources>

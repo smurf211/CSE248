@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.AttendantRemoveActivity"></activity>
+        <activity android:name=".controller.TicketActivity"></activity>
+        <activity android:name=".controller.AttendantRemoveActivity" />
         <activity android:name=".controller.AttendantOptionsActivity" />
         <activity android:name=".controller.AttendantParkActivity" />
         <activity android:name=".controller.CreateAttendantActivity" />

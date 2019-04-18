@@ -9,41 +9,38 @@ import android.widget.TextView;
 
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Garage;
-import com.project.cse248garage.model.Reciept;
+import com.project.cse248garage.model.Ticket;
 
-public class AttendantRemoveActivity extends AppCompatActivity {
+public class TicketActivity extends AppCompatActivity {
     Garage garage;
-
+    String licensePlate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attendant_remove);
+        setContentView(R.layout.activity_ticket);
 
         garage = (Garage) getIntent().getSerializableExtra("Garage");
+        licensePlate = getIntent().getStringExtra("LicensePlate");
     }
 
-    public void removeVehicle(View view){
 
-        EditText licenseField = findViewById(R.id.license_field);
-        String licensePlate = licenseField.getText().toString();
+    public void printTicket(View view){
 
-        Reciept reciept = garage.removeCar(licensePlate);
 
+        Ticket ticket = garage.findByPlate(licensePlate).getTicket();
+       // System.out.println(ticket.toString());
         TextView displayField = findViewById(R.id.display_field);
-       displayField.setText(reciept.toString());
-
-
-
-
-
+        displayField.setText(ticket.toString());
     }
 
     public void done(View view){
-
         Intent intent = new Intent(this, AttendantOptionsActivity.class);
         intent.putExtra("Garage", garage);
-
         startActivity(intent);
+
     }
+
+
+
 }

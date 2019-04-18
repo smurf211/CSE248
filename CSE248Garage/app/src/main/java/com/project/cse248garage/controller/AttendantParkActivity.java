@@ -70,8 +70,9 @@ public class AttendantParkActivity extends AppCompatActivity {
 
         }
 
-        Intent intent = new Intent(this, AttendantOptionsActivity.class);
+        Intent intent = new Intent(this, TicketActivity.class);
         intent.putExtra("Garage", garage);
+        intent.putExtra("LicensePlate", licensePlate);
         startActivity(intent);
 
 

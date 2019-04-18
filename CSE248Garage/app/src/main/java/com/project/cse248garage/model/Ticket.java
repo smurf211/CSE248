@@ -11,6 +11,8 @@ public class Ticket implements Serializable {
     String date;
     String time;
     double paymentScheme;
+    boolean earlyBird;
+    public String spaceID;
 
     public Ticket(){
 
@@ -18,7 +20,7 @@ public class Ticket implements Serializable {
     }
 
 
-    public Ticket(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date,String time, double paymentScheme) {
+    public Ticket(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date,String time, double paymentScheme, boolean earlyBird, String spaceID) {
         this.licensePlate = licensePlate;
         this.category = category;
         this.attendantFirstName = attendantFirstName;
@@ -26,6 +28,8 @@ public class Ticket implements Serializable {
         this.date = date;
         this.time = time;
         this.paymentScheme = paymentScheme;
+        this.earlyBird = earlyBird;
+        this.spaceID = spaceID;
     }
 
 
@@ -55,5 +59,21 @@ public class Ticket implements Serializable {
 
     public double getPaymentScheme() {
         return paymentScheme;
+    }
+
+    public boolean isEarlyBird() {
+        return earlyBird;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket" + "\n"+
+                "licensePlate='" + licensePlate + "\n" +
+                ", category='" + category + "\n" +
+                ", attendantFirstName='" + attendantFirstName + "\n" +
+                ", attendantLastName='" + attendantLastName + "\n" +
+                ", date='" + date + "\n" +
+                ", time='" + time + '\n' +
+                ", paymentScheme=" + paymentScheme +  "\n" + "Space ID: " + this.spaceID;
     }
 }

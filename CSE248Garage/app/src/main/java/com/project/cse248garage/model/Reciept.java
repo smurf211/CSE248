@@ -12,8 +12,8 @@ public class Reciept extends Ticket implements Serializable {
     double paymentScheme;
 
 
-    public Reciept(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date, String time, double paymentScheme) {
-        super(licensePlate, category, attendantFirstName, attendantLastName, date, time, paymentScheme);
+    public Reciept(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date, String time, double paymentScheme, boolean earlyBird, String spaceID) {
+        super(licensePlate, category, attendantFirstName, attendantLastName, date, time, paymentScheme, earlyBird, spaceID);
         this.timeIn = time;
         this.dateIn = date;
         this.paymentScheme = paymentScheme;
@@ -25,16 +25,24 @@ public class Reciept extends Ticket implements Serializable {
 
         this.timeOut = String.valueOf(java.time.LocalTime.now());
         this.dateOut = String.valueOf(java.time.LocalDate.now());
+        this.paymentScheme = calculatePayment();
 
     }
+
 
 
     public double calculatePayment(){
 
         double totalSeconds = getTimeSeconds();
-        return totalSeconds * paymentScheme;
 
+        if(this.earlyBird){
+            return paymentScheme;
+        }
 
+        else {
+            return totalSeconds * paymentScheme;
+
+        }
     }
 
 
@@ -70,4 +78,18 @@ public class Reciept extends Ticket implements Serializable {
         Thread.sleep(millis);
     }
 
+    @Override
+    public String toString() {
+        return "Reciept" + "\n"+
+                "Time in: " + timeIn + '\n' +
+                "Date in: " + dateIn + '\n' +
+                "Time out: " + timeOut + '\n' +
+                "Date out: " + dateOut + '\n' +
+                "Payment Scheme: " + paymentScheme + '\n' +
+                "Early Bird: " + earlyBird + "\n" +
+                "License Plate: " + licensePlate + '\n' +
+                "Category: " + category + '\n' +
+                "Attendant Name: " + attendantFirstName + " " +
+                attendantLastName + "\n" + "Space ID: " + this.spaceID;
+    }
 }
