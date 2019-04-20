@@ -1,17 +1,28 @@
 package com.project.cse248garage.controller;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.CheckCredentials;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.User;
 import com.project.cse248garage.model.UserAccountBag;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,8 +96,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void displayMessage(){
+
+    public void saveGarage(View view){
+        Context context = view.getContext();
+        TextView displayField = findViewById(R.id.display_field);
+        displayField.setText("Garage saved");
+        File file = new File(context.getFilesDir(), "garage.dat");
 
 
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+
+            out.writeObject(garage);
+
+            out.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        garage.getBag().displayBagHash();
+
+    }
+
+    public void loadGarage(View view){
+        Context context = view.getContext();
+        TextView displayField = findViewById(R.id.display_field);
+        displayField.setText("Garage loaded");
+        File file = new File(context.getFilesDir(), "garage.dat");
+
+
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            garage = (Garage) ois.readObject();
+
+            ois.close();
+        } catch (FileNotFoundException e) {
+           System.out.println( e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+        }
+
+        garage.getBag().displayBagHash();
     }
 }
