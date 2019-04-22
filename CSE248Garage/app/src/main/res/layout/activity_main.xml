@@ -59,7 +59,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <EditText
@@ -82,7 +82,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="84dp"
         android:onClick="saveGarage"
-        android:text="Button"
+        android:text="@string/saveGarage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.205"
@@ -96,7 +96,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="84dp"
         android:onClick="loadGarage"
-        android:text="Button"
+        android:text="@string/LoadGarage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.82"

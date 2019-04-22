@@ -10,7 +10,7 @@ public abstract class Vehicle implements Serializable {
     //add attendant removed functionality
     //add attendant id to ticket
     //allow smaller vehicle to park in larger space
-    //add binary file loading garage
+
     //add admin defined payment scheme
 
     public Vehicle(String licensePlate, String attendantFirstName, String attendantLastName) {

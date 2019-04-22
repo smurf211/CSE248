@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(user.isAdmin()) {
-                user.setLoggedIn(false);
-                Intent intent1 = new Intent(this, GarageSetupActivity.class);
+              //  user.setLoggedIn(false);
+                Intent intent1 = new Intent(this, ManagerSelectActivity.class);
                 intent1.putExtra("Garage", garage);
 
                 startActivity(intent1);

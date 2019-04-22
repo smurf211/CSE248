@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
 
@@ -28,24 +29,51 @@ public class AttendantParkActivity extends AppCompatActivity {
     public void parkVehicle(View view){
 
         EditText licenseField = findViewById(R.id.license_field);
-        EditText categoryField = findViewById(R.id.category_field);
+      //  EditText categoryField = findViewById(R.id.category_field);
         Switch earlyBirdSwitch = findViewById(R.id.earlybird_switch);
 
         String licensePlate = licenseField.getText().toString();
-        String category = categoryField.getText().toString();
-        boolean earlyBird = earlyBirdSwitch.getShowText();
-        System.out.println(earlyBird);
+       // String category = categoryField.getText().toString();
+        CheckBox carBox = findViewById(R.id.checkBoxCar);
+        CheckBox truckBox = findViewById(R.id.checkBoxTruck);
+        CheckBox motoBox = findViewById(R.id.checkBoxMoto);
 
-        //add attendant first/last name to vehicle, get into ticket
+
+        System.out.println(carBox.getText().toString());
+
+
+        boolean earlyBird = earlyBirdSwitch.getShowText();
+       // System.out.println(earlyBird);
+
+
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
 
+        String category;
+        if(carBox.isChecked()) {
+            category = carBox.getText().toString().toLowerCase();
+            Car car = new Car(licensePlate, user.emitFirstName(), user.emitLastName());
+            garage.park(car, category, earlyBird);
+        }
 
 
+        else if(truckBox.isChecked()) {
+            category = truckBox.getText().toString().toLowerCase();
+            Truck truck = new Truck(licensePlate, user.emitFirstName(), user.emitLastName());
+            garage.park(truck, category, earlyBird);
+        }
+
+        else if(motoBox.isChecked()) {
+            category = motoBox.getText().toString().toLowerCase();
+            Motorcycle moto = new Motorcycle(licensePlate, user.emitFirstName(), user.emitLastName());
+            garage.park(moto, category, earlyBird);
+        }
+
+        /*
        if(category.equalsIgnoreCase("car")){
            Car car = new Car(licensePlate, user.emitFirstName(), user.emitLastName());
            garage.park(car, category, earlyBird);
 
-           System.out.println(garage.toString());
+          // System.out.println(garage.toString());
 
 
        }
@@ -69,6 +97,8 @@ public class AttendantParkActivity extends AppCompatActivity {
 
 
         }
+
+        */
 
         Intent intent = new Intent(this, TicketActivity.class);
         intent.putExtra("Garage", garage);

@@ -39,4 +39,7 @@
     <string name="printTicket">Print Ticket</string>
     <string name="done">done</string>
     <string name="logOut">Log Out</string>
+    <string name="parkremove">Park/Remove Vehicle</string>
+    <string name="saveGarage">Save Garage</string>
+    <string name="LoadGarage">Load Garage</string>
 </resources>
