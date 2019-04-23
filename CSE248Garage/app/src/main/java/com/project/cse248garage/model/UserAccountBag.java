@@ -265,6 +265,11 @@ public class UserAccountBag implements Serializable {
 
 	}
 
+	public void removeUser(User user){
+
+		userAccountHash.remove(user);
+	}
+
 
 
 

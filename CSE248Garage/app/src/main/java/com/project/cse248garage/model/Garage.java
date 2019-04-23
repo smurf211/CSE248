@@ -22,6 +22,7 @@ public class Garage implements Serializable {
 
     public double motoEarlyBird;
     public double motoPerHour;
+    public boolean garageCreated;
 
 
 
@@ -57,6 +58,7 @@ public class Garage implements Serializable {
 
         motorcycleSpaceBag = new ParkingSpace[motorcycleSize];
         loadMotorcycleSpaces(motorcycleSize);
+        this.garageCreated = true;
 
     }
 
@@ -239,7 +241,6 @@ public class Garage implements Serializable {
     }
 
 
-    //make method to calculate payment.
 
 
     public LocalTime getRecieptTime(ParkingSpace currentSpace){
@@ -350,6 +351,14 @@ public class Garage implements Serializable {
 
     public UserAccountBag getBag() {
         return bag;
+    }
+
+    public boolean isGarageCreated() {
+        return garageCreated;
+    }
+
+    public void setGarageCreated(boolean garageCreated) {
+        this.garageCreated = garageCreated;
     }
 
     @Override

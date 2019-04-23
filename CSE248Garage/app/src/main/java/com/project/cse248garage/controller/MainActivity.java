@@ -62,8 +62,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     EditText userNameField = findViewById(R.id.username_field);
     EditText passwordField = findViewById(R.id.password_field);
+
+
 
     String userName = userNameField.getText().toString();
     String password = passwordField.getText().toString();
@@ -94,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+        }
+        else{
+            userNameField.setText("");
+            passwordField.setText("");
+            userNameField.setError("Invalid username or password...");
+            passwordField.setError("Invalid username or password...");
+
+            userNameField.setHint("invalid credentials");
+            passwordField.setHint("invalid credentials");
         }
 
 

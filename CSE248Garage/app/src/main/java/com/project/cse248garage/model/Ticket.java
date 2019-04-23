@@ -1,6 +1,8 @@
 package com.project.cse248garage.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Ticket implements Serializable {
 
@@ -14,6 +16,7 @@ public class Ticket implements Serializable {
     double paymentScheme;
     boolean earlyBird;
     public String spaceID;
+
 
     public Ticket(){
 
@@ -32,6 +35,7 @@ public class Ticket implements Serializable {
         this.earlyBird = earlyBird;
         this.spaceID = spaceID;
         this.attendantID = attendantID;
+
     }
 
 
@@ -67,18 +71,37 @@ public class Ticket implements Serializable {
         return earlyBird;
     }
 
+    public String getEarlyBirdString(){
+        if(earlyBird){
+            return "Yes";
+        }
+        else{
+            return "No";
+        }
+    }
+
+    public String getCurrency(){
+        if(earlyBird) {
+            return "$" + String.valueOf(paymentScheme) + " Flat rate.";
+
+        }
+        else{
+            return "$" + String.valueOf(paymentScheme) + " Per Hour.";
+        }
+    }
+
     @Override
     public String toString() {
         return "Ticket" + "\n"+
                 "License Plate: " + licensePlate + "\n" +
                 "Category : " + category + "\n" +
-                "Attendant Name: " + attendantFirstName +
+                "Attendant Name: " + attendantFirstName + " "+
                   attendantLastName + "\n" +
                 "Attendant ID: " + attendantID + "\n" +
                 "Date: " + date + "\n" +
                 "Time: " + time + '\n' +
-                "Payment: " + paymentScheme +  "\n" +
-                "Early Bird: " + earlyBird + "\n" +
+                "Payment: " + getCurrency()+  "\n" +
+                "Early Bird: " + getEarlyBirdString() + "\n" +
                  "Space ID: " + this.spaceID;
     }
 }

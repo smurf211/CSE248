@@ -22,6 +22,7 @@ public class Reciept extends Ticket implements Serializable {
         this.dateIn = date;
         this.paymentScheme = paymentScheme;
 
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date1 = new Date();
 
@@ -111,6 +112,25 @@ public class Reciept extends Ticket implements Serializable {
         this.attendantRemovedId = attendantRemovedId;
     }
 
+    public String getEarlyBirdString(){
+        if(earlyBird){
+            return "Yes";
+        }
+        else{
+            return "No";
+        }
+    }
+
+    public String getCurrency(){
+        if(earlyBird) {
+            return "$" + String.valueOf(paymentScheme) + " Flat rate.";
+
+        }
+        else{
+            return "$" + String.valueOf(paymentScheme) + " Per Hour.";
+        }
+    }
+
     @Override
     public String toString() {
         return "Reciept" + "\n"+
@@ -118,8 +138,9 @@ public class Reciept extends Ticket implements Serializable {
                 "Date in: " + dateIn + '\n' +
                 "Time out: " + timeOut + '\n' +
                 "Date out: " + dateOut + '\n' +
-                "Payment Scheme: " + paymentScheme + '\n' +
-                "Early Bird: " + earlyBird + "\n" +
+                "Payment Due:: " + getCurrency() + '\n' +
+                "Amount Paid: " + "$" + paymentScheme + "\n"+
+                "Early Bird: " + getEarlyBirdString() + "\n" +
                 "License Plate: " + licensePlate + '\n' +
                 "Category: " + category + '\n' +
                 "Attendant Parked Name: " + attendantFirstName + " " +

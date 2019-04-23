@@ -9,12 +9,23 @@ import android.widget.TextView;
 
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Car;
+import com.project.cse248garage.model.CheckCredentials;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.UserAccountBag;
 
 public class CreateAttendantActivity extends AppCompatActivity {
-    //UserAccountBag bag;
+
     Garage garage;
+    CheckCredentials check;
+    EditText userNameField;
+    EditText passwordField;
+    EditText firstname_field;
+    EditText lastname_field;
+    String userName;
+    String password;
+    String firstName;
+    String lastName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,24 +33,30 @@ public class CreateAttendantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_attendant);
         // bag  = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
         garage  = (Garage) getIntent().getSerializableExtra("Garage");
+        check = new CheckCredentials();
 
     }
 
 
-//problem here
+
     public void createAttendant(View view){
 
 
 
-        EditText userNameField = findViewById(R.id.username_field);
-        EditText passwordField = findViewById(R.id.password_field);
-        EditText firstname_field = findViewById(R.id.firstname_field);
-        EditText lastname_field = findViewById(R.id.lastname_field);
+         userNameField = findViewById(R.id.username_field);
+         passwordField = findViewById(R.id.password_field);
+        firstname_field = findViewById(R.id.firstname_field);
+        lastname_field = findViewById(R.id.lastname_field);
 
-        String userName = userNameField.getText().toString();
-        String password = passwordField.getText().toString();
-        String firstName = firstname_field.getText().toString();
-        String lastName = lastname_field.getText().toString();
+        userName = userNameField.getText().toString();
+        password = passwordField.getText().toString();
+        firstName = firstname_field.getText().toString();
+        lastName = lastname_field.getText().toString();
+
+        if(!checkLogin()){
+            return;
+        }
+
 
         garage.getBag().createAttendantAccount(userName, password, firstName, lastName);
 
@@ -56,6 +73,49 @@ public class CreateAttendantActivity extends AppCompatActivity {
         intent.putExtra("Garage", garage);
         startActivity(intent);
 
+
+    }
+
+    public boolean checkLogin(){
+
+        if(!check.checkUserNameHash(userName, garage.getBag().getUserAccountHash())){
+
+            if(userName.equals("")){
+                userNameField.setError("Enter a username");
+                return false;
+            }
+            else {
+                userNameField.setError("Username in use");
+                return false;
+            }
+        }
+
+        if(!check.checkPassword(password)){
+
+            if(password.equals("")){
+                passwordField.setError("Enter a password");
+                return false;
+            }
+            else {
+                passwordField.setError("Password must be 8 characters, contain a capital letter, lowercase letter and a special character");
+                return false;
+            }
+
+
+        }
+
+        if(firstName.equals("")){
+            firstname_field.setError("enter a first name");
+            return false;
+        }
+
+        if(lastName.equals("")){
+            lastname_field.setError("enter a last name");
+            return false;
+        }
+
+
+    return true;
 
     }
 }

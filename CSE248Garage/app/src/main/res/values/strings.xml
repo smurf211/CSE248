@@ -42,4 +42,6 @@
     <string name="parkremove">Park/Remove Vehicle</string>
     <string name="saveGarage">Save Garage</string>
     <string name="LoadGarage">Load Garage</string>
+    <string name="addAttendant">Add Attendant</string>
+    <string name="removeAttendant">Remove Attendant</string>
 </resources>

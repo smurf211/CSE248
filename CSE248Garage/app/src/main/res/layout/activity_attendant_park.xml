@@ -114,45 +114,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.341"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:checked="false" />
 
-    <CheckBox
-        android:id="@+id/checkBoxCar"
-        android:layout_width="79dp"
-        android:layout_height="37dp"
+    <RadioGroup
+        android:id="@+id/rg1"
+        android:layout_width="267dp"
+        android:layout_height="43dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/Car"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintHorizontal_bias="0.959"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <CheckBox
-        android:id="@+id/checkBoxTruck"
-        android:layout_width="77dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="212dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/Truck"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.617"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <RadioButton
+            android:id="@+id/carButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Car" />
 
-    <CheckBox
-        android:id="@+id/checkBoxMoto"
-        android:layout_width="114dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="212dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/Motorcycle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.971"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <RadioButton
+            android:id="@+id/truckButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Truck" />
+
+        <RadioButton
+            android:id="@+id/motoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Motorcycle" />
+    </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

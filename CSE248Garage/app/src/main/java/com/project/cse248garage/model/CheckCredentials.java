@@ -47,6 +47,10 @@ public class CheckCredentials implements Serializable {
 
 	public boolean checkUserNameHash(String userName, HashMap<User, String> map) {
 
+		if(userName.equals("")){
+			return false;
+		}
+
 		if (map.containsValue(userName)) {
 
 			return false;

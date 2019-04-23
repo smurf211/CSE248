@@ -28,6 +28,13 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         EditText licenseField = findViewById(R.id.license_field);
         String licensePlate = licenseField.getText().toString();
 
+
+        if(garage.findByPlate(licensePlate) == null){
+
+            licenseField.setError("Vehicle not found..");
+            return;
+        }
+
         Reciept reciept = garage.removeCar(licensePlate);
 
         TextView displayField = findViewById(R.id.display_field);
