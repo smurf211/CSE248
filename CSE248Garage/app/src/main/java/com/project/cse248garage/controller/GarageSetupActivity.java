@@ -45,21 +45,39 @@ public class GarageSetupActivity extends AppCompatActivity {
 
          garage.setSpaces(carSpaces, truckSpaces, motorcycleSpaces);
 
+
+
         EditText carEarlyBird = findViewById(R.id.car_earlybird);
-        carEarlyBird.setText(String.valueOf(Car.earlyBird));
+        String carValueEarlyBird = carEarlyBird.getText().toString();
+        garage.setCarEarlyBird(Double.valueOf(carValueEarlyBird));
+
+
         EditText carPerHour = findViewById(R.id.car_perhour);
-        carPerHour.setText(String.valueOf(Car.perHour));
+        String carValuePerHour = carPerHour.getText().toString();
+        garage.setCarPerHour(Double.valueOf(carValuePerHour));
+
 
         EditText truckEarlyBird = findViewById(R.id.truck_earlybird);
-        truckEarlyBird.setText(String.valueOf(Truck.earlyBird));
+        String truckValueEarlyBird = truckEarlyBird.getText().toString();
+        garage.setTruckEarlyBird(Double.valueOf(truckValueEarlyBird));
+
+
         EditText truckPerHour = findViewById(R.id.truck_perhour);
-        truckPerHour.setText(String.valueOf(Truck.perHour));
+        String truckValuePerHour = truckPerHour.getText().toString();
+        garage.setTruckPerHour(Double.valueOf(truckValuePerHour));
+
 
         EditText motorcycleEarlyBird = findViewById(R.id.motorcycle_earlybird);
-        motorcycleEarlyBird.setText(String.valueOf(Motorcycle.earlyBird));
-        EditText motorcyclePerHour = findViewById(R.id.motorcycle_perhour);
-        motorcyclePerHour.setText(String.valueOf(Motorcycle.perHour));
+        String motoValueEarlyBird = motorcycleEarlyBird.getText().toString();
+        garage.setMotoPerHour(Double.valueOf(motoValueEarlyBird));
 
+
+        EditText motorcyclePerHour = findViewById(R.id.motorcycle_perhour);
+        String motoValuePerHour = motorcyclePerHour.getText().toString();
+        garage.setMotoPerHour(Double.valueOf(motoValuePerHour));
+
+        //System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
+        System.out.println(garage.toString());
 
         //EditText displayGarage = findViewById(R.id.garage_display);
        // displayGarage.setText(garage.toString());

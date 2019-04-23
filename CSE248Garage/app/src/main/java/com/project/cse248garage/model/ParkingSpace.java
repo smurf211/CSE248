@@ -19,6 +19,7 @@ public class ParkingSpace implements Serializable {
     LocalDate date;
     Ticket ticket;
     public String spaceID;
+    Garage garage;
 
 
     public ParkingSpace(String category, boolean free, int distance){
@@ -41,6 +42,7 @@ public class ParkingSpace implements Serializable {
         this.vehicle = vehicle;
 
 
+
     }
 
 
@@ -61,19 +63,19 @@ public class ParkingSpace implements Serializable {
 
             if(category.equals("car")){
 
-                return Car.earlyBird;
+                return garage.getCarEarlyBird();
 
             }
 
             if(category.equals("truck")){
 
-                return Truck.earlyBird;
+                return garage.getTruckEarlyBird();
 
             }
 
             if(category.equals("motorcycle")){
 
-                return Motorcycle.earlyBird;
+                return garage.getMotoEarlyBird();
 
             }
         }
@@ -82,19 +84,19 @@ public class ParkingSpace implements Serializable {
 
             if(category.equals("car")){
 
-                return Car.perHour;
+                return garage.getCarPerHour();
 
             }
 
             if(category.equals("truck")){
 
-                return Truck.perHour;
+                return garage.getTruckPerHour();
 
             }
 
             if(category.equals("motorcycle")){
 
-                return Motorcycle.perHour;
+                return garage.getMotoPerHour();
 
             }
 
@@ -201,6 +203,14 @@ public class ParkingSpace implements Serializable {
 
     public void setSpaceID(String spaceID) {
         this.spaceID = spaceID;
+    }
+
+    public Garage getGarage() {
+        return garage;
+    }
+
+    public void setGarage(Garage garage) {
+        this.garage = garage;
     }
 
     @Override

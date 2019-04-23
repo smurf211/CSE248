@@ -14,6 +14,17 @@ public class Garage implements Serializable {
     public ParkingSpace[] truckSpaceBag;
     public ParkingSpace[] motorcycleSpaceBag;
 
+    public double carEarlyBird;
+    public double carPerHour;
+
+    public double truckEarlyBird;
+    public double truckPerHour;
+
+    public double motoEarlyBird;
+    public double motoPerHour;
+
+
+
     UserAccountBag bag;
 
     public Garage(){
@@ -57,6 +68,7 @@ public class Garage implements Serializable {
 
             carBag[i] = new ParkingSpace("car", true, ParkingSpace.carDistance++);
             carBag[i].setSpaceID("c"+ String.valueOf(carBag[i].carDistance));
+            carBag[i].setGarage(this);
 
         }
 
@@ -72,6 +84,7 @@ public class Garage implements Serializable {
 
             truckSpaceBag[i] = new ParkingSpace("truck",true, ParkingSpace.truckDistance++);
             truckSpaceBag[i].setSpaceID("t"+ String.valueOf(truckSpaceBag[i].truckDistance));
+            truckSpaceBag[i].setGarage(this);
 
         }
 
@@ -87,6 +100,7 @@ public class Garage implements Serializable {
 
             motorcycleSpaceBag[i] = new ParkingSpace("motorcycle", true, ParkingSpace.motorcycleDistance++);
             motorcycleSpaceBag[i].setSpaceID("m"+ String.valueOf(motorcycleSpaceBag[i].carDistance));
+            motorcycleSpaceBag[i].setGarage(this);
 
         }
 
@@ -99,7 +113,11 @@ public class Garage implements Serializable {
 
     public void park(Vehicle vehicle, String category, Boolean earlyBird){
 
+       // if(findClosestSpace(category) == null){
 
+            //return false;
+
+      //  }
 
         ParkingSpace openSpace = findClosestSpace(category);
 
@@ -122,7 +140,7 @@ public class Garage implements Serializable {
 
         Ticket ticket = new Ticket(openSpace.getVehicle().getLicensePlate(), openSpace.getCategory(),
                 openSpace.getVehicle().getAttendantFirstName(),
-                openSpace.getVehicle().getAttendantLastName(), date1, time, openSpace.getPrice(category, earlyBird), earlyBird, openSpace.getSpaceID());
+                openSpace.getVehicle().getAttendantLastName(), date1, time, openSpace.getPrice(category, earlyBird), earlyBird, openSpace.getSpaceID(), openSpace.getVehicle().getAttendantId());
         openSpace.setTicket(ticket);
 
 
@@ -136,6 +154,8 @@ public class Garage implements Serializable {
         if(category.equals("car")){
 
             for(int i =0; i < carBag.length; i++){
+
+
 
                if( carBag[i].isFree()){
 
@@ -211,7 +231,7 @@ public class Garage implements Serializable {
         Reciept reciept = new Reciept(currentSpace.getVehicle().getLicensePlate(), currentSpace.getCategory(),
                 currentSpace.getVehicle().getAttendantFirstName(),
                 currentSpace.getVehicle().getAttendantLastName(), date, time,
-                currentSpace.getTicket().getPaymentScheme(), currentSpace.getTicket().isEarlyBird(), currentSpace.getSpaceID());
+                currentSpace.getTicket().getPaymentScheme(), currentSpace.getTicket().isEarlyBird(), currentSpace.getSpaceID(),currentSpace.getVehicle().getAttendantId(), this);
 
         currentSpace.removeVehicle();
 
@@ -264,7 +284,7 @@ public class Garage implements Serializable {
         for(int i =0; i < motorcycleSpaceBag.length; i++){
 
 
-            if(!motorcycleSpaceBag[i].isFree() && carBag[i].getVehicle().getLicensePlate().equals(licensePlate)){
+            if(!motorcycleSpaceBag[i].isFree() && motorcycleSpaceBag[i].getVehicle().getLicensePlate().equals(licensePlate)){
 
                 return motorcycleSpaceBag[i];
 
@@ -278,6 +298,54 @@ public class Garage implements Serializable {
 
         return null;
 
+    }
+
+    public double getCarEarlyBird() {
+        return carEarlyBird;
+    }
+
+    public void setCarEarlyBird(double carEarlyBird) {
+        this.carEarlyBird = carEarlyBird;
+    }
+
+    public double getCarPerHour() {
+        return carPerHour;
+    }
+
+    public void setCarPerHour(double carPerHour) {
+        this.carPerHour = carPerHour;
+    }
+
+    public double getTruckEarlyBird() {
+        return truckEarlyBird;
+    }
+
+    public void setTruckEarlyBird(double truckEarlyBird) {
+        this.truckEarlyBird = truckEarlyBird;
+    }
+
+    public double getTruckPerHour() {
+        return truckPerHour;
+    }
+
+    public void setTruckPerHour(double truckPerHour) {
+        this.truckPerHour = truckPerHour;
+    }
+
+    public double getMotoEarlyBird() {
+        return motoEarlyBird;
+    }
+
+    public void setMotoEarlyBird(double motoEarlyBird) {
+        this.motoEarlyBird = motoEarlyBird;
+    }
+
+    public double getMotoPerHour() {
+        return motoPerHour;
+    }
+
+    public void setMotoPerHour(double motoPerHour) {
+        this.motoPerHour = motoPerHour;
     }
 
     public UserAccountBag getBag() {

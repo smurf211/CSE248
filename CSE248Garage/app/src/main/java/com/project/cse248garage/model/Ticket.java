@@ -8,6 +8,7 @@ public class Ticket implements Serializable {
     String category;
     String attendantFirstName;
     String attendantLastName;
+    String attendantID;
     String date;
     String time;
     double paymentScheme;
@@ -20,7 +21,7 @@ public class Ticket implements Serializable {
     }
 
 
-    public Ticket(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date,String time, double paymentScheme, boolean earlyBird, String spaceID) {
+    public Ticket(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date,String time, double paymentScheme, boolean earlyBird, String spaceID, String attendantID) {
         this.licensePlate = licensePlate;
         this.category = category;
         this.attendantFirstName = attendantFirstName;
@@ -30,6 +31,7 @@ public class Ticket implements Serializable {
         this.paymentScheme = paymentScheme;
         this.earlyBird = earlyBird;
         this.spaceID = spaceID;
+        this.attendantID = attendantID;
     }
 
 
@@ -68,12 +70,15 @@ public class Ticket implements Serializable {
     @Override
     public String toString() {
         return "Ticket" + "\n"+
-                "licensePlate='" + licensePlate + "\n" +
-                ", category='" + category + "\n" +
-                ", attendantFirstName='" + attendantFirstName + "\n" +
-                ", attendantLastName='" + attendantLastName + "\n" +
-                ", date='" + date + "\n" +
-                ", time='" + time + '\n' +
-                ", paymentScheme=" + paymentScheme +  "\n" + "Space ID: " + this.spaceID;
+                "License Plate: " + licensePlate + "\n" +
+                "Category : " + category + "\n" +
+                "Attendant Name: " + attendantFirstName +
+                  attendantLastName + "\n" +
+                "Attendant ID: " + attendantID + "\n" +
+                "Date: " + date + "\n" +
+                "Time: " + time + '\n' +
+                "Payment: " + paymentScheme +  "\n" +
+                "Early Bird: " + earlyBird + "\n" +
+                 "Space ID: " + this.spaceID;
     }
 }

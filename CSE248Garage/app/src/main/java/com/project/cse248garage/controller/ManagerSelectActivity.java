@@ -39,6 +39,7 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
 
     public void parkCar(View view){
+        garage.getBag().displayBagHash();
 
         Intent intent2 = new Intent(this, AttendantOptionsActivity.class);
         intent2.putExtra("Garage", garage);
@@ -49,6 +50,7 @@ public class ManagerSelectActivity extends AppCompatActivity {
     }
 
         public void logOut(View view){
+            garage.getBag().displayBagHash();
 
 
             User user =  garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());

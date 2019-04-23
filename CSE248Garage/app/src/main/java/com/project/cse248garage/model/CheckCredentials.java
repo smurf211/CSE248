@@ -17,12 +17,13 @@ package com.project.cse248garage.model;
  * 
  */
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CheckCredentials {
+public class CheckCredentials implements Serializable {
 	
 
 	

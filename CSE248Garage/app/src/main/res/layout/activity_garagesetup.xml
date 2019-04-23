@@ -130,7 +130,7 @@
         android:id="@+id/textView8"
         android:layout_width="41dp"
         android:layout_height="26dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/Car"
         android:textAlignment="center"
@@ -168,7 +168,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/category"
         app:layout_constraintEnd_toStartOf="@+id/textView12"
-        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,7 +181,7 @@
         android:layout_marginEnd="48dp"
         android:text="@string/earlybird"
         app:layout_constraintEnd_toStartOf="@+id/textView13"
-        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintHorizontal_bias="0.787"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -193,7 +193,7 @@
         android:layout_marginEnd="120dp"
         android:text="@string/perhour"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -226,9 +226,9 @@
 
     <EditText
         android:id="@+id/truck_earlybird"
-        android:layout_width="98dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="104dp"
+        android:layout_width="86dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="108dp"
         android:layout_marginTop="88dp"
         android:ems="10"
         android:inputType="numberDecimal"

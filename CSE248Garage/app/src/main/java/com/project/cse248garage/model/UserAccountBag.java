@@ -125,7 +125,7 @@ public class UserAccountBag implements Serializable {
 			if(user.isLoggedIn()){
 				return user;
 			}
-			it.remove(); // avoids a ConcurrentModificationException
+			//it.remove(); // avoids a ConcurrentModificationException
 		}
 
 

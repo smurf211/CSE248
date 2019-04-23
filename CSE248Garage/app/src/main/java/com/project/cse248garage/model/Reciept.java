@@ -10,10 +10,14 @@ public class Reciept extends Ticket implements Serializable {
     String timeOut;
     String dateOut;
     double paymentScheme;
+    String attendantRemovedFirst;
+    String attendantRemovedLast;
+    String attendantRemovedId;
+    Garage garage;
 
 
-    public Reciept(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date, String time, double paymentScheme, boolean earlyBird, String spaceID) {
-        super(licensePlate, category, attendantFirstName, attendantLastName, date, time, paymentScheme, earlyBird, spaceID);
+    public Reciept(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date, String time, double paymentScheme, boolean earlyBird, String spaceID, String attendantID, Garage garage) {
+        super(licensePlate, category, attendantFirstName, attendantLastName, date, time, paymentScheme, earlyBird, spaceID, attendantID);
         this.timeIn = time;
         this.dateIn = date;
         this.paymentScheme = paymentScheme;
@@ -26,6 +30,11 @@ public class Reciept extends Ticket implements Serializable {
         this.timeOut = String.valueOf(java.time.LocalTime.now());
         this.dateOut = String.valueOf(java.time.LocalDate.now());
         this.paymentScheme = calculatePayment();
+        this.garage = garage;
+        User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
+        this.attendantRemovedFirst = user.emitFirstName();
+        this.attendantRemovedLast = user.emitLastName();
+        this.attendantRemovedId = user.emitID();
 
     }
 
@@ -78,6 +87,30 @@ public class Reciept extends Ticket implements Serializable {
         Thread.sleep(millis);
     }
 
+    public String getAttendantRemovedFirst() {
+        return attendantRemovedFirst;
+    }
+
+    public void setAttendantRemovedFirst(String attendantRemovedFirst) {
+        this.attendantRemovedFirst = attendantRemovedFirst;
+    }
+
+    public String getAttendantRemovedLast() {
+        return attendantRemovedLast;
+    }
+
+    public void setAttendantRemovedLast(String attendantRemovedLast) {
+        this.attendantRemovedLast = attendantRemovedLast;
+    }
+
+    public String getAttendantRemovedId() {
+        return attendantRemovedId;
+    }
+
+    public void setAttendantRemovedId(String attendantRemovedId) {
+        this.attendantRemovedId = attendantRemovedId;
+    }
+
     @Override
     public String toString() {
         return "Reciept" + "\n"+
@@ -89,7 +122,13 @@ public class Reciept extends Ticket implements Serializable {
                 "Early Bird: " + earlyBird + "\n" +
                 "License Plate: " + licensePlate + '\n' +
                 "Category: " + category + '\n' +
-                "Attendant Name: " + attendantFirstName + " " +
-                attendantLastName + "\n" + "Space ID: " + this.spaceID;
+                "Attendant Parked Name: " + attendantFirstName + " " +
+                attendantLastName + "\n" +
+                "Attendant Parked ID: " + attendantID + "\n" +
+                "Attendant Removed Name: " + attendantRemovedFirst + " "
+                + attendantRemovedLast + "\n"+
+                "Attendant Removed ID: " + attendantRemovedId + "\n" +
+
+                "Space ID: " + this.spaceID;
     }
 }

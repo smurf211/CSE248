@@ -35,6 +35,7 @@ public class TicketActivity extends AppCompatActivity {
     }
 
     public void done(View view){
+        garage.getBag().displayBagHash();
         Intent intent = new Intent(this, AttendantOptionsActivity.class);
         intent.putExtra("Garage", garage);
         startActivity(intent);

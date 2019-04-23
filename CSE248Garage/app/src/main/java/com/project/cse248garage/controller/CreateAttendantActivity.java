@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.project.cse248garage.R;
+import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.UserAccountBag;
 
@@ -51,7 +52,7 @@ public class CreateAttendantActivity extends AppCompatActivity {
     }
 
     public void nextView(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ManagerSelectActivity.class);
         intent.putExtra("Garage", garage);
         startActivity(intent);
 

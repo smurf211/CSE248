@@ -7,16 +7,18 @@ public abstract class Vehicle implements Serializable {
     String licensePlate;
     public String attendantFirstName;
     public String attendantLastName;
-    //add attendant removed functionality
-    //add attendant id to ticket
-    //allow smaller vehicle to park in larger space
+    public String attendantId;
 
-    //add admin defined payment scheme
 
-    public Vehicle(String licensePlate, String attendantFirstName, String attendantLastName) {
+
+
+
+
+    public Vehicle(String licensePlate, String attendantFirstName, String attendantLastName, String attendantId) {
         this.licensePlate = licensePlate;
         this.attendantFirstName = attendantFirstName;
         this.attendantLastName = attendantLastName;
+        this.attendantId = attendantId;
     }
 
     @Override
@@ -38,5 +40,13 @@ public abstract class Vehicle implements Serializable {
 
     public String getAttendantLastName() {
         return attendantLastName;
+    }
+
+    public String getAttendantId() {
+        return attendantId;
+    }
+
+    public void setAttendantId(String attendantId) {
+        this.attendantId = attendantId;
     }
 }

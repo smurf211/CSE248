@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.project.cse248garage.R;
+import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.CheckCredentials;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.User;
@@ -47,9 +48,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             garage = new Garage();
+            System.out.println("NEW GARAGE");
         }
 
-
+        garage.getBag().displayBagHash();
 
 
 
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(user.isAdmin()) {
-              //  user.setLoggedIn(false);
+                user.setLoggedIn(true);
                 Intent intent1 = new Intent(this, ManagerSelectActivity.class);
                 intent1.putExtra("Garage", garage);
 
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             else {
                // System.out.println(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()));
+                user.setLoggedIn(true);
                 Intent intent2 = new Intent(this, AttendantOptionsActivity.class);
                 intent2.putExtra("Garage", garage);
                 startActivity(intent2);
@@ -140,5 +143,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         garage.getBag().displayBagHash();
+
+        System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
     }
 }
