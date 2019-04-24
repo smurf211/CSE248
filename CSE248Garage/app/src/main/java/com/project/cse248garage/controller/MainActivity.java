@@ -159,4 +159,13 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
     }
+
+    public void displayGarage(View view){
+
+        Intent intent2 = new Intent(this, DisplayGarageActivity.class);
+        intent2.putExtra("Garage", garage);
+        startActivity(intent2);
+
+
+    }
 }

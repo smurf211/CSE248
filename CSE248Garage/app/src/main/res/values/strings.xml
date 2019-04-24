@@ -44,4 +44,9 @@
     <string name="LoadGarage">Load Garage</string>
     <string name="addAttendant">Add Attendant</string>
     <string name="removeAttendant">Remove Attendant</string>
+    <string name="viewgarage">View Garage</string>
+    <string name="display">display</string>
+    <string name="cardisplayHint">C = Car</string>
+    <string name="truckdisplayhint">T = Truck</string>
+    <string name="motodisplayHint">M = Motorcycle</string>
 </resources>

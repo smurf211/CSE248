@@ -301,6 +301,18 @@ public class Garage implements Serializable {
 
     }
 
+    public ParkingSpace[] getCarBag() {
+        return carBag;
+    }
+
+    public ParkingSpace[] getTruckSpaceBag() {
+        return truckSpaceBag;
+    }
+
+    public ParkingSpace[] getMotorcycleSpaceBag() {
+        return motorcycleSpaceBag;
+    }
+
     public double getCarEarlyBird() {
         return carEarlyBird;
     }

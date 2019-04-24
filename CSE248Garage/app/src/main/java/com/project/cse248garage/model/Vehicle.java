@@ -10,7 +10,7 @@ public abstract class Vehicle implements Serializable {
     public String attendantId;
 
 
-
+    public abstract String getCategory();
 
 
 
