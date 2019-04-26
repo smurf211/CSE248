@@ -31,6 +31,10 @@ public class AttendantParkActivity extends AppCompatActivity {
     Switch earlyBirdSwitch;
     boolean earlyBird;
     RadioGroup rg1;
+    String category;
+    Vehicle vehicle;
+    User user;
+    String falseCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +97,7 @@ public class AttendantParkActivity extends AppCompatActivity {
         truckButton = findViewById(R.id.truckButton);
         motoButton = findViewById(R.id.motoButton);
         earlyBird = earlyBirdSwitch.isChecked();
-        User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
+        user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
 
 
         if(licensePlate.equals("")){
@@ -127,141 +131,29 @@ public class AttendantParkActivity extends AppCompatActivity {
         }
 
 
-        String category;
-        Vehicle vehicle;
+
 
         if(carButton.isChecked()) {
-
-            category = carButton.getText().toString().toLowerCase();
-            vehicle = new Car(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
-
-            if(garage.findClosestSpace(category) == null){
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
-                builder.setCancelable(true);
-                builder.setTitle("Sorry");
-                builder.setMessage("All spaces are occupied in this category, would you like to upgrade to a larger size? " +
-                        "\n\n" + "Your new category will be Truck and your price will be: \n$" + garage.getTruckPerHour() + " Per Hour " +
-                        "\n\n$" + garage.getTruckEarlyBird() + " Early Bird Flat Fee");
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-
-                            }
-                        });
-
-                builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    carButton.setChecked(true);
-                    carButton.setChecked(false);
-
-                    }
-                });
-
-                        builder.show();
+            parkCar("car");
 
 
-
-            }
-           else{
-               garage.park(vehicle, category, earlyBird);
-                nextView();
-            }
         }
 
 
         else if(truckButton.isChecked()) {
-            category = truckButton.getText().toString().toLowerCase();
-            vehicle = new Truck(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
 
-            if(garage.findClosestSpace(category) == null){
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
-                builder.setCancelable(true);
-                builder.setTitle("Sorry");
-                builder.setMessage("All spaces are occupied in this category, and your vehicle will not fit elsewhere. " +
-                        "\n\n" + "Shit out of luck. ");
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-
-                    }
-                });
-
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                       licenseField.setText("");
-                       earlyBirdSwitch.setChecked(false);
-
-                    }
-                });
-
-                builder.show();
-
-
-
-            }
-            else{
-                garage.park(vehicle, category, earlyBird);
-                nextView();
-            }
-
-
+           parkTruck("truck");
 
 
 
         }
-        //finish this
+
         else if(motoButton.isChecked()) {
-            category = motoButton.getText().toString().toLowerCase();
-            vehicle = new Motorcycle(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
-
-            if(garage.findClosestSpace(category) == null){
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
-                builder.setCancelable(true);
-                builder.setTitle("Achtung!");
-                builder.setMessage("All spaces are occupied in this category, would you like to upgrade to a larger size? " +
-                        "\n\n" + "Your new category will be Car and your price will be: \n$" + garage.getCarPerHour() + " Per Hour " +
-                        "\n\n$" + garage.getCarEarlyBird() + " Early Bird Flat Fee");
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-
-                    }
-                });
-
-                builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        motoButton.setChecked(false);
-                        carButton.setChecked(true);
-
-                    }
-                });
-
-                builder.show();
-
-
-
-            }
-            else{
-                garage.park(vehicle, category, earlyBird);
-                nextView();
-            }
 
 
 
 
-
+            parkMoto("motorcycle");
 
 
 
@@ -271,6 +163,172 @@ public class AttendantParkActivity extends AppCompatActivity {
 
 
 
+
+
+
+    }
+
+
+    public void parkCar(String category){
+
+       // category = carButton.getText().toString().toLowerCase();
+        falseCategory = category;
+        vehicle = new Car(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
+        vehicle.setFalseCategory(category);
+
+        if(garage.findClosestSpace(carButton.getText().toString().toLowerCase()) == null){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Sorry");
+            builder.setMessage("All spaces are occupied in this category, would you like to upgrade to a larger size? " +
+                    "\n\n" + "Your new category will be Truck and your price will be: \n$" + garage.getTruckPerHour() + " Per Hour " +
+                    "\n\n$" + garage.getTruckEarlyBird() + " Early Bird Flat Fee");
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+
+                }
+            });
+
+            builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                   // carButton.setChecked(false);
+                  //  truckButton.setChecked(true);
+                    parkTruck(falseCategory);
+
+
+
+                }
+            });
+
+            builder.show();
+
+
+
+        }
+        else{
+
+            garage.park(vehicle, carButton.getText().toString().toLowerCase(), earlyBird);
+            System.out.println(vehicle.getCategory());
+            nextView();
+
+
+        }
+
+
+
+
+
+
+    }
+
+    public void parkTruck(String category){
+
+       // category = truckButton.getText().toString().toLowerCase();
+        vehicle = new Truck(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
+        vehicle.setFalseCategory(category);
+
+        if(garage.findClosestSpace(truckButton.getText().toString().toLowerCase()) == null){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Sorry");
+            builder.setMessage("All spaces are occupied in this category, and your vehicle will not fit elsewhere. " +
+                    "\n\n" + "Shit out of luck. ");
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+
+                }
+            });
+
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    licenseField.setText("");
+                    earlyBirdSwitch.setChecked(false);
+
+                }
+            });
+
+            builder.show();
+
+
+
+
+        }
+        else{
+
+            garage.park(vehicle, truckButton.getText().toString().toLowerCase(), earlyBird);
+            System.out.println(vehicle.getCategory());
+            nextView();
+
+
+        }
+
+
+
+    }
+
+    public void parkMoto(String category){
+        falseCategory = category;
+
+       // category = motoButton.getText().toString().toLowerCase();
+        vehicle = new Motorcycle(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
+        vehicle.setFalseCategory(category);
+
+        if(garage.findClosestSpace(motoButton.getText().toString().toLowerCase()) == null){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Achtung!");
+            builder.setMessage("All spaces are occupied in this category, would you like to upgrade to a larger size? " +
+                    "\n\n" + "Your new category will be Car and your price will be: \n$" + garage.getCarPerHour() + " Per Hour " +
+                    "\n\n$" + garage.getCarEarlyBird() + " Early Bird Flat Fee");
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+
+                }
+            });
+
+            builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                   // motoButton.setChecked(false);
+                   // carButton.setChecked(true);
+
+                    if(garage.findClosestSpace("car") == null){
+                        parkTruck(falseCategory);
+                    }
+                    parkCar(falseCategory);
+
+
+                }
+            });
+
+            builder.show();
+
+
+
+
+        }
+        else{
+
+            garage.park(vehicle, motoButton.getText().toString().toLowerCase(), earlyBird);
+            System.out.println(vehicle.getCategory());
+            nextView();
+
+
+        }
 
 
 

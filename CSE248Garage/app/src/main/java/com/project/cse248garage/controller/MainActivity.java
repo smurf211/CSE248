@@ -7,9 +7,13 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Car;
@@ -61,14 +65,51 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.example_menu,menu );
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
+               displayGarage();
+
+
+
+                return true;
+            case R.id.item2:
+                Toast.makeText(this, "Garage Saved", Toast.LENGTH_SHORT).show();
+                saveGarage();
+
+                return true;
+            case R.id.item3:
+                Toast.makeText(this, "Garage Loaded", Toast.LENGTH_SHORT).show();
+                loadGarage();
+
+
+                return true;
+            case R.id.subitem1:
+                Toast.makeText(this, "Sub Item 1 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.subitem2:
+                Toast.makeText(this, "Sub Item 2 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
     public void adminLogin(View view){
 
-
-
-
-
-
-    EditText userNameField = findViewById(R.id.username_field);
+        EditText userNameField = findViewById(R.id.username_field);
     EditText passwordField = findViewById(R.id.password_field);
 
 
@@ -117,8 +158,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void saveGarage(View view){
-        Context context = view.getContext();
+    public void saveGarage(){
+
+
+        Context context = MainActivity.this;
         TextView displayField = findViewById(R.id.display_field);
         displayField.setText("Garage saved");
         File file = new File(context.getFilesDir(), "garage.dat");
@@ -138,8 +181,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void loadGarage(View view){
-        Context context = view.getContext();
+    public void loadGarage(){
+
+
+        Context context = MainActivity.this;
         TextView displayField = findViewById(R.id.display_field);
         displayField.setText("Garage loaded");
         File file = new File(context.getFilesDir(), "garage.dat");
@@ -164,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
     }
 
-    public void displayGarage(View view){
+    public void displayGarage(){
 
         Intent intent2 = new Intent(this, DisplayGarageActivity.class);
         intent2.putExtra("Garage", garage);

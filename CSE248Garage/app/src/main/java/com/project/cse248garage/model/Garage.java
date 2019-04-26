@@ -1,5 +1,16 @@
 package com.project.cse248garage.model;
 
+import android.app.Activity;
+import android.content.Context;
+import android.widget.TextView;
+
+import com.project.cse248garage.R;
+import com.project.cse248garage.controller.MainActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -300,6 +311,8 @@ public class Garage implements Serializable {
         return null;
 
     }
+
+
 
     public ParkingSpace[] getCarBag() {
         return carBag;

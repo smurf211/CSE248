@@ -1,5 +1,7 @@
 package com.project.cse248garage.controller;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +30,35 @@ public class DisplayGarageActivity extends AppCompatActivity {
         garage = (Garage) getIntent().getSerializableExtra("Garage");
     }
 
-    public void displayGarage(View view){
+    public void displayGarage(View view) {
+
+        if (garage.getCarBag() == null || garage.getTruckSpaceBag() == null || garage.getMotorcycleSpaceBag() == null) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(DisplayGarageActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Warning!");
+            builder.setMessage("No Garage to display, please create one.");
+
+            builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.cancel();
+                    return;
+
+                }
+            });
+
+
+            builder.show();
+
+            return;
+        }
+
+
+
+
+
 
         carView = findViewById(R.id.display_field1);
         truckView = findViewById(R.id.display_field2);
@@ -38,7 +68,7 @@ public class DisplayGarageActivity extends AppCompatActivity {
 
 
            if( !garage.getCarBag()[i].isFree()){
-           temp = garage.getCarBag()[i].getVehicle().getCategory();
+           temp = garage.getCarBag()[i].getVehicle().getFalseCategory();
            temp2 = temp.substring(0,1).toUpperCase();
            carView.append("c"+ (i+1) +" [" + temp2 + "]" + "\n\n");
            }
@@ -52,7 +82,7 @@ public class DisplayGarageActivity extends AppCompatActivity {
         for(int i = 0; i < garage.getTruckSpaceBag().length; i++){
 
             if( !garage.getTruckSpaceBag()[i].isFree()){
-                temp = garage.getTruckSpaceBag()[i].getVehicle().getCategory();
+                temp = garage.getTruckSpaceBag()[i].getVehicle().getFalseCategory();
                 temp2 = temp.substring(0,1).toUpperCase();
                 truckView.append("t"+ (i+1) +" [" + temp2 + "]" + "\n\n");
             }
@@ -66,7 +96,7 @@ public class DisplayGarageActivity extends AppCompatActivity {
         for(int i = 0; i < garage.getMotorcycleSpaceBag().length; i++){
 
             if( !garage.getMotorcycleSpaceBag()[i].isFree()){
-                temp = garage.getMotorcycleSpaceBag()[i].getVehicle().getCategory();
+                temp = garage.getMotorcycleSpaceBag()[i].getVehicle().getFalseCategory();
                 temp2 = temp.substring(0,1).toUpperCase();
                 motoView.append("m"+ (i+1) +" [" + temp2 + "]" + "\n\n");
             }

@@ -8,6 +8,7 @@ public abstract class Vehicle implements Serializable {
     public String attendantFirstName;
     public String attendantLastName;
     public String attendantId;
+    public String falseCategory;
 
 
     public abstract String getCategory();
@@ -28,6 +29,14 @@ public abstract class Vehicle implements Serializable {
                 ", attendantFirstName='" + attendantFirstName + '\'' +
                 ", attendantLastName='" + attendantLastName + '\'' +
                 '}';
+    }
+
+    public String getFalseCategory() {
+        return falseCategory;
+    }
+
+    public void setFalseCategory(String falseCategory) {
+        this.falseCategory = falseCategory;
     }
 
     public String getLicensePlate() {
