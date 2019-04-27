@@ -25,6 +25,10 @@ public class Garage implements Serializable {
     public ParkingSpace[] truckSpaceBag;
     public ParkingSpace[] motorcycleSpaceBag;
 
+
+
+
+
     public double carEarlyBird;
     public double carPerHour;
 
@@ -45,6 +49,9 @@ public class Garage implements Serializable {
 
 
     public Garage(int carSize, int motorcycleSize, int truckSize){
+
+
+
 
 
         carBag = new ParkingSpace[carSize];
@@ -121,6 +128,8 @@ public class Garage implements Serializable {
 
 
     }
+
+
 
 
 

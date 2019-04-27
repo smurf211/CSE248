@@ -11,6 +11,8 @@ public abstract class Vehicle implements Serializable {
     public String falseCategory;
 
 
+
+
     public abstract String getCategory();
 
 

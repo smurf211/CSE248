@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Car;
@@ -79,8 +80,8 @@ public class GarageSetupActivity extends AppCompatActivity {
         //System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
         System.out.println(garage.toString());
 
-        //EditText displayGarage = findViewById(R.id.garage_display);
-       // displayGarage.setText(garage.toString());
+        TextView displayGarage = findViewById(R.id.display_field);
+        displayGarage.setText("Garage Created!");
 
     }
 

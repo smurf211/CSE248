@@ -14,13 +14,14 @@ public class Reciept extends Ticket implements Serializable {
     String attendantRemovedLast;
     String attendantRemovedId;
     Garage garage;
+    double rate;
 
 
     public Reciept(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date, String time, double paymentScheme, boolean earlyBird, String spaceID, String attendantID, Garage garage) {
         super(licensePlate, category, attendantFirstName, attendantLastName, date, time, paymentScheme, earlyBird, spaceID, attendantID);
         this.timeIn = time;
         this.dateIn = date;
-        this.paymentScheme = paymentScheme;
+        this.rate = paymentScheme;
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -62,26 +63,31 @@ public class Reciept extends Ticket implements Serializable {
         double timeInSeconds;
         double timeOutMinutes;
         double timeOutSeconds;
+        double timeInHours;
+        double timeOutHours;
         String[] timeInTokens = timeIn.split(":");
+        timeInHours = Integer.valueOf(timeInTokens[0]);
         timeInMinutes = Integer.valueOf(timeInTokens[1]);
         timeInSeconds = Double.valueOf(timeInTokens[2]);
         String[] timeOutTokens = timeOut.split(":");
+        timeOutHours = Integer.valueOf(timeOutTokens[0]);
         timeOutMinutes = Integer.valueOf(timeOutTokens[1]);
         timeOutSeconds = Double.valueOf(timeOutTokens[2]);
 
+        double differenceHours = timeOutHours - timeInHours;
         double differenceMinutes = timeOutMinutes - timeInMinutes;
         double differenceSeconds = timeOutSeconds - timeInSeconds;
 
-        double totalSeconds = (differenceMinutes * 60) + differenceSeconds;
+        double totalSeconds = (differenceHours * 60 * 60) + (differenceMinutes * 60) + differenceSeconds;
         System.out.println("timeInMinutes: " + timeInMinutes + " timeInSeconds:" + timeInSeconds + " timeOutMinutes: " + timeOutMinutes + " timeOutSeconds: " + timeOutSeconds
         + "\n" + " dMinutes: " + differenceMinutes + " dseconds: " + differenceSeconds);
         System.out.println(totalSeconds + "Rounded: " + Math.round(totalSeconds));
+        double totalMinutes = (totalSeconds /60);
 
 
 
 
-
-    return Math.round(totalSeconds);
+    return Math.round(totalMinutes);
     }
 
     public static void sleep(long millis) throws InterruptedException{
@@ -121,13 +127,26 @@ public class Reciept extends Ticket implements Serializable {
         }
     }
 
-    public String getCurrency(){
+    public String getRate(){
+
         if(earlyBird) {
-            return "$" + String.valueOf(paymentScheme) + " Flat rate.";
+            return "$" + String.valueOf(rate) + "Flat fee.";
 
         }
         else{
-            return "$" + String.valueOf(paymentScheme) + " Per Hour.";
+            return "$" + String.valueOf(rate) + "Per Hour." ;
+        }
+
+
+    }
+
+    public String getCurrency(){
+        if(earlyBird) {
+            return "$" + String.valueOf(paymentScheme) ;
+
+        }
+        else{
+            return "$" + String.valueOf(paymentScheme) ;
         }
     }
 
@@ -135,20 +154,19 @@ public class Reciept extends Ticket implements Serializable {
     public String toString() {
         return "Reciept" + "\n"+
                 "Time in: " + timeIn + '\n' +
-                "Date in: " + dateIn + '\n' +
                 "Time out: " + timeOut + '\n' +
+                "Date in: " + dateIn + '\n' +
                 "Date out: " + dateOut + '\n' +
-                "Payment Due:: " + getCurrency() + '\n' +
+                "Rate: " + getRate() + '\n' +
+                "Payment Due: " + getCurrency() + '\n' +
                 "Amount Paid: " + "$" + paymentScheme + "\n"+
                 "Early Bird: " + getEarlyBirdString() + "\n" +
                 "License Plate: " + licensePlate + '\n' +
                 "Category: " + category + '\n' +
-                "Attendant Parked Name: " + attendantFirstName + " " +
-                attendantLastName + "\n" +
-                "Attendant Parked ID: " + attendantID + "\n" +
-                "Attendant Removed Name: " + attendantRemovedFirst + " "
-                + attendantRemovedLast + "\n"+
-                "Attendant Removed ID: " + attendantRemovedId + "\n" +
+                "Attendant Parked Name/ID: " + attendantFirstName + " " +
+                attendantLastName + " " + attendantID + "\n" +
+                "Attendant Removed Name/ID: " + attendantRemovedFirst + " "
+                + attendantRemovedLast + " "+ attendantRemovedId + "\n" +
 
                 "Space ID: " + this.spaceID;
     }

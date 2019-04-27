@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.TicketActivity">
+    tools:context=".controller.TicketActivity"
+    android:background="#d5e2f2">
 
     <Button
         android:id="@+id/button8"
