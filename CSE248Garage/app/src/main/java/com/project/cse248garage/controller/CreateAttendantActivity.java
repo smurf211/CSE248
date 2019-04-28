@@ -63,7 +63,7 @@ public class CreateAttendantActivity extends AppCompatActivity {
        TextView displayAttendant = findViewById(R.id.display_field);
 
 
-         displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toString());
+         displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toStringAdmin());
 
 
     }

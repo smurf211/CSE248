@@ -176,15 +176,25 @@ public class User implements Serializable {
         this.loggedIn = loggedIn;
     }
 
+
+    public String toStringAdmin() {
+        return
+                "Name: " + firstName  + " " + lastName
+                + "\n ID: '" + iD  +
+                "\n Admin: " + admin +
+                "\n UserName: " + userName  +
+                "\n password: " + password;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", iD='" + iD + '\'' +
-                ", admin=" + admin +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return
+                "Name: " + firstName  + " " + lastName
+                        + "\n ID: '" + iD  +
+                        "\n Admin: " + admin +
+                        "\n UserName: " + userName  +
+                        "\n password: " + "*******";
     }
+
+
 }

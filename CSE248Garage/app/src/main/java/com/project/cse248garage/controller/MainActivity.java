@@ -94,12 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
 
                 return true;
-            case R.id.subitem1:
-                Toast.makeText(this, "Sub Item 1 selected", Toast.LENGTH_SHORT).show();
+            case R.id.item4:
+                Toast.makeText(this, "Display Attendants Selected", Toast.LENGTH_SHORT).show();
+                displayAttendants();
                 return true;
-            case R.id.subitem2:
-                Toast.makeText(this, "Sub Item 2 selected", Toast.LENGTH_SHORT).show();
-                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -212,6 +211,15 @@ public class MainActivity extends AppCompatActivity {
     public void displayGarage(){
 
         Intent intent2 = new Intent(this, DisplayGarageActivity.class);
+        intent2.putExtra("Garage", garage);
+        startActivity(intent2);
+
+
+    }
+
+    public void displayAttendants(){
+
+        Intent intent2 = new Intent(this, DisplayAttendantActivity.class);
         intent2.putExtra("Garage", garage);
         startActivity(intent2);
 

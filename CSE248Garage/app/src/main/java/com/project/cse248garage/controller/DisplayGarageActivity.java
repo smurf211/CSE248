@@ -32,6 +32,8 @@ public class DisplayGarageActivity extends AppCompatActivity {
 
     public void displayGarage(View view) {
 
+
+
         if (garage.getCarBag() == null || garage.getTruckSpaceBag() == null || garage.getMotorcycleSpaceBag() == null) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(DisplayGarageActivity.this);
@@ -70,10 +72,10 @@ public class DisplayGarageActivity extends AppCompatActivity {
            if( !garage.getCarBag()[i].isFree()){
            temp = garage.getCarBag()[i].getVehicle().getFalseCategory();
            temp2 = temp.substring(0,1).toUpperCase();
-           carView.append("c"+ (i+1) +" [" + temp2 + "]" + "\n\n");
+           carView.append(garage.getCarBag()[i].getSpaceID() +" [" + temp2 + "]" + "\n\n");
            }
             else {
-               carView.append("c" + (i + 1) + " [" + " " + "]" + "\n\n");
+               carView.append(garage.getCarBag()[i].getSpaceID() + " [" + " " + "]" + "\n\n");
            }
 
 

@@ -86,9 +86,10 @@ public class Garage implements Serializable {
 
         for(int i =0; i < carSize; i++){
 
-            carBag[i] = new ParkingSpace("car", true, ParkingSpace.carDistance++);
+            carBag[i] = new ParkingSpace("car", true, ParkingSpace.carDistance);
             carBag[i].setSpaceID("c"+ String.valueOf(carBag[i].carDistance));
             carBag[i].setGarage(this);
+            ParkingSpace.carDistance++;
 
         }
 
@@ -102,9 +103,10 @@ public class Garage implements Serializable {
 
         for(int i =0; i < truckSize; i++){
 
-            truckSpaceBag[i] = new ParkingSpace("truck",true, ParkingSpace.truckDistance++);
+            truckSpaceBag[i] = new ParkingSpace("truck",true, ParkingSpace.truckDistance);
             truckSpaceBag[i].setSpaceID("t"+ String.valueOf(truckSpaceBag[i].truckDistance));
             truckSpaceBag[i].setGarage(this);
+            ParkingSpace.truckDistance++;
 
         }
 
@@ -118,9 +120,11 @@ public class Garage implements Serializable {
 
         for(int i =0; i < motorcycleSize; i++){
 
-            motorcycleSpaceBag[i] = new ParkingSpace("motorcycle", true, ParkingSpace.motorcycleDistance++);
-            motorcycleSpaceBag[i].setSpaceID("m"+ String.valueOf(motorcycleSpaceBag[i].carDistance));
+            motorcycleSpaceBag[i] = new ParkingSpace("motorcycle", true, ParkingSpace.motorcycleDistance);
+            motorcycleSpaceBag[i].setSpaceID("m"+ String.valueOf(motorcycleSpaceBag[i].motorcycleDistance));
             motorcycleSpaceBag[i].setGarage(this);
+
+            ParkingSpace.motorcycleDistance++;
 
         }
 

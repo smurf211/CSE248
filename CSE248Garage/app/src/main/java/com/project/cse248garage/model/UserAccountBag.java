@@ -281,6 +281,52 @@ public class UserAccountBag implements Serializable {
 
 	}
 
+	public String displayBagAdmin(){
+		int i =1;
+		String display = "";
+		User user;
+		Iterator it = userAccountHash.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			//System.out.println(pair.getKey() + " = " + pair.getValue());
+			//userName = (String) pair.getValue();
+			user = (User) pair.getKey();
+			display += "\n"+ i + ". "  + user.toStringAdmin() + "\n";
+			i++;
+			//it.remove(); // avoids a ConcurrentModificationException
+		}
+
+
+		return display;
+
+
+
+
+	}
+
+	public String displayBagUser(){
+		int i =1;
+		String display = "";
+		User user;
+		Iterator it = userAccountHash.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			//System.out.println(pair.getKey() + " = " + pair.getValue());
+			//userName = (String) pair.getValue();
+			user = (User) pair.getKey();
+			display += "\n"+ i + ". "  + user.toString() + "\n";
+			i++;
+			//it.remove(); // avoids a ConcurrentModificationException
+		}
+
+
+		return display;
+
+
+
+
+	}
+
 	public int getnElems() {
 		return nElems;
 	}
