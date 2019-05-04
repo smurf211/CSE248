@@ -69,9 +69,19 @@ public class Record implements Serializable {
 
     @Override
     public String toString() {
-        return "Record: " +
-                "Vehicle: " + vehicle + "\n" +
-                "Tickets: " + tickets +  "\n" +
-                "Reciepts: " + reciepts;
+
+        if(reciepts.size() == 0){
+            return "Record: " + "\n" +
+                    vehicle + "\n" +
+                    "Tickets: " + "\n " + tickets +  "\n" +
+                    "Reciepts: " + "none";
+
+
+        }
+
+        return "Record: " + "\n" +
+                  vehicle + "\n" +
+                "Tickets: " +  "\n" + tickets +  "\n" +
+                "Reciepts: " + "\n" +  reciepts;
     }
 }

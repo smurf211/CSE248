@@ -8,9 +8,9 @@
 
     <item android:id="@+id/item2"
 
-        android:title="Save Garage"
+    android:title="Save Garage"
 
-        app:showAsAction="never"/>
+    app:showAsAction="never"/>
 
     <item android:id="@+id/item3"
 

@@ -19,6 +19,7 @@ package com.project.cse248garage.model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -108,6 +109,24 @@ public class UserAccountBag implements Serializable {
 
 
 			return null;
+
+
+	}
+
+	public ArrayList<String> getUsersArrayList( HashMap<User, String> map) {
+
+		ArrayList<String> userNames = new ArrayList<String>();
+
+		for (Entry<User, String> entry : map.entrySet()) {
+
+
+				userNames.add(entry.getKey().emitUserName());
+
+
+		}
+
+
+		return userNames;
 
 
 	}

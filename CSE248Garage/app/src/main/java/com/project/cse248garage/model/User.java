@@ -27,7 +27,7 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.admin = admin;
         iD = String.valueOf(++idCounter);
-        for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
+        for (int i = 2; i > String.valueOf(idCounter).length(); i--) {
             iD = '0' + iD;
 
         }
@@ -43,7 +43,7 @@ public class User implements Serializable {
         this.admin = admin;
         this.password = password;
         iD = String.valueOf(++idCounter);
-        for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
+        for (int i = 2; i > String.valueOf(idCounter).length(); i--) {
             iD = '0' + iD;
 
         }
@@ -61,7 +61,7 @@ public class User implements Serializable {
 
 
         iD = String.valueOf(++idCounter);
-        for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
+        for (int i = 2; i > String.valueOf(idCounter).length(); i--) {
             iD = '0' + iD;
 
         }

@@ -26,11 +26,11 @@ public abstract class Vehicle implements Serializable {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "licensePlate='" + licensePlate + '\'' +
-                ", attendantFirstName='" + attendantFirstName + '\'' +
-                ", attendantLastName='" + attendantLastName + '\'' +
-                '}';
+        return "Vehicle " + "\n"+
+                " License Plate: " + licensePlate
+                + "\n" +
+                "Category: " + getCategory()
+                ;
     }
 
     public String getFalseCategory() {

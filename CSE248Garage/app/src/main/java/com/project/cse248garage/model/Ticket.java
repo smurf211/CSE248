@@ -114,12 +114,12 @@ public class Ticket implements Serializable {
         return "Ticket" + "\n"+
                 "License Plate: " + licensePlate + "\n" +
                 "Category : " + category + "\n" +
-                "Attendant Name: " + attendantFirstName + " "+
-                  attendantLastName + "\n" +
-                "Attendant ID: " + attendantID + "\n" +
-                "Date: " + date + "\n" +
-                "Time: " + Reciept.convertTimeFromMilitary(time) + '\n' +
-                "Payment: " + getCurrency()+  "\n" +
+                "Attendant Name/ID: " + attendantFirstName + " "+
+                  attendantLastName + " " +
+                 attendantID + "\n" +
+                "Date/Time: " + date + " "  +
+                 Reciept.convertTimeFromMilitary(time) + '\n' +
+                "Rate: " + getCurrency()+  "\n" +
                 "Early Bird: " + getEarlyBirdString() + "\n" +
                 "Space ID: " + this.spaceID;
     }

@@ -52,4 +52,5 @@
     <string name="DisplayAttendants">Display Attendants</string>
     <string name="printReciept">Print Reciept</string>
     <string name="DisplayRecords">Display Records</string>
+    <string name="plateHistory">Plate Numbers:</string>
 </resources>

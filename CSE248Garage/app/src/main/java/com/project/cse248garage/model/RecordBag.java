@@ -11,17 +11,20 @@ public class RecordBag implements Serializable {
 
     public RecordBag(){
 
-        nElems++;
+
 
     }
 
     public void addRecord(Record record){
 
         recordList.add(record);
+        nElems++;
     }
 
     public void removeRecord(Record record){
+
         recordList.remove(record);
+        nElems--;
     }
 
 
@@ -43,14 +46,20 @@ public class RecordBag implements Serializable {
 
     }
 
-    public ArrayList<String> getLicensePlates(){
+    public ArrayList<String> getLicensePlates(Garage garage){
 
 
 
         ArrayList<String> list = new ArrayList<String>();
 
        for(int i =0; i < recordList.size(); i++){
-           list.add(recordList.get(i).getLicensePlate());
+           if(garage.findByPlateBoolean(recordList.get(i).getLicensePlate())){
+               list.add(recordList.get(i).getLicensePlate() + " (Present)");
+
+           }
+           else {
+               list.add(recordList.get(i).getLicensePlate());
+           }
        }
 
 

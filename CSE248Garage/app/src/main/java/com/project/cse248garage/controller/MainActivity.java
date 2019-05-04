@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         Intent intent = getIntent();
 
         if(intent.hasExtra("Garage")) {
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu );
+        inflater.inflate(R.menu.menu_mainactivity,menu );
 
         return true;
     }
@@ -78,35 +79,11 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.item1:
 
-                Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
-               displayGarage();
+                Toast.makeText(this, "Load Garage", Toast.LENGTH_SHORT).show();
+               loadGarage();
 
+               return true;
 
-
-                return true;
-            case R.id.item2:
-
-                Toast.makeText(this, "Garage Saved", Toast.LENGTH_SHORT).show();
-                saveGarage();
-
-                return true;
-            case R.id.item3:
-                Toast.makeText(this, "Garage Loaded", Toast.LENGTH_SHORT).show();
-                loadGarage();
-
-
-                return true;
-            case R.id.item4:
-
-                Toast.makeText(this, "Display Attendants Selected", Toast.LENGTH_SHORT).show();
-                displayAttendants();
-                return true;
-
-            case R.id.item5:
-
-                Toast.makeText(this, "Display Records Selected", Toast.LENGTH_SHORT).show();
-                displayRecords();
-                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

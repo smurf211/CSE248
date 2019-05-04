@@ -387,6 +387,51 @@ public class Garage implements Serializable {
 
     }
 
+    public boolean findByPlateBoolean(String licensePlate){
+
+        for(int i =0; i < carBag.length; i++){
+
+
+            if(!carBag[i].isFree() && carBag[i].getVehicle().getLicensePlate().equals(licensePlate)){
+
+                return true;
+
+            }
+
+
+        }
+
+        for(int i =0; i < truckSpaceBag.length; i++){
+
+
+            if(!truckSpaceBag[i].isFree() && truckSpaceBag[i].getVehicle().getLicensePlate().equals(licensePlate)){
+
+                return true;
+
+            }
+
+
+        }
+
+        for(int i =0; i < motorcycleSpaceBag.length; i++){
+
+
+            if(!motorcycleSpaceBag[i].isFree() && motorcycleSpaceBag[i].getVehicle().getLicensePlate().equals(licensePlate)){
+
+                return true;
+
+            }
+
+
+        }
+
+
+
+
+        return false;
+
+    }
+
     public int getGarageSize(){
 
         if(carBag != null && truckSpaceBag != null && motorcycleSpaceBag != null ) {
