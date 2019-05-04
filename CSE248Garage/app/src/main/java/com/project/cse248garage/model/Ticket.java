@@ -82,12 +82,31 @@ public class Ticket implements Serializable {
 
     public String getCurrency(){
         if(earlyBird) {
-            return "$" + String.valueOf(paymentScheme) + " Flat rate.";
+            return "$" + addZeroToRate(paymentScheme) + " Flat rate.";
 
         }
         else{
-            return "$" + String.valueOf(paymentScheme) + " Per Hour.";
+            return "$" + addZeroToRate(paymentScheme) + " Per Hour.";
         }
+    }
+
+    public static String addZeroToRate(double rate){
+
+        if(!String.valueOf(rate).contains(".")){
+
+            return String.valueOf(rate);
+        }
+
+        String[] rateTokens = String.valueOf(rate).split("[.]");
+
+        if(rateTokens[1].length() == 1){
+
+         return String.valueOf(rate) + "0";
+        }
+        else{
+            return String.valueOf(rate);
+        }
+
     }
 
     @Override
@@ -99,9 +118,9 @@ public class Ticket implements Serializable {
                   attendantLastName + "\n" +
                 "Attendant ID: " + attendantID + "\n" +
                 "Date: " + date + "\n" +
-                "Time: " + time + '\n' +
+                "Time: " + Reciept.convertTimeFromMilitary(time) + '\n' +
                 "Payment: " + getCurrency()+  "\n" +
                 "Early Bird: " + getEarlyBirdString() + "\n" +
-                 "Space ID: " + this.spaceID;
+                "Space ID: " + this.spaceID;
     }
 }

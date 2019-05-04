@@ -50,4 +50,6 @@
     <string name="truckdisplayhint">T = Truck</string>
     <string name="motodisplayHint">M = Motorcycle</string>
     <string name="DisplayAttendants">Display Attendants</string>
+    <string name="printReciept">Print Reciept</string>
+    <string name="DisplayRecords">Display Records</string>
 </resources>

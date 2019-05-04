@@ -12,30 +12,30 @@ public class Demo {
         //GO THROUGH ACTIVITIES AGAIN TO SEE IF USER IS ALWAYS LOGGED IN WHEN THAT METHOD IS CALLED
 
 
-        UserAccountBag bag = new UserAccountBag();
+       // UserAccountBag bag = new UserAccountBag();
 
 
-         bag.createManagerAccount("jackg45", "MjsRas1118!", "eric", "poop", true );
-         bag.createAttendantAccount("mike211", "MjsRas1118!", "jack", "spadaro");
+        // bag.createManagerAccount("jackg45", "MjsRas1118!", "eric", "poop", true );
+       //  bag.createAttendantAccount("mike211", "MjsRas1118!", "jack", "spadaro");
 
-        User user = bag.getUser("jackg45", bag.getUserAccountHash());
-        user.setLoggedIn(true);
+       // User user = bag.getUser("jackg45", bag.getUserAccountHash());
+       // user.setLoggedIn(true);
 
-        bag.displayBagHash();
-
-
-
-   User user3 = bag.getLoggedInUser(bag.getUserAccountHash());
-
-    bag.displayBagHash();
-
-   User user2 =  bag.getLoggedInUser(bag.getUserAccountHash());
+       // bag.displayBagHash();
 
 
-        bag.displayBagHash();
-        System.out.println("-----------------------------");
 
-        System.out.println(user3);
+   //User user3 = bag.getLoggedInUser(bag.getUserAccountHash());
+
+  //  bag.displayBagHash();
+
+  // User user2 =  bag.getLoggedInUser(bag.getUserAccountHash());
+
+
+    //   bag.displayBagHash();
+    //    System.out.println("-----------------------------");
+
+    //    System.out.println(user3);
 
         //  bag.displayBagHash();
         // System.out.println(garage.toString());
@@ -50,8 +50,13 @@ public class Demo {
         //  Reciept reciept = new Reciept("gfsdgdfg", "car", "mike", "johnson", "4/27/19",time , 2.50 );
 
         // reciept.getTimeSeconds();
-
-
+       Reciept reciept = new Reciept("12:00:00", "12:01:30");
+       reciept.setRate(2.5);
+     //   reciept.sleep(5000);
+        System.out.println(reciept.getTimeSeconds());
+        System.out.println(reciept.calculatePayment());
+        System.out.println(Reciept.convertTimeFromMilitary("12:47:03.234"));
+        System.out.println(Ticket.addZeroToRate(2.54));
 
     }
 

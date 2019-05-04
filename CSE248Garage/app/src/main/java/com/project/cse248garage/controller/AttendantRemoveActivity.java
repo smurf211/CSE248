@@ -13,6 +13,7 @@ import com.project.cse248garage.model.Reciept;
 
 public class AttendantRemoveActivity extends AppCompatActivity {
     Garage garage;
+    Reciept reciept;
 
 
     @Override
@@ -35,10 +36,16 @@ public class AttendantRemoveActivity extends AppCompatActivity {
             return;
         }
 
-        Reciept reciept = garage.removeCar(licensePlate);
+         reciept = garage.removeCar(licensePlate);
 
-        TextView displayField = findViewById(R.id.display_field);
-       displayField.setText(reciept.toString());
+      //  TextView displayField = findViewById(R.id.display_field);
+      // displayField.setText(reciept.toString());
+
+        Intent intent = new Intent(this, RecieptActivity.class);
+        intent.putExtra("Garage", garage);
+        intent.putExtra("Reciept", reciept);
+        startActivity(intent);
+
 
 
 
@@ -52,5 +59,13 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         intent.putExtra("Garage", garage);
 
         startActivity(intent);
+    }
+
+    public void nextView(){
+        Intent intent = new Intent(this, RecieptActivity.class);
+        intent.putExtra("Garage", garage);
+        intent.putExtra("Reciept", reciept);
+        startActivity(intent);
+
     }
 }

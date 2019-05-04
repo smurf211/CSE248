@@ -70,6 +70,12 @@ public class AttendantOptionsActivity extends AppCompatActivity {
                 displayAttendants();
                 return true;
 
+            case R.id.item5:
+
+                Toast.makeText(this, "Display Records Selected", Toast.LENGTH_SHORT).show();
+                displayRecords();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -167,6 +173,15 @@ public class AttendantOptionsActivity extends AppCompatActivity {
     public void displayAttendants(){
 
         Intent intent2 = new Intent(this, DisplayAttendantActivity.class);
+        intent2.putExtra("Garage", garage);
+        startActivity(intent2);
+
+
+    }
+
+    public void displayRecords(){
+
+        Intent intent2 = new Intent(this, RecordsActivity.class);
         intent2.putExtra("Garage", garage);
         startActivity(intent2);
 

@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.item1:
+
                 Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
                displayGarage();
 
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item2:
+
                 Toast.makeText(this, "Garage Saved", Toast.LENGTH_SHORT).show();
                 saveGarage();
 
@@ -95,8 +97,15 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item4:
+
                 Toast.makeText(this, "Display Attendants Selected", Toast.LENGTH_SHORT).show();
                 displayAttendants();
+                return true;
+
+            case R.id.item5:
+
+                Toast.makeText(this, "Display Records Selected", Toast.LENGTH_SHORT).show();
+                displayRecords();
                 return true;
 
             default:
@@ -220,6 +229,15 @@ public class MainActivity extends AppCompatActivity {
     public void displayAttendants(){
 
         Intent intent2 = new Intent(this, DisplayAttendantActivity.class);
+        intent2.putExtra("Garage", garage);
+        startActivity(intent2);
+
+
+    }
+
+    public void displayRecords(){
+
+        Intent intent2 = new Intent(this, RecordsActivity.class);
         intent2.putExtra("Garage", garage);
         startActivity(intent2);
 

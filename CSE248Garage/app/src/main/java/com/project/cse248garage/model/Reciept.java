@@ -16,6 +16,11 @@ public class Reciept extends Ticket implements Serializable {
     Garage garage;
     double rate;
 
+    public Reciept(String timeIn, String timeOut){
+        this.timeIn = timeIn;
+        this.timeOut = timeOut;
+    }
+
 
     public Reciept(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date, String time, double paymentScheme, boolean earlyBird, String spaceID, String attendantID, Garage garage) {
         super(licensePlate, category, attendantFirstName, attendantLastName, date, time, paymentScheme, earlyBird, spaceID, attendantID);
@@ -47,11 +52,11 @@ public class Reciept extends Ticket implements Serializable {
         double totalSeconds = getTimeSeconds();
 
         if(this.earlyBird){
-            return paymentScheme;
+            return rate;
         }
 
         else {
-            return totalSeconds * paymentScheme;
+            return totalSeconds * rate;
 
         }
     }
@@ -79,9 +84,9 @@ public class Reciept extends Ticket implements Serializable {
         double differenceSeconds = timeOutSeconds - timeInSeconds;
 
         double totalSeconds = (differenceHours * 60 * 60) + (differenceMinutes * 60) + differenceSeconds;
-        System.out.println("timeInMinutes: " + timeInMinutes + " timeInSeconds:" + timeInSeconds + " timeOutMinutes: " + timeOutMinutes + " timeOutSeconds: " + timeOutSeconds
-        + "\n" + " dMinutes: " + differenceMinutes + " dseconds: " + differenceSeconds);
-        System.out.println(totalSeconds + "Rounded: " + Math.round(totalSeconds));
+      //  System.out.println("timeInMinutes: " + timeInMinutes + " timeInSeconds:" + timeInSeconds + " timeOutMinutes: " + timeOutMinutes + " timeOutSeconds: " + timeOutSeconds
+        //+ "\n" + " dMinutes: " + differenceMinutes + " dseconds: " + differenceSeconds);
+       // System.out.println(totalSeconds + "Rounded: " + Math.round(totalSeconds));
         double totalMinutes = (totalSeconds /60);
 
 
@@ -130,11 +135,11 @@ public class Reciept extends Ticket implements Serializable {
     public String getRate(){
 
         if(earlyBird) {
-            return "$" + String.valueOf(rate) + "Flat fee.";
+            return "$" + String.valueOf(rate) + " Flat fee.";
 
         }
         else{
-            return "$" + String.valueOf(rate) + "Per Hour." ;
+            return "$" + String.valueOf(rate) + " Per Hour." ;
         }
 
 
@@ -142,22 +147,61 @@ public class Reciept extends Ticket implements Serializable {
 
     public String getCurrency(){
         if(earlyBird) {
-            return "$" + String.valueOf(paymentScheme) ;
+            return "$" + Ticket.addZeroToRate(paymentScheme) ;
 
         }
         else{
-            return "$" + String.valueOf(paymentScheme) ;
+            return "$" + Ticket.addZeroToRate(paymentScheme) ;
         }
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public static String convertTimeFromMilitary(String time){
+
+        String minutes;
+        String seconds;
+        int hours;
+        String amPm;
+        String[] breakMillis = time.split("[.]");
+
+        String[] timeTokens = breakMillis[0].split(":");
+        hours = Integer.valueOf(timeTokens[0]);
+        minutes = timeTokens[1];
+        seconds = timeTokens[2];
+
+        if(hours < 12){
+
+            amPm = "AM";
+        }
+        else if(hours == 12){
+            amPm = "PM";
+
+        }
+        else{
+            amPm = "PM";
+            hours = (hours -12);
+        }
+
+        String actualTime = String.valueOf(hours) + ":" + minutes + ":" + seconds + " " + amPm;
+
+        return actualTime;
+
+
+
+
     }
 
     @Override
     public String toString() {
         return "Reciept" + "\n"+
-                "Time in: " + timeIn + '\n' +
-                "Time out: " + timeOut + '\n' +
+                "Time in: " + convertTimeFromMilitary(timeIn) + '\n' +
+                "Time out: " + convertTimeFromMilitary(timeOut) + '\n' +
                 "Date in: " + dateIn + '\n' +
                 "Date out: " + dateOut + '\n' +
-                "Rate: " + getRate() + '\n' +
+                "Rate: " + Ticket.addZeroToRate(rate) + '\n' +
                 "Payment Due: " + getCurrency() + '\n' +
                 "Amount Paid: " + "$" + paymentScheme + "\n"+
                 "Early Bird: " + getEarlyBirdString() + "\n" +

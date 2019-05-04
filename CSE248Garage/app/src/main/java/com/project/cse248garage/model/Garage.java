@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class Garage implements Serializable {
     public ParkingSpace[] carBag;
     public ParkingSpace[] truckSpaceBag;
     public ParkingSpace[] motorcycleSpaceBag;
+    RecordBag recordBag = new RecordBag();
 
 
 
@@ -169,6 +171,15 @@ public class Garage implements Serializable {
                 openSpace.getVehicle().getAttendantLastName(), date1, time, openSpace.getPrice(category, earlyBird), earlyBird, openSpace.getSpaceID(), openSpace.getVehicle().getAttendantId());
         openSpace.setTicket(ticket);
 
+       Record record = recordBag.getRecord(vehicle.getLicensePlate());
+
+       if(record == null){
+
+           record = new Record(openSpace.getVehicle(), vehicle.getLicensePlate());
+           recordBag.addRecord(record);
+       }
+
+        record.addTicket(ticket);
 
     }
 
@@ -237,6 +248,47 @@ public class Garage implements Serializable {
 
     }
 
+    public ArrayList<String> getLicensePlates(){
+
+
+
+        ArrayList<String> list = new ArrayList<String>();
+
+      for(int i = 0; i < carBag.length; i++){
+
+          if(!carBag[i].isFree()){
+
+              list.add(carBag[i].getVehicle().getLicensePlate());
+          }
+
+
+      }
+
+        for(int i = 0; i < truckSpaceBag.length; i++){
+
+            if(!truckSpaceBag[i].isFree()){
+
+                list.add(truckSpaceBag[i].getVehicle().getLicensePlate());
+            }
+
+
+        }
+
+        for(int i = 0; i < motorcycleSpaceBag.length; i++){
+
+            if(!motorcycleSpaceBag[i].isFree()){
+
+                list.add(motorcycleSpaceBag[i].getVehicle().getLicensePlate());
+            }
+
+
+        }
+
+
+        return list;
+
+    }
+
 
 
     public Reciept removeCar(String licensePlate){
@@ -258,6 +310,16 @@ public class Garage implements Serializable {
                 currentSpace.getVehicle().getAttendantFirstName(),
                 currentSpace.getVehicle().getAttendantLastName(), date, time,
                 currentSpace.getTicket().getPaymentScheme(), currentSpace.getTicket().isEarlyBird(), currentSpace.getSpaceID(),currentSpace.getVehicle().getAttendantId(), this);
+
+        Record record = recordBag.getRecord(licensePlate);
+
+        if(record == null){
+
+            record = new Record(currentSpace.getVehicle(), currentSpace.getVehicle().getLicensePlate());
+            recordBag.addRecord(record);
+        }
+
+        record.addReciept(reciept);
 
         currentSpace.removeVehicle();
 
@@ -323,6 +385,15 @@ public class Garage implements Serializable {
 
         return null;
 
+    }
+
+    public int getGarageSize(){
+
+        if(carBag != null && truckSpaceBag != null && motorcycleSpaceBag != null ) {
+            return carBag.length + motorcycleSpaceBag.length + truckSpaceBag.length;
+        }
+
+        return 0;
     }
 
 
@@ -397,6 +468,10 @@ public class Garage implements Serializable {
 
     public void setGarageCreated(boolean garageCreated) {
         this.garageCreated = garageCreated;
+    }
+
+    public RecordBag getRecordBag() {
+        return recordBag;
     }
 
     @Override
