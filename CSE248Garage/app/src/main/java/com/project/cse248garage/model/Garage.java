@@ -45,7 +45,8 @@ public class Garage implements Serializable {
 
     UserAccountBag bag;
 
-    public Garage(){
+    public Garage() {
+
         bag = new UserAccountBag();
     }
 
@@ -53,7 +54,7 @@ public class Garage implements Serializable {
     public Garage(int carSize, int motorcycleSize, int truckSize){
 
 
-
+        bag = new UserAccountBag();
 
 
         carBag = new ParkingSpace[carSize];
@@ -141,11 +142,7 @@ public class Garage implements Serializable {
 
     public void park(Vehicle vehicle, String category, Boolean earlyBird){
 
-       // if(findClosestSpace(category) == null){
 
-            //return false;
-
-      //  }
 
         ParkingSpace openSpace = findClosestSpace(category);
 
@@ -296,13 +293,7 @@ public class Garage implements Serializable {
 
     ParkingSpace currentSpace = findByPlate(licensePlate);
 
-      //  SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-      //  Date date1 = new Date();
 
-
-
-     //   currentSpace.setTime(java.time.LocalTime.now());
-      //  currentSpace.setDate(java.time.LocalDate.now());
 
     String date = String.valueOf(getRecieptDate(currentSpace));
      String time =   String.valueOf(getRecieptTime(currentSpace));
@@ -329,18 +320,7 @@ public class Garage implements Serializable {
 
 
 
-    public LocalTime getRecieptTime(ParkingSpace currentSpace){
 
-        return currentSpace.getTime();
-
-
-    }
-
-
-    public LocalDate getRecieptDate(ParkingSpace currentSpace){
-
-        return currentSpace.getDate();
-    }
 
     public ParkingSpace findByPlate(String licensePlate){
 
@@ -439,6 +419,19 @@ public class Garage implements Serializable {
         }
 
         return 0;
+    }
+
+    public LocalTime getRecieptTime(ParkingSpace currentSpace){
+
+        return currentSpace.getTime();
+
+
+    }
+
+
+    public LocalDate getRecieptDate(ParkingSpace currentSpace){
+
+        return currentSpace.getDate();
     }
 
 

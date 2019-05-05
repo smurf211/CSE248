@@ -110,6 +110,8 @@ public class ParkingSpace implements Serializable {
 
     }
 
+
+
     public int getDistance(String category){
 
         if(category.equals("motorcycle")){
