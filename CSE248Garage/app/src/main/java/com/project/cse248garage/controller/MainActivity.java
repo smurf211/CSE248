@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.cse248garage.R;
+import com.project.cse248garage.databasePhpTest.BackgroundWorkerTest;
 import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.CheckCredentials;
 import com.project.cse248garage.model.Garage;
@@ -93,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void adminLogin(View view){
-
         EditText userNameField = findViewById(R.id.username_field);
     EditText passwordField = findViewById(R.id.password_field);
 
@@ -101,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     String userName = userNameField.getText().toString();
     String password = passwordField.getText().toString();
+    String type = "login";
+
 
      System.out.println(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() ));
 
@@ -112,15 +114,25 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(user.isAdmin()) {
+
+
+                BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+                backgroundWorker.execute(type, userName, password);
+
+
+
                 user.setLoggedIn(true);
                 Intent intent1 = new Intent(this, ManagerSelectActivity.class);
                 intent1.putExtra("Garage", garage);
 
-                startActivity(intent1);
+
+               startActivity(intent1);
             }
 
             else {
-               // System.out.println(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()));
+                BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+                backgroundWorker.execute(type, userName, password);
+
                 user.setLoggedIn(true);
                 Intent intent2 = new Intent(this, AttendantOptionsActivity.class);
                 intent2.putExtra("Garage", garage);
@@ -141,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
 
 
     public void saveGarage(){

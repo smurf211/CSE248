@@ -2,14 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.cse248garage">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".controller.RecordsActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".databasePhpTest.RegisterActivity"></activity>
+        <activity android:name=".databasePhpTest.DataBaseLoginActivity" />
+        <activity android:name=".controller.RecordsActivity" />
         <activity android:name=".controller.DisplayAttendantActivity" />
         <activity android:name=".controller.DisplayGarageActivity" />
         <activity android:name=".controller.RemoveAttendantActivity" />
