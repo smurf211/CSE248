@@ -14,9 +14,11 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.project.cse248garage.R;
+import com.project.cse248garage.databasePhpTest.BackgroundWorkerTest;
 import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.Motorcycle;
+import com.project.cse248garage.model.ParkingSpace;
 import com.project.cse248garage.model.Truck;
 import com.project.cse248garage.model.User;
 import com.project.cse248garage.model.Vehicle;
@@ -35,6 +37,14 @@ public class AttendantParkActivity extends AppCompatActivity {
     Vehicle vehicle;
     User user;
     String falseCategory;
+    BackgroundWorker backgroundWorker;
+    BackgroundWorker backgroundWorker1;
+   static String resultID;
+    String typePark = "park vehicle";
+    ParkingSpace openSpace;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,45 +55,15 @@ public class AttendantParkActivity extends AppCompatActivity {
         System.out.println("on create");
         garage.getBag().displayBagHash();
 
-        /*
-
-        final RadioGroup rg1 = (RadioGroup)findViewById(R.id.rg1);
-        carButton = (RadioButton) findViewById(R.id.carButton);
-        truckButton =(RadioButton) findViewById(R.id.truckButton);
-        motoButton =(RadioButton) findViewById(R.id.motoButton);
-
-
-        //set setOnCheckedChangeListener()
-        carButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton checkBox, boolean checked) {
-                //basically, since we will set enabled state to whatever state the checkbox is
-                //therefore, we will only have to setEnabled(checked)
-              //  for(int i = 0; i < rg1.getChildCount(); i++){
-               //     ((RadioButton)rg1.getChildAt(i)).setEnabled(false);
-              //  }
-                if(checked){
-                    truckButton.setEnabled(false);
-                    motoButton.setEnabled(false);
-
-                }
-            }
-        });
-
-//set default to false
-        for(int i = 0; i < rg1.getChildCount(); i++){
-            ((RadioButton)rg1.getChildAt(i)).setEnabled(true);
-        }
-
-
-*/
+    backgroundWorker = new BackgroundWorker(this);
+    backgroundWorker1 = new BackgroundWorker(this);
     }
 
 
     public void parkVehicle(View view){
 
-       // rg1 = (RadioGroup)findViewById(R.id.rg1);
+
+
 
 
 
@@ -171,7 +151,8 @@ public class AttendantParkActivity extends AppCompatActivity {
 
     public void parkCar(String category){
 
-       // category = carButton.getText().toString().toLowerCase();
+
+
         falseCategory = category;
         vehicle = new Car(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
         vehicle.setFalseCategory(category);
@@ -202,6 +183,8 @@ public class AttendantParkActivity extends AppCompatActivity {
 
 
 
+
+
                 }
             });
 
@@ -212,9 +195,9 @@ public class AttendantParkActivity extends AppCompatActivity {
         }
         else{
 
-            garage.park(vehicle, carButton.getText().toString().toLowerCase(), earlyBird);
+          openSpace =  garage.park(vehicle, carButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
             System.out.println(vehicle.getCategory());
-            nextView();
+
 
 
         }
@@ -265,9 +248,9 @@ public class AttendantParkActivity extends AppCompatActivity {
         }
         else{
 
-            garage.park(vehicle, truckButton.getText().toString().toLowerCase(), earlyBird);
+           openSpace= garage.park(vehicle, truckButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
             System.out.println(vehicle.getCategory());
-            nextView();
+
 
 
         }
@@ -323,9 +306,9 @@ public class AttendantParkActivity extends AppCompatActivity {
         }
         else{
 
-            garage.park(vehicle, motoButton.getText().toString().toLowerCase(), earlyBird);
+         openSpace =   garage.park(vehicle, motoButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
             System.out.println(vehicle.getCategory());
-            nextView();
+
 
 
         }
@@ -335,11 +318,32 @@ public class AttendantParkActivity extends AppCompatActivity {
     }
 
 
-    public void nextView(){
+    public void nextView(View view){
+
+        System.out.println("*******************************" + resultID);
+        String[] resultTokens = resultID.split(" ");
+        resultID = resultTokens[2];
+        ParkingSpace space = garage.findByPlate(licensePlate);
+        space.getVehicle().setVehicleId(Integer.valueOf(resultID));
+        System.out.println(space.getVehicle());
+
+        backgroundWorker1.execute(typePark, openSpace.getCategory(), String.valueOf(openSpace.getCarDistance()), String.valueOf(openSpace.getTruckDistance()), String.valueOf(openSpace.getMotorcycleDistance()),
+                String.valueOf(openSpace.getDistance()),Garage.convertBoolean(earlyBird), Garage.convertBoolean(openSpace.isFree()),
+                String.valueOf(vehicle.getVehicleId()), String.valueOf(openSpace.getTime()), String.valueOf(openSpace.getDate()), openSpace.getSpaceID());
+
+
         Intent intent = new Intent(this, TicketActivity.class);
         intent.putExtra("Garage", garage);
         intent.putExtra("LicensePlate", licensePlate);
         startActivity(intent);
 
+    }
+
+    public static String getResultID() {
+        return resultID;
+    }
+
+    public static void setResultID(String resultID) {
+        AttendantParkActivity.resultID = resultID;
     }
 }

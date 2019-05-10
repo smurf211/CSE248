@@ -14,6 +14,7 @@ import com.project.cse248garage.model.Reciept;
 public class AttendantRemoveActivity extends AppCompatActivity {
     Garage garage;
     Reciept reciept;
+    BackgroundWorker backgroundWorker;
 
 
     @Override
@@ -22,6 +23,7 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_attendant_remove);
 
         garage = (Garage) getIntent().getSerializableExtra("Garage");
+        backgroundWorker = new BackgroundWorker(this);
     }
 
     public void removeVehicle(View view){
@@ -36,15 +38,14 @@ public class AttendantRemoveActivity extends AppCompatActivity {
             return;
         }
 
-         reciept = garage.removeCar(licensePlate);
+         reciept = garage.removeCar(licensePlate, backgroundWorker);
 
       //  TextView displayField = findViewById(R.id.display_field);
       // displayField.setText(reciept.toString());
 
-        Intent intent = new Intent(this, RecieptActivity.class);
-        intent.putExtra("Garage", garage);
-        intent.putExtra("Reciept", reciept);
-        startActivity(intent);
+
+
+
 
 
 
@@ -61,7 +62,7 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void nextView(){
+    public void nextView(View view){
         Intent intent = new Intent(this, RecieptActivity.class);
         intent.putExtra("Garage", garage);
         intent.putExtra("Reciept", reciept);

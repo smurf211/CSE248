@@ -10,7 +10,7 @@ public class Car extends Vehicle implements Serializable {
         return "car";
     }
 
-    public Car(String licensePlate, String attendantFirstName, String attendantLastName, String attendantId) {
+    public Car(String licensePlate, String attendantFirstName, String attendantLastName, int attendantId) {
         super(licensePlate, attendantFirstName, attendantLastName, attendantId);
     }
 

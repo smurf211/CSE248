@@ -28,7 +28,7 @@ public class TicketActivity extends AppCompatActivity {
     public void printTicket(View view){
 
 
-        Ticket ticket = garage.findByPlate(licensePlate).getTicket();
+        Ticket ticket = garage.findByPlate(licensePlate).getVehicle().getTicket();
        // System.out.println(ticket.toString());
         TextView displayField = findViewById(R.id.display_field);
         displayField.setText(ticket.toString());

@@ -30,16 +30,13 @@ public class UserAccountBag implements Serializable {
 
         nElems = 0;
         createManagerAccount("smurf211", "MjsRas1118!", "mike", "spadaro", true);
+        User user = getUser("smurf211", userAccountHash);
+        user.setiD(1);
 
     }
 
 
-    public void insertHash(String firstName, String lastName, boolean admin) {
-        Manager user = new Manager(firstName, lastName, admin);
-        userAccountHash.put(user, user.emitUserName().toLowerCase());
-        nElems++;
 
-    }
 
 
     public User getUser(String userName, String password, HashMap<User, String> map) {

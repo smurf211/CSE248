@@ -19,6 +19,9 @@ public class RemoveAttendantActivity extends AppCompatActivity {
     EditText userNameField;
 
     String userName;
+    BackgroundWorker backgroundWorker;
+    int userID;
+    String type = "remove attendant";
 
 
     @Override
@@ -28,6 +31,7 @@ public class RemoveAttendantActivity extends AppCompatActivity {
 
         garage  = (Garage) getIntent().getSerializableExtra("Garage");
         check = new CheckCredentials();
+        backgroundWorker = new BackgroundWorker(this);
     }
 
     public void removeAttendant(View view){
@@ -51,7 +55,14 @@ public class RemoveAttendantActivity extends AppCompatActivity {
             userNameField.setError("user not found!");
             return;
         }
+        userID = user.emitID();
+
+
+
         garage.getBag().removeUser(user);
+
+        backgroundWorker.execute(type, String.valueOf(userID));
+
 
 
         garage.getBag().displayBagHash();

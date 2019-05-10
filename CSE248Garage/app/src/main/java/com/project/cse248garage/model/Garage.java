@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.TextView;
 
 import com.project.cse248garage.R;
+import com.project.cse248garage.controller.BackgroundWorker;
 import com.project.cse248garage.controller.MainActivity;
 
 import java.io.File;
@@ -31,6 +32,7 @@ public class Garage implements Serializable {
 
 
 
+
     public double carEarlyBird;
     public double carPerHour;
 
@@ -39,6 +41,7 @@ public class Garage implements Serializable {
 
     public double motoEarlyBird;
     public double motoPerHour;
+
     public boolean garageCreated;
 
 
@@ -140,11 +143,18 @@ public class Garage implements Serializable {
 
 
 
-    public void park(Vehicle vehicle, String category, Boolean earlyBird){
+    public ParkingSpace park(Vehicle vehicle, String category, Boolean earlyBird, BackgroundWorker backgroundWorker){
+
+
+        String typeVehicle = "create vehicle";
+
+
 
 
 
         ParkingSpace openSpace = findClosestSpace(category);
+
+
 
         openSpace.setFree(false);
         openSpace.setEarlyBird(earlyBird);
@@ -162,11 +172,10 @@ public class Garage implements Serializable {
         String time = String.valueOf(getRecieptTime(openSpace));
 
          String date1 =  String.valueOf(getRecieptDate(openSpace));
+         double rate = openSpace.getPrice(category, earlyBird);
 
-        Ticket ticket = new Ticket(openSpace.getVehicle().getLicensePlate(), openSpace.getCategory(),
-                openSpace.getVehicle().getAttendantFirstName(),
-                openSpace.getVehicle().getAttendantLastName(), date1, time, openSpace.getPrice(category, earlyBird), earlyBird, openSpace.getSpaceID(), openSpace.getVehicle().getAttendantId());
-        openSpace.setTicket(ticket);
+        Ticket ticket = new Ticket(vehicle, date1, time, rate, earlyBird, openSpace.getSpaceID());
+        vehicle.setTicket(ticket);
 
        Record record = recordBag.getRecord(vehicle.getLicensePlate());
 
@@ -177,8 +186,16 @@ public class Garage implements Serializable {
        }
 
         record.addTicket(ticket);
+        //finish after user gets correct ID
+        User user = getBag().getLoggedInUser(getBag().getUserAccountHash());
+        System.out.println(user);
+        backgroundWorker.execute(typeVehicle, String.valueOf(user.emitID()), vehicle.getLicensePlate(), vehicle.getFalseCategory(), vehicle.getCategory(), openSpace.getSpaceID(),
+                date1, " ", time, "", convertBoolean(earlyBird), String.valueOf(rate));
 
+
+    return openSpace;
     }
+
 
 
 
@@ -288,19 +305,23 @@ public class Garage implements Serializable {
 
 
 
-    public Reciept removeCar(String licensePlate){
+    public Reciept removeCar(String licensePlate, BackgroundWorker backgroundWorker){
+
+
+
 
 
     ParkingSpace currentSpace = findByPlate(licensePlate);
+
+        String type = "remove vehicle";
+        backgroundWorker.execute(type, String.valueOf(currentSpace.getVehicle().getVehicleId()));
 
 
 
     String date = String.valueOf(getRecieptDate(currentSpace));
      String time =   String.valueOf(getRecieptTime(currentSpace));
-        Reciept reciept = new Reciept(currentSpace.getVehicle().getLicensePlate(), currentSpace.getCategory(),
-                currentSpace.getVehicle().getAttendantFirstName(),
-                currentSpace.getVehicle().getAttendantLastName(), date, time,
-                currentSpace.getTicket().getPaymentScheme(), currentSpace.getTicket().isEarlyBird(), currentSpace.getSpaceID(),currentSpace.getVehicle().getAttendantId(), this);
+        Reciept reciept = new Reciept(currentSpace.getVehicle(), date, time,
+                currentSpace.getVehicle().getTicket().getRate(), currentSpace.getVehicle().getTicket().isEarlyBird(), currentSpace.getSpaceID(), this);
 
         Record record = recordBag.getRecord(licensePlate);
 
@@ -432,6 +453,16 @@ public class Garage implements Serializable {
     public LocalDate getRecieptDate(ParkingSpace currentSpace){
 
         return currentSpace.getDate();
+    }
+
+    public static String convertBoolean(Boolean earlyBird){
+
+        if(earlyBird == true){
+            return "1";
+        }
+        else{
+            return "0";
+        }
     }
 
 

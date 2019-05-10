@@ -10,9 +10,6 @@ public class Reciept extends Ticket implements Serializable {
     String timeOut;
     String dateOut;
     double paymentScheme;
-    String attendantRemovedFirst;
-    String attendantRemovedLast;
-    String attendantRemovedId;
     Garage garage;
     double rate;
 
@@ -22,11 +19,11 @@ public class Reciept extends Ticket implements Serializable {
     }
 
 
-    public Reciept(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date, String time, double paymentScheme, boolean earlyBird, String spaceID, String attendantID, Garage garage) {
-        super(licensePlate, category, attendantFirstName, attendantLastName, date, time, paymentScheme, earlyBird, spaceID, attendantID);
+    public Reciept(Vehicle vehicle, String date, String time, double rate, boolean earlyBird, String spaceID, Garage garage) {
+        super(vehicle, date, time, rate, earlyBird, spaceID);
         this.timeIn = time;
         this.dateIn = date;
-        this.rate = paymentScheme;
+        this.rate = rate;
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -39,12 +36,11 @@ public class Reciept extends Ticket implements Serializable {
         this.paymentScheme = calculatePayment();
         this.garage = garage;
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
-        this.attendantRemovedFirst = user.emitFirstName();
-        this.attendantRemovedLast = user.emitLastName();
-        this.attendantRemovedId = user.emitID();
+        vehicle.setAttendantRemovedFirst(user.emitFirstName());
+        vehicle.setAttendantRemovedLast(user.emitLastName());
+        vehicle.setAttendantRemovedId(user.emitID());
 
     }
-
 
 
     public double calculatePayment(){
@@ -84,9 +80,7 @@ public class Reciept extends Ticket implements Serializable {
         double differenceSeconds = timeOutSeconds - timeInSeconds;
 
         double totalSeconds = (differenceHours * 60 * 60) + (differenceMinutes * 60) + differenceSeconds;
-      //  System.out.println("timeInMinutes: " + timeInMinutes + " timeInSeconds:" + timeInSeconds + " timeOutMinutes: " + timeOutMinutes + " timeOutSeconds: " + timeOutSeconds
-        //+ "\n" + " dMinutes: " + differenceMinutes + " dseconds: " + differenceSeconds);
-       // System.out.println(totalSeconds + "Rounded: " + Math.round(totalSeconds));
+
         double totalMinutes = (totalSeconds /60);
 
 
@@ -99,29 +93,11 @@ public class Reciept extends Ticket implements Serializable {
         Thread.sleep(millis);
     }
 
-    public String getAttendantRemovedFirst() {
-        return attendantRemovedFirst;
-    }
 
-    public void setAttendantRemovedFirst(String attendantRemovedFirst) {
-        this.attendantRemovedFirst = attendantRemovedFirst;
-    }
 
-    public String getAttendantRemovedLast() {
-        return attendantRemovedLast;
-    }
 
-    public void setAttendantRemovedLast(String attendantRemovedLast) {
-        this.attendantRemovedLast = attendantRemovedLast;
-    }
 
-    public String getAttendantRemovedId() {
-        return attendantRemovedId;
-    }
 
-    public void setAttendantRemovedId(String attendantRemovedId) {
-        this.attendantRemovedId = attendantRemovedId;
-    }
 
     public String getEarlyBirdString(){
         if(earlyBird){
@@ -132,18 +108,7 @@ public class Reciept extends Ticket implements Serializable {
         }
     }
 
-    public String getRate(){
 
-        if(earlyBird) {
-            return "$" + String.valueOf(rate) + " Flat fee.";
-
-        }
-        else{
-            return "$" + String.valueOf(rate) + " Per Hour." ;
-        }
-
-
-    }
 
     public String getCurrency(){
         if(earlyBird) {
@@ -205,12 +170,12 @@ public class Reciept extends Ticket implements Serializable {
                 "Payment Due: " + getCurrency() + '\n' +
                 "Amount Paid: " + "$" + paymentScheme + "\n"+
                 "Early Bird: " + getEarlyBirdString() + "\n" +
-                "License Plate: " + licensePlate + '\n' +
-                "Category: " + category + '\n' +
-                "Attendant Parked Name/ID: " + attendantFirstName + " " +
-                attendantLastName + " " + attendantID + "\n" +
-                "Attendant Removed Name/ID: " + attendantRemovedFirst + " "
-                + attendantRemovedLast + " "+ attendantRemovedId + "\n" +
+                "License Plate: " + getVehicle().getLicensePlate() + '\n' +
+                "Category: " + getVehicle().getCategory() + '\n' +
+                "Attendant Parked Name/ID: " + getVehicle().getAttendantFirstName() + " " +
+                getVehicle().getAttendantLastName() + " " + getVehicle().getAttendantId() + "\n" +
+                "Attendant Removed Name/ID: " + vehicle.getAttendantRemovedFirst() + " "
+                + vehicle.getAttendantRemovedLast() + " "+ vehicle.getAttendantRemovedId() + "\n" +
 
                 "Space ID: " + this.spaceID;
     }

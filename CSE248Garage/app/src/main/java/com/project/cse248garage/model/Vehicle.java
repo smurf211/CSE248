@@ -4,11 +4,16 @@ import java.io.Serializable;
 
 public abstract class Vehicle implements Serializable {
 
+    int vehicleId;
     String licensePlate;
     public String attendantFirstName;
     public String attendantLastName;
-    public String attendantId;
+    int attendantId;
     public String falseCategory;
+    public Ticket ticket;
+    String attendantRemovedFirst;
+    String attendantRemovedLast;
+    int attendantRemovedId;
 
 
 
@@ -17,7 +22,7 @@ public abstract class Vehicle implements Serializable {
 
 
 
-    public Vehicle(String licensePlate, String attendantFirstName, String attendantLastName, String attendantId) {
+    public Vehicle(String licensePlate, String attendantFirstName, String attendantLastName, int attendantId) {
         this.licensePlate = licensePlate;
         this.attendantFirstName = attendantFirstName;
         this.attendantLastName = attendantLastName;
@@ -27,6 +32,7 @@ public abstract class Vehicle implements Serializable {
     @Override
     public String toString() {
         return "Vehicle " + "\n"+
+                "ID: " + vehicleId + "\n"+
                 " License Plate: " + licensePlate
                 + "\n" +
                 "Category: " + getCategory()
@@ -53,11 +59,51 @@ public abstract class Vehicle implements Serializable {
         return attendantLastName;
     }
 
-    public String getAttendantId() {
+    public int getAttendantId() {
         return attendantId;
     }
 
-    public void setAttendantId(String attendantId) {
+    public void setAttendantId(int attendantId) {
         this.attendantId = attendantId;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    public String getAttendantRemovedFirst() {
+        return attendantRemovedFirst;
+    }
+
+    public void setAttendantRemovedFirst(String attendantRemovedFirst) {
+        this.attendantRemovedFirst = attendantRemovedFirst;
+    }
+
+    public String getAttendantRemovedLast() {
+        return attendantRemovedLast;
+    }
+
+    public void setAttendantRemovedLast(String attendantRemovedLast) {
+        this.attendantRemovedLast = attendantRemovedLast;
+    }
+
+    public int getAttendantRemovedId() {
+        return attendantRemovedId;
+    }
+
+    public void setAttendantRemovedId(int attendantRemovedId) {
+        this.attendantRemovedId = attendantRemovedId;
+    }
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
     }
 }

@@ -6,14 +6,11 @@ import java.util.Date;
 
 public class Ticket implements Serializable {
 
-    String licensePlate;
-    String category;
-    String attendantFirstName;
-    String attendantLastName;
-    String attendantID;
+
+    Vehicle vehicle;
     String date;
     String time;
-    double paymentScheme;
+    double rate;
     boolean earlyBird;
     public String spaceID;
 
@@ -24,36 +21,20 @@ public class Ticket implements Serializable {
     }
 
 
-    public Ticket(String licensePlate, String category, String attendantFirstName, String attendantLastName, String date,String time, double paymentScheme, boolean earlyBird, String spaceID, String attendantID) {
-        this.licensePlate = licensePlate;
-        this.category = category;
-        this.attendantFirstName = attendantFirstName;
-        this.attendantLastName = attendantLastName;
+    public Ticket(Vehicle vehicle, String date, String time, double rate, boolean earlyBird, String spaceID) {
+
         this.date = date;
         this.time = time;
-        this.paymentScheme = paymentScheme;
+        this.rate = rate;
         this.earlyBird = earlyBird;
         this.spaceID = spaceID;
-        this.attendantID = attendantID;
+        this.vehicle = vehicle;
+
 
     }
 
 
-    public String getLicensePlate() {
-        return licensePlate;
-    }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public String getAttendantFirstName() {
-        return attendantFirstName;
-    }
-
-    public String getAttendantLastName() {
-        return attendantLastName;
-    }
 
     public String getDate() {
         return date;
@@ -63,8 +44,8 @@ public class Ticket implements Serializable {
         return time;
     }
 
-    public double getPaymentScheme() {
-        return paymentScheme;
+    public double getRate() {
+        return rate;
     }
 
     public boolean isEarlyBird() {
@@ -82,11 +63,11 @@ public class Ticket implements Serializable {
 
     public String getCurrency(){
         if(earlyBird) {
-            return "$" + addZeroToRate(paymentScheme) + " Flat rate.";
+            return "$" + addZeroToRate(rate) + " Flat rate.";
 
         }
         else{
-            return "$" + addZeroToRate(paymentScheme) + " Per Hour.";
+            return "$" + addZeroToRate(rate) + " Per Hour.";
         }
     }
 
@@ -109,14 +90,22 @@ public class Ticket implements Serializable {
 
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
     @Override
     public String toString() {
         return "Ticket" + "\n"+
-                "License Plate: " + licensePlate + "\n" +
-                "Category : " + category + "\n" +
-                "Attendant Name/ID: " + attendantFirstName + " "+
-                  attendantLastName + " " +
-                 attendantID + "\n" +
+                "License Plate: " + getVehicle().getLicensePlate() + "\n" +
+                "Category : " + getVehicle().getCategory() + "\n" +
+                "Attendant Name/ID: " + getVehicle().getAttendantFirstName() + " "+
+                  getVehicle().getAttendantLastName() + " " +
+                 getVehicle().getAttendantId() + "\n" +
                 "Date/Time: " + date + " "  +
                  Reciept.convertTimeFromMilitary(time) + '\n' +
                 "Rate: " + getCurrency()+  "\n" +

@@ -8,9 +8,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.project.cse248garage.R;
+import com.project.cse248garage.databasePhpTest.BackgroundWorkerTest;
 import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.CheckCredentials;
 import com.project.cse248garage.model.Garage;
+import com.project.cse248garage.model.User;
 import com.project.cse248garage.model.UserAccountBag;
 
 public class CreateAttendantActivity extends AppCompatActivity {
@@ -25,6 +27,8 @@ public class CreateAttendantActivity extends AppCompatActivity {
     String password;
     String firstName;
     String lastName;
+    static String resultID;
+    User testUser;
 
 
     @Override
@@ -41,7 +45,7 @@ public class CreateAttendantActivity extends AppCompatActivity {
 
     public void createAttendant(View view){
 
-
+        String type = "register";
 
          userNameField = findViewById(R.id.username_field);
          passwordField = findViewById(R.id.password_field);
@@ -59,6 +63,13 @@ public class CreateAttendantActivity extends AppCompatActivity {
 
 
         garage.getBag().createAttendantAccount(userName, password, firstName, lastName);
+        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+        backgroundWorker.execute(type, firstName, lastName, userName, password, String.valueOf(0));
+        testUser = garage.getBag().getUser(userName, garage.getBag().getUserAccountHash());
+
+
+
+
 
        TextView displayAttendant = findViewById(R.id.display_field);
 
@@ -69,6 +80,14 @@ public class CreateAttendantActivity extends AppCompatActivity {
     }
 
     public void nextView(View view){
+        if(testUser != null) {
+            System.out.println("*******************************" + resultID);
+            String[] resultTokens = resultID.split(" ");
+            resultID = resultTokens[2];
+            User user = garage.getBag().getUser(userName, garage.getBag().getUserAccountHash());
+            user.setiD(Integer.valueOf(resultID));
+            System.out.println(user);
+        }
         Intent intent = new Intent(this, ManagerSelectActivity.class);
         intent.putExtra("Garage", garage);
         startActivity(intent);
@@ -117,5 +136,13 @@ public class CreateAttendantActivity extends AppCompatActivity {
 
     return true;
 
+    }
+
+    public static String getResultID() {
+        return resultID;
+    }
+
+    public static void setResultID(String resultID) {
+        CreateAttendantActivity.resultID = resultID;
     }
 }

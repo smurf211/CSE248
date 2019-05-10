@@ -17,7 +17,7 @@ public class ParkingSpace implements Serializable {
     Vehicle vehicle;
     LocalTime time;
     LocalDate date;
-    Ticket ticket;
+
     public String spaceID;
     Garage garage;
 
@@ -179,17 +179,13 @@ public class ParkingSpace implements Serializable {
         return price;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
+
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
 
-    public Ticket getTicket() {
-        return ticket;
-    }
+
 
     public void setPrice(double price) {
         this.price = price;
@@ -213,6 +209,38 @@ public class ParkingSpace implements Serializable {
 
     public void setGarage(Garage garage) {
         this.garage = garage;
+    }
+
+    public static int getCarDistance() {
+        return carDistance;
+    }
+
+    public static void setCarDistance(int carDistance) {
+        ParkingSpace.carDistance = carDistance;
+    }
+
+    public static int getTruckDistance() {
+        return truckDistance;
+    }
+
+    public static void setTruckDistance(int truckDistance) {
+        ParkingSpace.truckDistance = truckDistance;
+    }
+
+    public static int getMotorcycleDistance() {
+        return motorcycleDistance;
+    }
+
+    public static void setMotorcycleDistance(int motorcycleDistance) {
+        ParkingSpace.motorcycleDistance = motorcycleDistance;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 
     @Override

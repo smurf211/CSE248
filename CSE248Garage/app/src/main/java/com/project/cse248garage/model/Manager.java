@@ -10,11 +10,5 @@ public class Manager extends User implements Serializable {
         super(userName, password, firstName, lastName, admin);
     }
 
-    public Manager(String firstName, String lastName, boolean admin) {
-        super(firstName, lastName, admin);
-    }
 
-    public Manager(String password, String firstName, String lastName, boolean admin) {
-        super(password, firstName, lastName, admin);
-    }
 }

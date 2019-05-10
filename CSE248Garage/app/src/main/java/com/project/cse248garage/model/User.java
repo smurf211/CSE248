@@ -7,7 +7,7 @@ public class User implements Serializable {
 
     private String firstName;
     private String lastName;
-    private String iD;
+    private int iD;
     private boolean admin;
     private boolean loggedIn;
 
@@ -15,22 +15,18 @@ public class User implements Serializable {
     private String password;
 
 
-    private static int idCounter = 0;
 
     public User(){
 
     }
+    /*
 
     public User(String firstName, String lastName, boolean admin ) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.admin = admin;
-        iD = String.valueOf(++idCounter);
-        for (int i = 2; i > String.valueOf(idCounter).length(); i--) {
-            iD = '0' + iD;
 
-        }
         userName = createUserName();
 
         generatePassword();
@@ -42,15 +38,12 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.admin = admin;
         this.password = password;
-        iD = String.valueOf(++idCounter);
-        for (int i = 2; i > String.valueOf(idCounter).length(); i--) {
-            iD = '0' + iD;
 
-        }
         userName = createUserName();
 
         generatePassword();
     }
+    */
 
     public User(String userName, String password, String firstName, String lastName, boolean admin) {
         this.userName = userName;
@@ -60,16 +53,12 @@ public class User implements Serializable {
         this.admin = admin;
 
 
-        iD = String.valueOf(++idCounter);
-        for (int i = 2; i > String.valueOf(idCounter).length(); i--) {
-            iD = '0' + iD;
 
-        }
 
 
     }
 
-
+/*
 
     public String createUserName() {
 
@@ -95,8 +84,7 @@ public class User implements Serializable {
 
 
 
-
-
+*/
 
 
 
@@ -148,11 +136,13 @@ public class User implements Serializable {
 
 
 
-    public String emitID() {
+    public int emitID() {
         return iD;
     }
 
-
+    public void setiD(int iD) {
+        this.iD = iD;
+    }
 
     public String emitUserName() {
         return userName;
@@ -190,7 +180,7 @@ public class User implements Serializable {
     public String toString() {
         return
                 "Name: " + firstName  + " " + lastName
-                        + "\n ID: '" + iD  +
+                        + "\n ID: " + iD  +
                         "\n Admin: " + admin +
                         "\n UserName: " + userName  +
                         "\n password: " + "*******";

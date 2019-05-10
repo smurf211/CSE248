@@ -37,11 +37,7 @@ public class GarageSetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garagesetup);
 
-       // Intent intent = getIntent();
 
-       // String message = intent.getStringExtra("Extra_Message");
-      //  TextView textView = findViewById(R.id.display_username);
-      //  textView.setText(message);
           garage = (Garage) getIntent().getSerializableExtra("Garage");
 
 
@@ -75,6 +71,8 @@ public class GarageSetupActivity extends AppCompatActivity {
 
 
 
+
+
         String carValueEarlyBird = carEarlyBird.getText().toString();
         garage.setCarEarlyBird(Double.valueOf(carValueEarlyBird));
 
@@ -103,8 +101,20 @@ public class GarageSetupActivity extends AppCompatActivity {
         String motoValuePerHour = motorcyclePerHour.getText().toString();
         garage.setMotoPerHour(Double.valueOf(motoValuePerHour));
 
+
+        String type = "create garage";
+
+        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+        backgroundWorker.execute(type, String.valueOf(carSpaces), String.valueOf(truckSpaces), String.valueOf(motorcycleSpaces), carValueEarlyBird,
+                carValuePerHour, truckValueEarlyBird,truckValuePerHour, motoValueEarlyBird, motoValuePerHour);
+
+
+        System.out.println("**************************************************************************");
+
+
+
         //System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
-        System.out.println(garage.toString());
+      //  System.out.println(garage.toString());
 
         TextView displayGarage = findViewById(R.id.display_field);
         displayGarage.setText("Garage Created!");

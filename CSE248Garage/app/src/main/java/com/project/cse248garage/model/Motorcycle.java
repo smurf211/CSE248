@@ -10,7 +10,7 @@ public class Motorcycle extends Vehicle implements Serializable {
         return "motorcycle";
     }
 
-    public Motorcycle(String licensePlate, String attendantFirstName, String attendantLastName, String attendantId) {
+    public Motorcycle(String licensePlate, String attendantFirstName, String attendantLastName, int attendantId) {
         super(licensePlate, attendantFirstName, attendantLastName, attendantId);
     }
 
