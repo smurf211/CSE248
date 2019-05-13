@@ -15,7 +15,7 @@ public class Ticket implements Serializable {
     public String spaceID;
 
 
-    public Ticket(){
+    public Ticket() {
 
 
     }
@@ -34,8 +34,6 @@ public class Ticket implements Serializable {
     }
 
 
-
-
     public String getDate() {
         return date;
     }
@@ -52,39 +50,36 @@ public class Ticket implements Serializable {
         return earlyBird;
     }
 
-    public String getEarlyBirdString(){
-        if(earlyBird){
+    public String getEarlyBirdString() {
+        if (earlyBird) {
             return "Yes";
-        }
-        else{
+        } else {
             return "No";
         }
     }
 
-    public String getCurrency(){
-        if(earlyBird) {
+    public String getCurrency(double rate) {
+        if (earlyBird) {
             return "$" + addZeroToRate(rate) + " Flat rate.";
 
-        }
-        else{
+        } else {
             return "$" + addZeroToRate(rate) + " Per Hour.";
         }
     }
 
-    public static String addZeroToRate(double rate){
+    public static String addZeroToRate(double rate) {
 
-        if(!String.valueOf(rate).contains(".")){
+        if (!String.valueOf(rate).contains(".")) {
 
             return String.valueOf(rate);
         }
 
         String[] rateTokens = String.valueOf(rate).split("[.]");
 
-        if(rateTokens[1].length() == 1){
+        if (rateTokens[1].length() == 1) {
 
-         return String.valueOf(rate) + "0";
-        }
-        else{
+            return String.valueOf(rate) + "0";
+        } else {
             return String.valueOf(rate);
         }
 
@@ -98,17 +93,21 @@ public class Ticket implements Serializable {
         this.vehicle = vehicle;
     }
 
+    public void setEarlyBird(boolean earlyBird) {
+        this.earlyBird = earlyBird;
+    }
+
     @Override
     public String toString() {
-        return "Ticket" + "\n"+
+        return "Ticket" + "\n" +
                 "License Plate: " + getVehicle().getLicensePlate() + "\n" +
                 "Category : " + getVehicle().getCategory() + "\n" +
-                "Attendant Name/ID: " + getVehicle().getAttendantFirstName() + " "+
-                  getVehicle().getAttendantLastName() + " " +
-                 getVehicle().getAttendantId() + "\n" +
-                "Date/Time: " + date + " "  +
-                 Reciept.convertTimeFromMilitary(time) + '\n' +
-                "Rate: " + getCurrency()+  "\n" +
+                "Attendant Name/ID: " + getVehicle().getAttendantFirstName() + " " +
+                getVehicle().getAttendantLastName() + " " +
+                getVehicle().getAttendantId() + "\n" +
+                "Date/Time: " + date + " " +
+                Reciept.convertTimeFromMilitary(time) + '\n' +
+                "Rate: " + getCurrency(rate) + "\n" +
                 "Early Bird: " + getEarlyBirdString() + "\n" +
                 "Space ID: " + this.spaceID;
     }

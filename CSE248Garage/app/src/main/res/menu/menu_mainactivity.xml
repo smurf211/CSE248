@@ -4,15 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item android:id="@+id/item1"
 
-        android:title="Load Garage"
-
-        app:showAsAction="never">
-
-
-
-
-    </item>
 
 </menu>

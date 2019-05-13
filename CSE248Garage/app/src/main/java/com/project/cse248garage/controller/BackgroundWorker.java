@@ -27,7 +27,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     String result;
 
 
-    public BackgroundWorker(Context ctx){
+    public BackgroundWorker(Context ctx) {
 
         context = ctx;
     }
@@ -44,8 +44,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         String park_vehicle_url = "http://smurf211.com/parkvehicle.php";
         String remove_vehicle_url = "http://smurf211.com/removevehicle.php";
         String remove_attendant_url = "http://smurf211.com/removeattendant.php";
+        String create_history_url = "http://smurf211.com/createhistory.php";
+        String destroy_garage_url = "http://smurf211.com/destroygarage.php";
 
-        if(type.equals("login")){
+        if (type.equals("login")) {
 
             try {
                 String user_name = params[1];
@@ -60,17 +62,17 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("user_name", "UTF-8")+"="+URLEncoder.encode(user_name, "UTF-8")+"&"
-                        + URLEncoder.encode("password", "UTF-8")+"="+URLEncoder.encode(password, "UTF-8");
+                String post_data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8") + "&"
+                        + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
-                 result = "";
+                result = "";
                 String line = "";
-                while((line = bufferedReader.readLine())!= null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
 
@@ -83,13 +85,12 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
-        }
-        else if(type.equals("register")){
+        } else if (type.equals("register")) {
             try {
 
                 String firstname = params[1];
@@ -109,11 +110,11 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("firstname", "UTF-8")+"="+URLEncoder.encode(firstname, "UTF-8")+"&"+
-                URLEncoder.encode("lastname", "UTF-8")+"="+URLEncoder.encode(lastname, "UTF-8")+"&" +
-                URLEncoder.encode("username", "UTF-8")+"="+URLEncoder.encode(username, "UTF-8")+"&"+
-                URLEncoder.encode("password", "UTF-8")+"="+URLEncoder.encode(password, "UTF-8")+"&"
-                        + URLEncoder.encode("admin", "UTF-8")+"="+URLEncoder.encode(admin, "UTF-8");
+                String post_data = URLEncoder.encode("firstname", "UTF-8") + "=" + URLEncoder.encode(firstname, "UTF-8") + "&" +
+                        URLEncoder.encode("lastname", "UTF-8") + "=" + URLEncoder.encode(lastname, "UTF-8") + "&" +
+                        URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" +
+                        URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&"
+                        + URLEncoder.encode("admin", "UTF-8") + "=" + URLEncoder.encode(admin, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -124,14 +125,12 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
                 result = "";
                 String line = "";
-                while((line = bufferedReader.readLine())!= null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
 
 
-
-
-               // System.out.println(result);
+                // System.out.println(result);
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
@@ -140,15 +139,12 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
-
-        }
-
-        else if(type.equals("create garage")){
+        } else if (type.equals("create garage")) {
 
 
             try {
@@ -176,15 +172,15 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("carsize", "UTF-8")+"="+URLEncoder.encode(carsize, "UTF-8")+"&"+
-                        URLEncoder.encode("trucksize", "UTF-8")+"="+URLEncoder.encode(trucksize, "UTF-8")+"&" +
-                        URLEncoder.encode("motosize", "UTF-8")+"="+URLEncoder.encode(motosize, "UTF-8")+"&"+
-                        URLEncoder.encode("car_early", "UTF-8")+"="+URLEncoder.encode(car_early, "UTF-8")+"&"
-                        + URLEncoder.encode("car_per_hour", "UTF-8")+"="+URLEncoder.encode(car_per_hour, "UTF-8")+ "&" +
-                         URLEncoder.encode("truck_early", "UTF-8")+"="+URLEncoder.encode(truck_early, "UTF-8")+"&"
-                        + URLEncoder.encode("truck_per_hour", "UTF-8")+"="+URLEncoder.encode(truck_per_hour, "UTF-8")+ "&" +
-                        URLEncoder.encode("moto_early", "UTF-8")+"="+URLEncoder.encode(moto_early, "UTF-8")+"&"
-                        + URLEncoder.encode("moto_per_hour", "UTF-8")+"="+URLEncoder.encode(moto_per_hour, "UTF-8");
+                String post_data = URLEncoder.encode("carsize", "UTF-8") + "=" + URLEncoder.encode(carsize, "UTF-8") + "&" +
+                        URLEncoder.encode("trucksize", "UTF-8") + "=" + URLEncoder.encode(trucksize, "UTF-8") + "&" +
+                        URLEncoder.encode("motosize", "UTF-8") + "=" + URLEncoder.encode(motosize, "UTF-8") + "&" +
+                        URLEncoder.encode("car_early", "UTF-8") + "=" + URLEncoder.encode(car_early, "UTF-8") + "&"
+                        + URLEncoder.encode("car_per_hour", "UTF-8") + "=" + URLEncoder.encode(car_per_hour, "UTF-8") + "&" +
+                        URLEncoder.encode("truck_early", "UTF-8") + "=" + URLEncoder.encode(truck_early, "UTF-8") + "&"
+                        + URLEncoder.encode("truck_per_hour", "UTF-8") + "=" + URLEncoder.encode(truck_per_hour, "UTF-8") + "&" +
+                        URLEncoder.encode("moto_early", "UTF-8") + "=" + URLEncoder.encode(moto_early, "UTF-8") + "&"
+                        + URLEncoder.encode("moto_per_hour", "UTF-8") + "=" + URLEncoder.encode(moto_per_hour, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -195,7 +191,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
                 result = "";
                 String line = "";
-                while((line = bufferedReader.readLine())!= null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
 
@@ -208,19 +204,12 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
-
-
-
-
-
-        }
-
-        else if(type.equals("create vehicle")){
+        } else if (type.equals("create vehicle")) {
 
 
             try {
@@ -237,8 +226,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 String time_out = params[9];
                 String early_bird = params[10];
                 String rate = params[11];
-
-
+                String isDeleted = "N";
 
 
                 URL url = new URL(create_vehicle_url);
@@ -251,20 +239,22 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(user_id, "UTF-8")+"&"+
+                String post_data = URLEncoder.encode("user_id", "UTF-8") + "=" + URLEncoder.encode(user_id, "UTF-8") + "&" +
 
-                        URLEncoder.encode("license_plate", "UTF-8")+"="+URLEncoder.encode(license_plate, "UTF-8")+"&"+
-                        URLEncoder.encode("f_category", "UTF-8")+"="+URLEncoder.encode(f_category, "UTF-8")+"&"
-                        + URLEncoder.encode("category", "UTF-8")+"="+URLEncoder.encode(category, "UTF-8")+ "&" +
-                        URLEncoder.encode("space_id", "UTF-8")+"="+URLEncoder.encode(space_id, "UTF-8")+"&"
-                        + URLEncoder.encode("date_in", "UTF-8")+"="+URLEncoder.encode(date_in, "UTF-8")+ "&" +
-                        URLEncoder.encode("date_out", "UTF-8")+"="+URLEncoder.encode(date_out, "UTF-8")+"&"
-                        + URLEncoder.encode("time_in", "UTF-8")+"="+URLEncoder.encode(time_in, "UTF-8")
+                        URLEncoder.encode("license_plate", "UTF-8") + "=" + URLEncoder.encode(license_plate, "UTF-8") + "&" +
+                        URLEncoder.encode("f_category", "UTF-8") + "=" + URLEncoder.encode(f_category, "UTF-8") + "&"
+                        + URLEncoder.encode("category", "UTF-8") + "=" + URLEncoder.encode(category, "UTF-8") + "&" +
+                        URLEncoder.encode("space_id", "UTF-8") + "=" + URLEncoder.encode(space_id, "UTF-8") + "&"
+                        + URLEncoder.encode("date_in", "UTF-8") + "=" + URLEncoder.encode(date_in, "UTF-8") + "&" +
+                        URLEncoder.encode("date_out", "UTF-8") + "=" + URLEncoder.encode(date_out, "UTF-8") + "&"
+                        + URLEncoder.encode("time_in", "UTF-8") + "=" + URLEncoder.encode(time_in, "UTF-8")
                         + "&" +
-                        URLEncoder.encode("time_out", "UTF-8")+"="+URLEncoder.encode(time_out, "UTF-8")+"&"
-                        + URLEncoder.encode("early_bird", "UTF-8")+"="+URLEncoder.encode(early_bird, "UTF-8")
-                        +"&"
-                        + URLEncoder.encode("rate", "UTF-8")+"="+URLEncoder.encode(rate, "UTF-8");
+                        URLEncoder.encode("time_out", "UTF-8") + "=" + URLEncoder.encode(time_out, "UTF-8") + "&"
+                        + URLEncoder.encode("early_bird", "UTF-8") + "=" + URLEncoder.encode(early_bird, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("rate", "UTF-8") + "=" + URLEncoder.encode(rate, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("isDeleted", "UTF-8") + "=" + URLEncoder.encode(isDeleted, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -275,7 +265,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
                 result = "";
                 String line = "";
-                while((line = bufferedReader.readLine())!= null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
 
@@ -288,18 +278,12 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
-
-
-
-
-
-        }
-        else if(type.equals("park vehicle")){
+        } else if (type.equals("park vehicle")) {
 
 
             try {
@@ -316,8 +300,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 String time = params[9];
                 String date = params[10];
                 String space_id = params[11];
-
-
+                String isDeleted = "N";
 
 
                 URL url = new URL(park_vehicle_url);
@@ -330,21 +313,21 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("category", "UTF-8")+"="+URLEncoder.encode(category, "UTF-8")+"&"+
-                        URLEncoder.encode("car_distance", "UTF-8")+"="+URLEncoder.encode(car_distance, "UTF-8")+"&"+
-                        URLEncoder.encode("truck_distance", "UTF-8")+"="+URLEncoder.encode(truck_distance, "UTF-8")+"&"
-                        + URLEncoder.encode("moto_distance", "UTF-8")+"="+URLEncoder.encode(moto_distance, "UTF-8")+ "&" +
-                        URLEncoder.encode("distance", "UTF-8")+"="+URLEncoder.encode(distance, "UTF-8")+"&"
-                        + URLEncoder.encode("early_bird", "UTF-8")+"="+URLEncoder.encode(early_bird, "UTF-8")+ "&" +
+                String post_data = URLEncoder.encode("category", "UTF-8") + "=" + URLEncoder.encode(category, "UTF-8") + "&" +
+                        URLEncoder.encode("car_distance", "UTF-8") + "=" + URLEncoder.encode(car_distance, "UTF-8") + "&" +
+                        URLEncoder.encode("truck_distance", "UTF-8") + "=" + URLEncoder.encode(truck_distance, "UTF-8") + "&"
+                        + URLEncoder.encode("moto_distance", "UTF-8") + "=" + URLEncoder.encode(moto_distance, "UTF-8") + "&" +
+                        URLEncoder.encode("distance", "UTF-8") + "=" + URLEncoder.encode(distance, "UTF-8") + "&"
+                        + URLEncoder.encode("early_bird", "UTF-8") + "=" + URLEncoder.encode(early_bird, "UTF-8") + "&" +
 
-                         URLEncoder.encode("free", "UTF-8")+"="+URLEncoder.encode(free, "UTF-8")
+                        URLEncoder.encode("free", "UTF-8") + "=" + URLEncoder.encode(free, "UTF-8")
                         + "&" +
-                        URLEncoder.encode("vehicle_id", "UTF-8")+"="+URLEncoder.encode(vehicle_id, "UTF-8")+"&"
-                        + URLEncoder.encode("time", "UTF-8")+"="+URLEncoder.encode(time, "UTF-8")
-                        +"&"
-                        + URLEncoder.encode("date", "UTF-8")+"="+URLEncoder.encode(date, "UTF-8")
-                        +"&"
-                        + URLEncoder.encode("space_id", "UTF-8")+"="+URLEncoder.encode(space_id, "UTF-8");
+                        URLEncoder.encode("vehicle_id", "UTF-8") + "=" + URLEncoder.encode(vehicle_id, "UTF-8") + "&"
+                        + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("date", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("space_id", "UTF-8") + "=" + URLEncoder.encode(space_id, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -355,7 +338,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
                 result = "";
                 String line = "";
-                while((line = bufferedReader.readLine())!= null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
 
@@ -368,28 +351,18 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
-
-
-
-
-
-        }
-
-        else if(type.equals("remove vehicle")){
+        } else if (type.equals("remove vehicle")) {
 
 
             try {
 
 
                 String vehicle_id = params[1];
-
-
-
 
 
                 URL url = new URL(remove_vehicle_url);
@@ -402,7 +375,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("vehicle_id", "UTF-8")+"="+URLEncoder.encode(vehicle_id, "UTF-8");
+                String post_data = URLEncoder.encode("vehicle_id", "UTF-8") + "=" + URLEncoder.encode(vehicle_id, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -413,7 +386,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
                 result = "";
                 String line = "";
-                while((line = bufferedReader.readLine())!= null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
 
@@ -426,28 +399,18 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
-
-
-
-
-
-        }
-
-        else if(type.equals("remove attendant")){
+        } else if (type.equals("remove attendant")) {
 
 
             try {
 
 
                 String user_id = params[1];
-
-
-
 
 
                 URL url = new URL(remove_attendant_url);
@@ -460,7 +423,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String post_data = URLEncoder.encode("user_id", "UTF-8")+"="+URLEncoder.encode(user_id, "UTF-8");
+                String post_data = URLEncoder.encode("user_id", "UTF-8") + "=" + URLEncoder.encode(user_id, "UTF-8");
 
 
                 bufferedWriter.write(post_data);
@@ -471,7 +434,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
                 result = "";
                 String line = "";
-                while((line = bufferedReader.readLine())!= null){
+                while ((line = bufferedReader.readLine()) != null) {
                     result += line;
                 }
 
@@ -484,14 +447,132 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
+        } else if (type.equals("create history")) {
 
 
+            try {
 
+
+                String date_in = params[1];
+                String date_out = params[2];
+                String time_in = params[3];
+                String time_out = params[4];
+                String early_bird = params[5];
+                String space_id = params[6];
+                String license_plate = params[7];
+                String user_parked_id = params[8];
+                String user_removed_id = params[9];
+                String category = params[10];
+                String false_category = params[11];
+                String rate = params[12];
+                String payment_scheme = params[13];
+                String vehicle_id = params[14];
+
+                URL url = new URL(create_history_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String post_data = URLEncoder.encode("date_in", "UTF-8") + "=" + URLEncoder.encode(date_in, "UTF-8") + "&" +
+                        URLEncoder.encode("date_out", "UTF-8") + "=" + URLEncoder.encode(date_out, "UTF-8") + "&" +
+                        URLEncoder.encode("time_in", "UTF-8") + "=" + URLEncoder.encode(time_in, "UTF-8") + "&"
+                        + URLEncoder.encode("time_out", "UTF-8") + "=" + URLEncoder.encode(time_out, "UTF-8") + "&" +
+                        URLEncoder.encode("early_bird", "UTF-8") + "=" + URLEncoder.encode(early_bird, "UTF-8") + "&"
+                        + URLEncoder.encode("space_id", "UTF-8") + "=" + URLEncoder.encode(space_id, "UTF-8") + "&" +
+
+                        URLEncoder.encode("license_plate", "UTF-8") + "=" + URLEncoder.encode(license_plate, "UTF-8")
+                        + "&" +
+                        URLEncoder.encode("user_parked_id", "UTF-8") + "=" + URLEncoder.encode(user_parked_id, "UTF-8") + "&"
+                        + URLEncoder.encode("user_removed_id", "UTF-8") + "=" + URLEncoder.encode(user_removed_id, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("category", "UTF-8") + "=" + URLEncoder.encode(category, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("false_category", "UTF-8") + "=" + URLEncoder.encode(false_category, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("rate", "UTF-8") + "=" + URLEncoder.encode(rate, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("payment_scheme", "UTF-8") + "=" + URLEncoder.encode(payment_scheme, "UTF-8")
+                        + "&"
+                        + URLEncoder.encode("vehicle_id", "UTF-8") + "=" + URLEncoder.encode(vehicle_id, "UTF-8");
+
+
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
+                result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        if (type.equals("destroy garage")) {
+
+            try {
+
+
+                URL url = new URL(destroy_garage_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = "";
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
+                result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         }

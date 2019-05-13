@@ -80,6 +80,9 @@ public class UserAccountBag implements Serializable {
 
     }
 
+
+
+
     public ArrayList<String> getUsersArrayList(HashMap<User, String> map) {
 
         ArrayList<String> userNames = new ArrayList<String>();
@@ -148,6 +151,7 @@ public class UserAccountBag implements Serializable {
         return false;
 
     }
+
 
 
     public void removeUser(User user) {

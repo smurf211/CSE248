@@ -13,10 +13,27 @@ public class Reciept extends Ticket implements Serializable {
     Garage garage;
     double rate;
 
-    public Reciept(String timeIn, String timeOut){
+    public Reciept(String timeIn, String timeOut) {
         this.timeIn = timeIn;
         this.timeOut = timeOut;
     }
+
+    public Reciept(Vehicle vehicle, String dateIn, String dateOut, String timeIn , String timeOut, boolean earlyBird, String spaceID,  double rate, double paymentScheme, Garage garage) {
+        super(vehicle, dateIn, timeIn, rate, earlyBird, spaceID);
+        this.timeIn = timeIn;
+        this.dateIn = dateIn;
+        this.rate = rate;
+
+        this.timeOut = timeOut;
+        this.dateOut = dateOut;
+        this.paymentScheme = paymentScheme;
+        this.garage = garage;
+
+
+
+    }
+
+
 
 
     public Reciept(Vehicle vehicle, String date, String time, double rate, boolean earlyBird, String spaceID, Garage garage) {
@@ -28,7 +45,6 @@ public class Reciept extends Ticket implements Serializable {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date1 = new Date();
-
 
 
         this.timeOut = String.valueOf(java.time.LocalTime.now());
@@ -43,23 +59,20 @@ public class Reciept extends Ticket implements Serializable {
     }
 
 
-    public double calculatePayment(){
+    public double calculatePayment() {
 
         double totalSeconds = getTimeSeconds();
 
-        if(this.earlyBird){
+        if (this.earlyBird) {
             return rate;
-        }
-
-        else {
+        } else {
             return totalSeconds * rate;
 
         }
     }
 
 
-
-    public double getTimeSeconds(){
+    public double getTimeSeconds() {
         double timeInMinutes;
         double timeInSeconds;
         double timeOutMinutes;
@@ -81,42 +94,32 @@ public class Reciept extends Ticket implements Serializable {
 
         double totalSeconds = (differenceHours * 60 * 60) + (differenceMinutes * 60) + differenceSeconds;
 
-        double totalMinutes = (totalSeconds /60);
+        double totalMinutes = (totalSeconds / 60);
 
 
-
-
-    return Math.round(totalMinutes);
+        return Math.round(totalMinutes);
     }
 
-    public static void sleep(long millis) throws InterruptedException{
+    public static void sleep(long millis) throws InterruptedException {
         Thread.sleep(millis);
     }
 
 
-
-
-
-
-
-    public String getEarlyBirdString(){
-        if(earlyBird){
+    public String getEarlyBirdString() {
+        if (earlyBird) {
             return "Yes";
-        }
-        else{
+        } else {
             return "No";
         }
     }
 
 
+    public String getCurrency() {
+        if (earlyBird) {
+            return "$" + Ticket.addZeroToRate(paymentScheme);
 
-    public String getCurrency(){
-        if(earlyBird) {
-            return "$" + Ticket.addZeroToRate(paymentScheme) ;
-
-        }
-        else{
-            return "$" + Ticket.addZeroToRate(paymentScheme) ;
+        } else {
+            return "$" + Ticket.addZeroToRate(paymentScheme);
         }
     }
 
@@ -124,7 +127,27 @@ public class Reciept extends Ticket implements Serializable {
         this.rate = rate;
     }
 
-    public static String convertTimeFromMilitary(String time){
+    public double getPaymentScheme() {
+        return paymentScheme;
+    }
+
+    public String getTimeOut() {
+        return timeOut;
+    }
+
+    public void setTimeOut(String timeOut) {
+        this.timeOut = timeOut;
+    }
+
+    public String getDateOut() {
+        return dateOut;
+    }
+
+    public void setDateOut(String dateOut) {
+        this.dateOut = dateOut;
+    }
+
+    public static String convertTimeFromMilitary(String time) {
 
         String minutes;
         String seconds;
@@ -137,17 +160,15 @@ public class Reciept extends Ticket implements Serializable {
         minutes = timeTokens[1];
         seconds = timeTokens[2];
 
-        if(hours < 12){
+        if (hours < 12) {
 
             amPm = "AM";
-        }
-        else if(hours == 12){
+        } else if (hours == 12) {
             amPm = "PM";
 
-        }
-        else{
+        } else {
             amPm = "PM";
-            hours = (hours -12);
+            hours = (hours - 12);
         }
 
         String actualTime = String.valueOf(hours) + ":" + minutes + ":" + seconds + " " + amPm;
@@ -155,27 +176,25 @@ public class Reciept extends Ticket implements Serializable {
         return actualTime;
 
 
-
-
     }
 
     @Override
     public String toString() {
-        return "Reciept" + "\n"+
+        return "Reciept" + "\n" +
                 "Time in: " + convertTimeFromMilitary(timeIn) + '\n' +
                 "Time out: " + convertTimeFromMilitary(timeOut) + '\n' +
                 "Date in: " + dateIn + '\n' +
                 "Date out: " + dateOut + '\n' +
                 "Rate: " + Ticket.addZeroToRate(rate) + '\n' +
                 "Payment Due: " + getCurrency() + '\n' +
-                "Amount Paid: " + "$" + paymentScheme + "\n"+
+                "Amount Paid: " + "$" + paymentScheme + "\n" +
                 "Early Bird: " + getEarlyBirdString() + "\n" +
                 "License Plate: " + getVehicle().getLicensePlate() + '\n' +
                 "Category: " + getVehicle().getCategory() + '\n' +
                 "Attendant Parked Name/ID: " + getVehicle().getAttendantFirstName() + " " +
                 getVehicle().getAttendantLastName() + " " + getVehicle().getAttendantId() + "\n" +
                 "Attendant Removed Name/ID: " + vehicle.getAttendantRemovedFirst() + " "
-                + vehicle.getAttendantRemovedLast() + " "+ vehicle.getAttendantRemovedId() + "\n" +
+                + vehicle.getAttendantRemovedLast() + " " + vehicle.getAttendantRemovedId() + "\n" +
 
                 "Space ID: " + this.spaceID;
     }

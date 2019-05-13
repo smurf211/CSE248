@@ -15,8 +15,8 @@ public class ParkingSpace implements Serializable {
     double price;
     boolean free; // 1 = free space, 0 = full space
     Vehicle vehicle;
-    LocalTime time;
-    LocalDate date;
+    String time;
+    String date;
 
     public String spaceID;
     Garage garage;
@@ -54,6 +54,8 @@ public class ParkingSpace implements Serializable {
 
 
     }
+
+
 
 
 
@@ -151,11 +153,19 @@ public class ParkingSpace implements Serializable {
         this.free = free;
     }
 
-    public void setTime(LocalTime time) {
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public void setDate(LocalDate date) {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -163,13 +173,7 @@ public class ParkingSpace implements Serializable {
         return vehicle;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
 
-    public LocalDate getDate() {
-        return date;
-    }
 
     public String getCategory() {
         return category;
@@ -243,14 +247,18 @@ public class ParkingSpace implements Serializable {
         this.distance = distance;
     }
 
+
+
     @Override
     public String toString() {
         return "ParkingSpace{" +
                 "category='" + category + '\'' +
                 ", distance=" + distance +
                 ", earlyBird=" + earlyBird +
-                ", price=" + price +
-                ", free=" + free +
-                '}';
+                ", price=" + price + "\n" +
+                ", free=" + free + "\n"+
+                ", spaceID='" + spaceID ;
+
+
     }
 }

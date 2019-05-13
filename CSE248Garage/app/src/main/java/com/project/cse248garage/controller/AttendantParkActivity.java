@@ -39,11 +39,9 @@ public class AttendantParkActivity extends AppCompatActivity {
     String falseCategory;
     BackgroundWorker backgroundWorker;
     BackgroundWorker backgroundWorker1;
-   static String resultID;
+    static String resultID;
     String typePark = "park vehicle";
     ParkingSpace openSpace;
-
-
 
 
     @Override
@@ -55,21 +53,17 @@ public class AttendantParkActivity extends AppCompatActivity {
         System.out.println("on create");
         garage.getBag().displayBagHash();
 
-    backgroundWorker = new BackgroundWorker(this);
-    backgroundWorker1 = new BackgroundWorker(this);
+        backgroundWorker = new BackgroundWorker(this);
+        backgroundWorker1 = new BackgroundWorker(this);
     }
 
 
-    public void parkVehicle(View view){
+    public void parkVehicle(View view) {
 
 
+        licenseField = findViewById(R.id.license_field);
 
-
-
-
-         licenseField = findViewById(R.id.license_field);
-
-         earlyBirdSwitch = findViewById(R.id.earlybird_switch);
+        earlyBirdSwitch = findViewById(R.id.earlybird_switch);
 
         licensePlate = licenseField.getText().toString();
 
@@ -80,13 +74,13 @@ public class AttendantParkActivity extends AppCompatActivity {
         user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
 
 
-        if(licensePlate.equals("")){
+        if (licensePlate.equals("")) {
 
             licenseField.setError("Enter a license plate");
             return;
         }
 
-        if(!carButton.isChecked() && ! truckButton.isChecked() && !motoButton.isChecked()){
+        if (!carButton.isChecked() && !truckButton.isChecked() && !motoButton.isChecked()) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
             builder.setCancelable(true);
@@ -96,13 +90,12 @@ public class AttendantParkActivity extends AppCompatActivity {
                     "\n" + garage.getTruckEarlyBird() + " Early Bird Flat Fee");
 
             builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
 
                 }
             });
-
 
 
             builder.show();
@@ -111,53 +104,35 @@ public class AttendantParkActivity extends AppCompatActivity {
         }
 
 
-
-
-        if(carButton.isChecked()) {
+        if (carButton.isChecked()) {
             parkCar("car");
 
 
-        }
+        } else if (truckButton.isChecked()) {
+
+            parkTruck("truck");
 
 
-        else if(truckButton.isChecked()) {
-
-           parkTruck("truck");
-
-
-
-        }
-
-        else if(motoButton.isChecked()) {
-
-
+        } else if (motoButton.isChecked()) {
 
 
             parkMoto("motorcycle");
 
 
-
         }
-
-
-
-
-
-
 
 
     }
 
 
-    public void parkCar(String category){
-
+    public void parkCar(String category) {
 
 
         falseCategory = category;
         vehicle = new Car(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
         vehicle.setFalseCategory(category);
 
-        if(garage.findClosestSpace(carButton.getText().toString().toLowerCase()) == null){
+        if (garage.findClosestSpace(carButton.getText().toString().toLowerCase()) == null) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
             builder.setCancelable(true);
@@ -177,12 +152,9 @@ public class AttendantParkActivity extends AppCompatActivity {
             builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                   // carButton.setChecked(false);
-                  //  truckButton.setChecked(true);
+                    // carButton.setChecked(false);
+                    //  truckButton.setChecked(true);
                     parkTruck(falseCategory);
-
-
-
 
 
                 }
@@ -191,31 +163,24 @@ public class AttendantParkActivity extends AppCompatActivity {
             builder.show();
 
 
+        } else {
 
-        }
-        else{
-
-          openSpace =  garage.park(vehicle, carButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
+            openSpace = garage.park(vehicle, carButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
             System.out.println(vehicle.getCategory());
 
 
-
         }
-
-
-
-
 
 
     }
 
-    public void parkTruck(String category){
+    public void parkTruck(String category) {
 
-       // category = truckButton.getText().toString().toLowerCase();
+        // category = truckButton.getText().toString().toLowerCase();
         vehicle = new Truck(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
         vehicle.setFalseCategory(category);
 
-        if(garage.findClosestSpace(truckButton.getText().toString().toLowerCase()) == null){
+        if (garage.findClosestSpace(truckButton.getText().toString().toLowerCase()) == null) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
             builder.setCancelable(true);
@@ -243,30 +208,25 @@ public class AttendantParkActivity extends AppCompatActivity {
             builder.show();
 
 
+        } else {
 
-
-        }
-        else{
-
-           openSpace= garage.park(vehicle, truckButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
+            openSpace = garage.park(vehicle, truckButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
             System.out.println(vehicle.getCategory());
 
 
-
         }
-
 
 
     }
 
-    public void parkMoto(String category){
+    public void parkMoto(String category) {
         falseCategory = category;
 
-       // category = motoButton.getText().toString().toLowerCase();
+        // category = motoButton.getText().toString().toLowerCase();
         vehicle = new Motorcycle(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
         vehicle.setFalseCategory(category);
 
-        if(garage.findClosestSpace(motoButton.getText().toString().toLowerCase()) == null){
+        if (garage.findClosestSpace(motoButton.getText().toString().toLowerCase()) == null) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(AttendantParkActivity.this);
             builder.setCancelable(true);
@@ -286,10 +246,10 @@ public class AttendantParkActivity extends AppCompatActivity {
             builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                   // motoButton.setChecked(false);
-                   // carButton.setChecked(true);
+                    // motoButton.setChecked(false);
+                    // carButton.setChecked(true);
 
-                    if(garage.findClosestSpace("car") == null){
+                    if (garage.findClosestSpace("car") == null) {
                         parkTruck(falseCategory);
                     }
                     parkCar(falseCategory);
@@ -301,24 +261,19 @@ public class AttendantParkActivity extends AppCompatActivity {
             builder.show();
 
 
+        } else {
 
-
-        }
-        else{
-
-         openSpace =   garage.park(vehicle, motoButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
+            openSpace = garage.park(vehicle, motoButton.getText().toString().toLowerCase(), earlyBird, backgroundWorker);
             System.out.println(vehicle.getCategory());
 
 
-
         }
-
 
 
     }
 
 
-    public void nextView(View view){
+    public void nextView(View view) {
 
         System.out.println("*******************************" + resultID);
         String[] resultTokens = resultID.split(" ");
@@ -328,7 +283,7 @@ public class AttendantParkActivity extends AppCompatActivity {
         System.out.println(space.getVehicle());
 
         backgroundWorker1.execute(typePark, openSpace.getCategory(), String.valueOf(openSpace.getCarDistance()), String.valueOf(openSpace.getTruckDistance()), String.valueOf(openSpace.getMotorcycleDistance()),
-                String.valueOf(openSpace.getDistance()),Garage.convertBoolean(earlyBird), Garage.convertBoolean(openSpace.isFree()),
+                String.valueOf(openSpace.getDistance()), Garage.convertBoolean(earlyBird), Garage.convertBoolean(openSpace.isFree()),
                 String.valueOf(vehicle.getVehicleId()), String.valueOf(openSpace.getTime()), String.valueOf(openSpace.getDate()), openSpace.getSpaceID());
 
 

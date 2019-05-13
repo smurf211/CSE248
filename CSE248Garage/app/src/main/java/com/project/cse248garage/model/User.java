@@ -15,8 +15,7 @@ public class User implements Serializable {
     private String password;
 
 
-
-    public User(){
+    public User() {
 
     }
     /*
@@ -45,15 +44,21 @@ public class User implements Serializable {
     }
     */
 
+    public User(int iD, String firstName, String lastName, String userName, String password,boolean admin) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.iD = iD;
+        this.admin = admin;
+        this.userName = userName;
+        this.password = password;
+    }
+
     public User(String userName, String password, String firstName, String lastName, boolean admin) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.admin = admin;
-
-
-
 
 
     }
@@ -85,10 +90,6 @@ public class User implements Serializable {
 
 
 */
-
-
-
-
 
 
     public void generatePassword() {
@@ -135,7 +136,6 @@ public class User implements Serializable {
     }
 
 
-
     public int emitID() {
         return iD;
     }
@@ -147,7 +147,6 @@ public class User implements Serializable {
     public String emitUserName() {
         return userName;
     }
-
 
 
     public String emitPassword() {
@@ -169,20 +168,20 @@ public class User implements Serializable {
 
     public String toStringAdmin() {
         return
-                "Name: " + firstName  + " " + lastName
-                + "\n ID: '" + iD  +
-                "\n Admin: " + admin +
-                "\n UserName: " + userName  +
-                "\n password: " + password;
+                "Name: " + firstName + " " + lastName
+                        + "\n ID: " + iD +
+                        "\n Admin: " + admin +
+                        "\n UserName: " + userName +
+                        "\n password: " + password;
     }
 
     @Override
     public String toString() {
         return
-                "Name: " + firstName  + " " + lastName
-                        + "\n ID: " + iD  +
+                "Name: " + firstName + " " + lastName
+                        + "\n ID: " + iD +
                         "\n Admin: " + admin +
-                        "\n UserName: " + userName  +
+                        "\n UserName: " + userName +
                         "\n password: " + "*******";
     }
 

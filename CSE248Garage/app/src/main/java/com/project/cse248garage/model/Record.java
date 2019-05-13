@@ -8,13 +8,13 @@ public class Record implements Serializable {
 
     String licensePlate;
     Vehicle vehicle;
-    ArrayList<Ticket> tickets;
+
     ArrayList<Reciept> reciepts;
 
 
 
     public Record(Vehicle vehicle, String licensePlate){
-        tickets = new ArrayList<Ticket>();
+
         reciepts = new ArrayList<Reciept>();
 
         this.vehicle = vehicle;
@@ -22,11 +22,7 @@ public class Record implements Serializable {
 
     }
 
-    public void addTicket(Ticket ticket){
 
-        tickets.add(ticket);
-
-    }
 
     public void addReciept(Reciept reciept){
 
@@ -43,13 +39,9 @@ public class Record implements Serializable {
         this.vehicle = vehicle;
     }
 
-    public ArrayList<Ticket> getTickets() {
-        return tickets;
-    }
 
-    public void setTickets(ArrayList<Ticket> tickets) {
-        this.tickets = tickets;
-    }
+
+
 
     public ArrayList<Reciept> getReciepts() {
         return reciepts;
@@ -70,18 +62,21 @@ public class Record implements Serializable {
     @Override
     public String toString() {
 
-        if(reciepts.size() == 0){
-            return "Record: " + "\n" +
-                    vehicle + "\n" +
-                    "Tickets: " + "\n " + tickets +  "\n" +
-                    "Reciepts: " + "none";
 
-
-        }
 
         return "Record: " + "\n" +
                   vehicle + "\n" +
-                "Tickets: " +  "\n" + tickets +  "\n" +
+
                 "Reciepts: " + "\n" +  reciepts;
+    }
+
+    public String toStringPresent() {
+
+
+
+        return "Record: " + "\n" +
+                vehicle + "\n" +
+
+                "Ticket: " + vehicle.getTicket() + "\n" ;
     }
 }

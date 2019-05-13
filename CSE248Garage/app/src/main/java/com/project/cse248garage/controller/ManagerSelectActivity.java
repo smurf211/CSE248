@@ -30,6 +30,7 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
     Garage garage;
     Intent intent1;
+    Context ctx = this;
 
 
 
@@ -65,13 +66,10 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item2:
-                Toast.makeText(this, "Garage Saved", Toast.LENGTH_SHORT).show();
-                saveGarage();
+                Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
+                displayGarage();
 
-                return true;
-            case R.id.item3:
-                Toast.makeText(this, "Garage Loaded", Toast.LENGTH_SHORT).show();
-                loadGarage();
+
 
 
                 return true;
@@ -101,7 +99,7 @@ public class ManagerSelectActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(ManagerSelectActivity.this);
             builder.setCancelable(true);
             builder.setTitle("Warning!");
-            builder.setMessage("Would you like to destroy the current garage and build and a new one? \n Attendants will be preserved.");
+            builder.setMessage("Would you like to destroy the current garage and build and a new one? \nAttendants will be preserved.");
 
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
@@ -117,6 +115,8 @@ public class ManagerSelectActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
+                    BackgroundWorker backgroundWorker = new BackgroundWorker(ctx);
+                    backgroundWorker.execute("destroy garage");
 
 
 

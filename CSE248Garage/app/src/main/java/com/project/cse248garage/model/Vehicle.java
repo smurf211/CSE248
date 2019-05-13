@@ -14,13 +14,26 @@ public abstract class Vehicle implements Serializable {
     String attendantRemovedFirst;
     String attendantRemovedLast;
     int attendantRemovedId;
-
-
+    String timeIn;
+    String dateIn;
+    String spaceID;
+    boolean earlyBird;
+    double rate;
 
 
     public abstract String getCategory();
 
-
+    public Vehicle(int vehicleId,int attendantId, String licensePlate, String falseCategory, String spaceID, String dateIn, String timeIn, boolean earlyBird, double rate) {
+        this.vehicleId = vehicleId;
+        this.licensePlate = licensePlate;
+        this.attendantId = attendantId;
+        this.falseCategory = falseCategory;
+        this.timeIn = timeIn;
+        this.dateIn = dateIn;
+        this.spaceID = spaceID;
+        this.earlyBird = earlyBird;
+        this.rate = rate;
+    }
 
     public Vehicle(String licensePlate, String attendantFirstName, String attendantLastName, int attendantId) {
         this.licensePlate = licensePlate;
@@ -31,8 +44,8 @@ public abstract class Vehicle implements Serializable {
 
     @Override
     public String toString() {
-        return "Vehicle " + "\n"+
-                "ID: " + vehicleId + "\n"+
+        return "Vehicle " + "\n" +
+                "ID: " + vehicleId + "\n" +
                 " License Plate: " + licensePlate
                 + "\n" +
                 "Category: " + getCategory()
@@ -105,5 +118,41 @@ public abstract class Vehicle implements Serializable {
 
     public void setVehicleId(int vehicleId) {
         this.vehicleId = vehicleId;
+    }
+
+    public String getTimeIn() {
+        return timeIn;
+    }
+
+    public void setTimeIn(String timeIn) {
+        this.timeIn = timeIn;
+    }
+
+    public String getDateIn() {
+        return dateIn;
+    }
+
+    public void setDateIn(String dateIn) {
+        this.dateIn = dateIn;
+    }
+
+    public void setAttendantFirstName(String attendantFirstName) {
+        this.attendantFirstName = attendantFirstName;
+    }
+
+    public void setAttendantLastName(String attendantLastName) {
+        this.attendantLastName = attendantLastName;
+    }
+
+    public String getSpaceID() {
+        return spaceID;
+    }
+
+    public boolean isEarlyBird() {
+        return earlyBird;
+    }
+
+    public double getRate() {
+        return rate;
     }
 }

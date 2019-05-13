@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.Ticket;
+import com.project.cse248garage.model.User;
 
 public class TicketActivity extends AppCompatActivity {
     Garage garage;
@@ -35,10 +36,23 @@ public class TicketActivity extends AppCompatActivity {
     }
 
     public void done(View view){
-        garage.getBag().displayBagHash();
-        Intent intent = new Intent(this, AttendantOptionsActivity.class);
-        intent.putExtra("Garage", garage);
-        startActivity(intent);
+
+        User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
+        //garage.getBag().displayBagHash();
+        if(user.isAdmin()){
+            Intent intent = new Intent(this, ManagerSelectActivity.class);
+            intent.putExtra("Garage", garage);
+            startActivity(intent);
+
+
+        }
+        else {
+
+
+            Intent intent = new Intent(this, AttendantOptionsActivity.class);
+            intent.putExtra("Garage", garage);
+            startActivity(intent);
+        }
 
     }
 

@@ -45,7 +45,8 @@ public class RecordsActivity extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, spinnerArrayPlates);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-         plateNumbers = (Spinner) findViewById(R.id.spinner);
+
+        plateNumbers = (Spinner) findViewById(R.id.spinner);
         plateNumbers.setAdapter(adapter);
 
         //----------------------------------------------------
@@ -89,17 +90,28 @@ public class RecordsActivity extends AppCompatActivity {
            String[] tokens = selected.split("[(]");
            selected = tokens[0].trim();
 
+            Record record = garage.getRecordBag().getRecord(selected);
+
+            System.out.println(selected);
+
+
+            displayField.setMovementMethod(new ScrollingMovementMethod());
+            //System.out.println(record.toString());
+            displayField.setText(record.toStringPresent());
+
+
         }
-        Record record = garage.getRecordBag().getRecord(selected);
+        else {
+            Record record = garage.getRecordBag().getRecord(selected);
 
-        System.out.println(selected);
-
-
-        displayField.setMovementMethod(new ScrollingMovementMethod());
-        System.out.println(record.toString());
-        displayField.setText(record.toString());
+            System.out.println(selected);
 
 
+            displayField.setMovementMethod(new ScrollingMovementMethod());
+            //System.out.println(record.toString());
+            displayField.setText(record.toString());
+
+        }
 
 
     }

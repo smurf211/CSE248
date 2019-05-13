@@ -9,12 +9,15 @@ import android.widget.TextView;
 
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Garage;
+import com.project.cse248garage.model.ParkingSpace;
 import com.project.cse248garage.model.Reciept;
 
 public class AttendantRemoveActivity extends AppCompatActivity {
     Garage garage;
     Reciept reciept;
     BackgroundWorker backgroundWorker;
+    BackgroundWorker historyWorker;
+
 
 
     @Override
@@ -24,6 +27,7 @@ public class AttendantRemoveActivity extends AppCompatActivity {
 
         garage = (Garage) getIntent().getSerializableExtra("Garage");
         backgroundWorker = new BackgroundWorker(this);
+        historyWorker = new BackgroundWorker(this);
     }
 
     public void removeVehicle(View view){
@@ -38,7 +42,10 @@ public class AttendantRemoveActivity extends AppCompatActivity {
             return;
         }
 
-         reciept = garage.removeCar(licensePlate, backgroundWorker);
+
+
+
+        reciept = garage.removeCar(licensePlate, backgroundWorker, historyWorker);
 
       //  TextView displayField = findViewById(R.id.display_field);
       // displayField.setText(reciept.toString());

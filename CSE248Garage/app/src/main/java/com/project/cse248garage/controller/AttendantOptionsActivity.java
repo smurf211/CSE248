@@ -55,13 +55,10 @@ public class AttendantOptionsActivity extends AppCompatActivity {
 
                 return true;
             case R.id.item2:
-                Toast.makeText(this, "Garage Saved", Toast.LENGTH_SHORT).show();
-                saveGarage();
+                Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
+                displayGarage();
 
-                return true;
-            case R.id.item3:
-                Toast.makeText(this, "Garage Loaded", Toast.LENGTH_SHORT).show();
-                loadGarage();
+
 
 
                 return true;
