@@ -46,7 +46,7 @@ public abstract class Vehicle implements Serializable {
     public String toString() {
         return "Vehicle " + "\n" +
                 "ID: " + vehicleId + "\n" +
-                " License Plate: " + licensePlate
+                "License Plate: " + licensePlate
                 + "\n" +
                 "Category: " + getCategory()
                 ;

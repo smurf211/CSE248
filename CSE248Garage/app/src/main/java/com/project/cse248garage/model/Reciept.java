@@ -1,5 +1,10 @@
 package com.project.cse248garage.model;
 
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,12 +48,14 @@ public class Reciept extends Ticket implements Serializable {
         this.rate = rate;
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date1 = new Date();
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String[] tokens = timeStamp.split(" ");
+        String dateOut = tokens[0];
+        String timeOut = tokens[1];
 
 
-        this.timeOut = String.valueOf(java.time.LocalTime.now());
-        this.dateOut = String.valueOf(java.time.LocalDate.now());
+        this.timeOut = timeOut;
+        this.dateOut = dateOut;
         this.paymentScheme = calculatePayment();
         this.garage = garage;
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
@@ -180,14 +187,25 @@ public class Reciept extends Ticket implements Serializable {
 
     @Override
     public String toString() {
-        return "Reciept" + "\n" +
-                "Time in: " + convertTimeFromMilitary(timeIn) + '\n' +
-                "Time out: " + convertTimeFromMilitary(timeOut) + '\n' +
-                "Date in: " + dateIn + '\n' +
-                "Date out: " + dateOut + '\n' +
+
+        /*
+
+        String boldText = "id";
+        String normalText = "name";
+        SpannableString str = new SpannableString(boldText + normalText);
+        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+*/
+
+        return  "Reciept" + "\n" +
+                "Time In: \t\t" + convertTimeFromMilitary(timeIn)  +
+                " \t\tOut: " + convertTimeFromMilitary(timeOut) + '\n' +
+                "Date In: \t\t\t" + dateIn  +
+                " \t\tOut: " + dateOut + '\n' +
                 "Rate: " + Ticket.addZeroToRate(rate) + '\n' +
-                "Payment Due: " + getCurrency() + '\n' +
-                "Amount Paid: " + "$" + paymentScheme + "\n" +
+                "Amount " + "Due: " + getCurrency()  +
+                " Paid: " + getCurrency() + "\n" +
                 "Early Bird: " + getEarlyBirdString() + "\n" +
                 "License Plate: " + getVehicle().getLicensePlate() + '\n' +
                 "Category: " + getVehicle().getCategory() + '\n' +

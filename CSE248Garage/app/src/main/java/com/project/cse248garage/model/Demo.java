@@ -43,20 +43,24 @@ public class Demo {
         //   SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         //   Date date = new Date();
 
-        //  String time = String.valueOf(java.time.LocalTime.now());
+          String time = String.valueOf(java.time.LocalTime.now());
+          String date = String.valueOf(java.time.LocalDate.now());
+          System.out.println(time + " " + date);
+          String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+          System.out.println(timeStamp);
 
         //Reciept.sleep(5500);
 
         //  Reciept reciept = new Reciept("gfsdgdfg", "car", "mike", "johnson", "4/27/19",time , 2.50 );
 
         // reciept.getTimeSeconds();
-       Reciept reciept = new Reciept("12:00:00", "12:01:30");
-       reciept.setRate(2.5);
+     //  Reciept reciept = new Reciept("12:00:00", "12:01:30");
+     //  reciept.setRate(2.5);
      //   reciept.sleep(5000);
-        System.out.println(reciept.getTimeSeconds());
-        System.out.println(reciept.calculatePayment());
-        System.out.println(Reciept.convertTimeFromMilitary("12:47:03.234"));
-        System.out.println(Ticket.addZeroToRate(2.54));
+      //  System.out.println(reciept.getTimeSeconds());
+      //  System.out.println(reciept.calculatePayment());
+      //  System.out.println(Reciept.convertTimeFromMilitary("12:47:03.234"));
+      //  System.out.println(Ticket.addZeroToRate(2.54));
 
     }
 

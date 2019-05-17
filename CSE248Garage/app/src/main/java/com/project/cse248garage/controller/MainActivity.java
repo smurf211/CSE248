@@ -3,6 +3,7 @@ package com.project.cse248garage.controller;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.renderscript.ScriptGroup;
@@ -12,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     String typeHistory = "history";
     String test ="";
     int counter = 0;
+    Button button;
 
 
 
@@ -81,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        button = findViewById(R.id.button);
+      //  buttonEffect(button);
 
 
 
@@ -224,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
                 int count = 0;
                 String id, firstname, lastname, username, password, admin;
-                while (count < jsonObject.length()) {
+                while (count < jsonArray.length()) {
 
                     JSONObject JO = jsonArray.getJSONObject(count);
                     id = JO.getString("id");
@@ -257,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
             if(jsonArray.length()> 0) {
                 int count = 0;
                 String carsize, trucksize, motosize, car_early, car_per_hour, truck_early, truck_per_hour, moto_early, moto_per_hour;
-                while (count < jsonObject.length()) {
+                while (count < jsonArray.length()) {
 
                     JSONObject JO = jsonArray.getJSONObject(count);
                     carsize = JO.getString("carsize");
@@ -298,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
             if(jsonArray.length()> 0) {
                 int count = 0;
                 String ID, user_id, license_plate, f_category, category, space_id, date_in, date_out, time_in, time_out, early_bird, rate, firstname, lastname;
-                while (count < jsonObject.length()) {
+                while (count < jsonArray.length()) {
 
                     JSONObject JO = jsonArray.getJSONObject(count);
                     ID = JO.getString("ID");
@@ -364,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
                 String date_in, date_out, time_in, time_out, early_bird, space_id, license_plate, user_parked_id, user_removed_id, category,
                         false_category, rate, payment_scheme, vehicle_id, id1, firstname1, lastname1, username1, password1, id2, firstname2, lastname2, username2, password2;
 
-                while (count < jsonObject.length()) {
+                while (count < jsonArray.length()) {
 
                     JSONObject JO = jsonArray.getJSONObject(count);
 
@@ -561,5 +567,26 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setJson_result_history(String json_result_history) {
         MainActivity.json_result_history = json_result_history;
+    }
+    public static void buttonEffect(View button){
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
     }
 }

@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class ParkingSpaceTest {
 
-    Vehicle car = new Car("mike-211", "jack", "johnson", "01");
+    Vehicle car = new Car("mike-211", "jack", "johnson", 01);
 
     ParkingSpace p1 = new ParkingSpace("car", true, 1);
     Garage garage = new Garage(2,2,2);

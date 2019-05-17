@@ -2,6 +2,7 @@ package com.project.cse248garage.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -49,26 +50,7 @@ public class RecordsActivity extends AppCompatActivity {
         plateNumbers = (Spinner) findViewById(R.id.spinner);
         plateNumbers.setAdapter(adapter);
 
-        //----------------------------------------------------
-        /*
-        if(garage.getGarageSize() > 0) {
 
-            spinnerArrayUsers = garage.getBag().getUsersArrayList(garage.getBag().getUserAccountHash());
-
-        }
-        else{
-            spinnerArrayUsers = new ArrayList<String>();
-
-        }
-
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, spinnerArrayUsers);
-
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        attendants = (Spinner) findViewById(R.id.spinner2);
-        attendants.setAdapter(adapter2);
-
-*/
 
 
 
@@ -96,7 +78,7 @@ public class RecordsActivity extends AppCompatActivity {
 
 
             displayField.setMovementMethod(new ScrollingMovementMethod());
-            //System.out.println(record.toString());
+
             displayField.setText(record.toStringPresent());
 
 
@@ -108,7 +90,7 @@ public class RecordsActivity extends AppCompatActivity {
 
 
             displayField.setMovementMethod(new ScrollingMovementMethod());
-            //System.out.println(record.toString());
+
             displayField.setText(record.toString());
 
         }

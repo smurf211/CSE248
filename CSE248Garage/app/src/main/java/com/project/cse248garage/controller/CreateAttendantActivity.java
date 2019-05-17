@@ -49,8 +49,8 @@ public class CreateAttendantActivity extends AppCompatActivity {
 
          userNameField = findViewById(R.id.username_field);
          passwordField = findViewById(R.id.password_field);
-        firstname_field = findViewById(R.id.firstname_field);
-        lastname_field = findViewById(R.id.lastname_field);
+         firstname_field = findViewById(R.id.firstname_field);
+         lastname_field = findViewById(R.id.lastname_field);
 
         userName = userNameField.getText().toString();
         password = passwordField.getText().toString();
@@ -75,6 +75,11 @@ public class CreateAttendantActivity extends AppCompatActivity {
 
 
          displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toStringAdmin());
+
+         userNameField.setText("");
+         passwordField.setText("");
+         firstname_field.setText("");
+         lastname_field.setText("");
 
 
     }

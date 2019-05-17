@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -11,12 +12,14 @@ import com.project.cse248garage.R;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.ParkingSpace;
 import com.project.cse248garage.model.Reciept;
+import com.project.cse248garage.model.User;
 
 public class AttendantRemoveActivity extends AppCompatActivity {
     Garage garage;
     Reciept reciept;
     BackgroundWorker backgroundWorker;
     BackgroundWorker historyWorker;
+    Button button7;
 
 
 
@@ -28,6 +31,7 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         garage = (Garage) getIntent().getSerializableExtra("Garage");
         backgroundWorker = new BackgroundWorker(this);
         historyWorker = new BackgroundWorker(this);
+        button7 = findViewById(R.id.button7);
     }
 
     public void removeVehicle(View view){
@@ -46,6 +50,10 @@ public class AttendantRemoveActivity extends AppCompatActivity {
 
 
         reciept = garage.removeCar(licensePlate, backgroundWorker, historyWorker);
+        button7.setEnabled(false);
+        float alpha = 0.45f;
+        button7.setAlpha(alpha);
+
 
       //  TextView displayField = findViewById(R.id.display_field);
       // displayField.setText(reciept.toString());
@@ -70,6 +78,11 @@ public class AttendantRemoveActivity extends AppCompatActivity {
     }
 
     public void nextView(View view){
+
+
+
+
+
         Intent intent = new Intent(this, RecieptActivity.class);
         intent.putExtra("Garage", garage);
         intent.putExtra("Reciept", reciept);

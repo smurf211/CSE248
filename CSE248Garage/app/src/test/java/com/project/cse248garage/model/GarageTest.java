@@ -19,7 +19,7 @@ public class GarageTest {
     public void parkAndFind() {
 
 
-        Vehicle car = new Car("mike-211", "jack", "johnson", "01");
+        Vehicle car = new Car("mike-211", "jack", "johnson", 01);
 
         garage.park(car, "car", true);
 
@@ -40,7 +40,7 @@ public class GarageTest {
         assertEquals("c1", space1.getSpaceID() );
         assertEquals(1, space1.distance );
 
-        Vehicle car = new Car("mike-211", "jack", "johnson", "01");
+        Vehicle car = new Car("mike-211", "jack", "johnson", 01);
 
         garage.park(car, "car", true);
 
@@ -54,9 +54,9 @@ public class GarageTest {
     @Test
     public void removeCar() {
 
-        Vehicle car = new Car("mike-211", "jack", "johnson", "01");
+        Vehicle car = new Car("mike-211", "jack", "johnson", 01);
 
-        garage.getBag().getUser("smurf211", garage.getBag().getUserAccountHash()).setLoggedIn(true);
+        garage.getBag().getUser("admin", garage.getBag().getUserAccountHash()).setLoggedIn(true);
 
         garage.park(car, "car", true);
 
@@ -70,7 +70,7 @@ public class GarageTest {
     @Test
     public void findByPlate() {
 
-        Vehicle car = new Car("mike-211", "jack", "johnson", "01");
+        Vehicle car = new Car("mike-211", "jack", "johnson", 01);
 
         garage.park(car, "car", true);
 

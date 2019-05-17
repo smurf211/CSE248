@@ -26,13 +26,13 @@
     <string name="lastName">Last Name</string>
     <string name="createAttendant">Create Attendant</string>
     <string name="Finish">Finish</string>
-    <string name="parkVehicle">Park Vehicle</string>
+    <string name="parkVehicle">"Park "</string>
     <string name="enterLicense">License Plate</string>
     <string name="licenseHint">enter a license plate number...</string>
     <string name="enterCategory">Category</string>
     <string name="categoryHint">car, truck or motorcycle</string>
     <string name="Park">Park</string>
-    <string name="removeVehicle">Remove Vehicle</string>
+    <string name="removeVehicle">Retrieve</string>
     <string name="earlyBird">EarlyBird</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
@@ -42,8 +42,8 @@
     <string name="parkremove">Park/Remove Vehicle</string>
     <string name="saveGarage">Save Garage</string>
     <string name="LoadGarage">Load Garage</string>
-    <string name="addAttendant">Add Attendant</string>
-    <string name="removeAttendant">Remove Attendant</string>
+    <string name="addAttendant">"Add "</string>
+    <string name="removeAttendant">"Remove "</string>
     <string name="viewgarage">View Garage</string>
     <string name="display">display</string>
     <string name="cardisplayHint">C = Car</string>
@@ -53,4 +53,7 @@
     <string name="printReciept">Print Reciept</string>
     <string name="DisplayRecords">Display Records</string>
     <string name="plateHistory">Plate Numbers:</string>
+    <string name="vehicle">Vehicles</string>
+    <string name="Attendant">Attendants</string>
+    <string name="usernamehint">enter a username...</string>
 </resources>

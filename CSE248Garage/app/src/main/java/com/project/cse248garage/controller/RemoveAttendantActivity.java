@@ -67,6 +67,7 @@ public class RemoveAttendantActivity extends AppCompatActivity {
 
         garage.getBag().displayBagHash();
         displayField.setText(user.toString() + " Removed!");
+        userNameField.setText("");
 
     }
 

@@ -14,8 +14,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -188,24 +187,28 @@ public class Garage implements Serializable {
         openSpace.setVehicle(vehicle);
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
 
 
-        openSpace.setTime(String.valueOf(java.time.LocalTime.now()));
-        openSpace.setDate(String.valueOf(java.time.LocalDate.now()));
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String[] tokens = timeStamp.split(" ");
+        String date = tokens[0];
+        String time = tokens[1];
 
 
-        String time = String.valueOf(getRecieptTime(openSpace));
-        String date1 = String.valueOf(getRecieptDate(openSpace));
+
+        openSpace.setTime(time);
+        openSpace.setDate(date);
+
+
+
 
         vehicle.setTimeIn(time);
-        vehicle.setDateIn(date1);
+        vehicle.setDateIn(date);
 
 
         double rate = openSpace.getPrice(category, earlyBird);
 
-        Ticket ticket = new Ticket(vehicle, date1, time, rate, earlyBird, openSpace.getSpaceID());
+        Ticket ticket = new Ticket(vehicle, date, time, rate, earlyBird, openSpace.getSpaceID());
         vehicle.setTicket(ticket);
 
         Record record = recordBag.getRecord(vehicle.getLicensePlate());
@@ -221,13 +224,56 @@ public class Garage implements Serializable {
         User user = getBag().getLoggedInUser(getBag().getUserAccountHash());
 
         backgroundWorker.execute(typeVehicle, String.valueOf(user.emitID()), vehicle.getLicensePlate(), vehicle.getFalseCategory(), vehicle.getCategory(), openSpace.getSpaceID(),
-                date1, " ", time, "", convertBoolean(earlyBird), String.valueOf(rate));
+                date, " ", time, "", convertBoolean(earlyBird), String.valueOf(rate));
 
 
         return openSpace;
     }
 
+    public ParkingSpace park(Vehicle vehicle, String category, Boolean earlyBird) {
 
+
+        ParkingSpace openSpace = findClosestSpace(category);
+
+
+        openSpace.setFree(false);
+        openSpace.setEarlyBird(earlyBird);
+        openSpace.setVehicle(vehicle);
+
+
+
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String[] tokens = timeStamp.split(" ");
+        String date = tokens[0];
+        String time = tokens[1];
+
+
+        openSpace.setTime(time);
+        openSpace.setDate(date);
+
+
+        vehicle.setTimeIn(time);
+        vehicle.setDateIn(date);
+
+
+        double rate = openSpace.getPrice(category, earlyBird);
+
+        Ticket ticket = new Ticket(vehicle, date, time, rate, earlyBird, openSpace.getSpaceID());
+        vehicle.setTicket(ticket);
+
+        Record record = recordBag.getRecord(vehicle.getLicensePlate());
+
+        if (record == null) {
+
+            record = new Record(openSpace.getVehicle(), vehicle.getLicensePlate());
+            recordBag.addRecord(record);
+        }
+
+
+
+
+        return openSpace;
+    }
 
 
     public Reciept removeCar(String licensePlate, BackgroundWorker backgroundWorker, BackgroundWorker historyWorker) {
@@ -236,8 +282,8 @@ public class Garage implements Serializable {
         ParkingSpace currentSpace = findByPlate(licensePlate);
 
 
-        String date = String.valueOf(getRecieptDate(currentSpace));
-        String time = String.valueOf(getRecieptTime(currentSpace));
+        String date = currentSpace.getDate();
+        String time = currentSpace.getTime();
         Reciept reciept = new Reciept(currentSpace.getVehicle(), date, time,
                 currentSpace.getVehicle().getTicket().getRate(), currentSpace.getVehicle().getTicket().isEarlyBird(), currentSpace.getSpaceID(), this);
 
@@ -263,6 +309,37 @@ public class Garage implements Serializable {
 
         String typeRemove = "remove vehicle";
         backgroundWorker.execute(typeRemove, String.valueOf(currentSpace.getVehicle().getVehicleId()));
+
+        currentSpace.removeVehicle();
+
+        return reciept;
+    }
+
+    public Reciept removeCar(String licensePlate) {
+
+
+        ParkingSpace currentSpace = findByPlate(licensePlate);
+
+
+        String date = currentSpace.getDate();
+        String time = currentSpace.getTime();
+        Reciept reciept = new Reciept(currentSpace.getVehicle(), date, time,
+                currentSpace.getVehicle().getTicket().getRate(), currentSpace.getVehicle().getTicket().isEarlyBird(), currentSpace.getSpaceID(), this);
+
+        Record record = recordBag.getRecord(licensePlate);
+
+        if (record == null) {
+
+            record = new Record(currentSpace.getVehicle(), currentSpace.getVehicle().getLicensePlate());
+            recordBag.addRecord(record);
+        }
+
+        record.addReciept(reciept);
+
+        Vehicle vehicle = currentSpace.getVehicle();
+
+
+
 
         currentSpace.removeVehicle();
 
@@ -364,7 +441,6 @@ public class Garage implements Serializable {
         return list;
 
     }
-
 
 
     public ParkingSpace findByPlate(String licensePlate) {
@@ -506,18 +582,8 @@ public class Garage implements Serializable {
         return 0;
     }
 
-    public String getRecieptTime(ParkingSpace currentSpace) {
-
-        return currentSpace.getTime();
 
 
-    }
-
-
-    public String getRecieptDate(ParkingSpace currentSpace) {
-
-        return currentSpace.getDate();
-    }
 
     public static String convertBoolean(Boolean earlyBird) {
 

@@ -72,10 +72,10 @@ public class DisplayGarageActivity extends AppCompatActivity {
            if( !garage.getCarBag()[i].isFree()){
            temp = garage.getCarBag()[i].getVehicle().getFalseCategory();
            temp2 = temp.substring(0,1).toUpperCase();
-           carView.append(garage.getCarBag()[i].getSpaceID() +" [" + temp2 + "]" + "\n\n");
+           carView.append((i +1) +" [" + temp2  + " " + garage.getCarBag()[i].getVehicle().getLicensePlate() + "]" + "\n\n");
            }
             else {
-               carView.append(garage.getCarBag()[i].getSpaceID() + " [" + " " + "]" + "\n\n");
+               carView.append((i +1) + " [" + " " + "]" + "\n\n");
            }
 
 
@@ -86,10 +86,10 @@ public class DisplayGarageActivity extends AppCompatActivity {
             if( !garage.getTruckSpaceBag()[i].isFree()){
                 temp = garage.getTruckSpaceBag()[i].getVehicle().getFalseCategory();
                 temp2 = temp.substring(0,1).toUpperCase();
-                truckView.append("t"+ (i+1) +" [" + temp2 + "]" + "\n\n");
+                truckView.append((i+1) +" [" + temp2 + " " + garage.getTruckSpaceBag()[i].getVehicle().getLicensePlate() +  "]" + "\n\n");
             }
             else {
-                truckView.append("t" + (i + 1) + " [" + " " + "]" + "\n\n");
+                truckView.append((i + 1) + " [" + " " + "]" + "\n\n");
             }
 
 
@@ -100,10 +100,10 @@ public class DisplayGarageActivity extends AppCompatActivity {
             if( !garage.getMotorcycleSpaceBag()[i].isFree()){
                 temp = garage.getMotorcycleSpaceBag()[i].getVehicle().getFalseCategory();
                 temp2 = temp.substring(0,1).toUpperCase();
-                motoView.append("m"+ (i+1) +" [" + temp2 + "]" + "\n\n");
+                motoView.append((i+1) +" [" + temp2 + " " + garage.getMotorcycleSpaceBag()[i].getVehicle().getLicensePlate() + "]" + "\n\n");
             }
             else {
-                motoView.append("m" + (i + 1) + " [" + " " + "]" + "\n\n");
+                motoView.append((i + 1) + " [" + " " + "]" + "\n\n");
             }
 
 

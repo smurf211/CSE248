@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,10 @@ public class ManagerSelectActivity extends AppCompatActivity {
     Garage garage;
     Intent intent1;
     Context ctx = this;
+    Button button14;
+    Button button16;
+    Button button17;
+    Button button18;
 
 
 
@@ -44,6 +49,27 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(garage.getGarageSize() == 0){
+
+            button14 = findViewById(R.id.button14);
+            button16 = findViewById(R.id.button16);
+            button17 = findViewById(R.id.button17);
+            button18 = findViewById(R.id.button18);
+
+            button14.setEnabled(false);
+            float alpha = 0.45f;
+            button14.setAlpha(alpha);
+            button16.setEnabled(false);
+            button16.setAlpha(alpha);
+            button17.setEnabled(false);
+            button17.setAlpha(alpha);
+            button18.setEnabled(false);
+            button18.setAlpha(alpha);
+
+
+
+        }
     }
 
 

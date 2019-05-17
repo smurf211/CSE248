@@ -4,10 +4,14 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColor">#000000</item>
+
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorButtonNormal">#e5d7d7</item>
+        <item name="colorButtonNormal">#595959</item>
         <item name="colorControlHighlight">#ffffff</item>
     </style>
+
+
 
 </resources>

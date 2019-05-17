@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class RecordBagTest {
 
     RecordBag bag = new RecordBag();
-    Vehicle car = new Car("mike-211", "jack", "johnson", "01");
+    Vehicle car = new Car("mike-211", "jack", "johnson", 01);
     Record record = new Record(car, "mike-211");
     Garage garage = new Garage(2,2,2);
 
@@ -38,7 +38,7 @@ public class RecordBagTest {
 
         ArrayList<String> list2 = new ArrayList<String>();
         list2.add("mike-211");
-        garage.getBag().getUser("smurf211", garage.getBag().getUserAccountHash()).setLoggedIn(true);
+        garage.getBag().getUser("admin", garage.getBag().getUserAccountHash()).setLoggedIn(true);
        garage.removeCar("mike-211");
 
         assertEquals(list2, garage.getRecordBag().getLicensePlates(garage));

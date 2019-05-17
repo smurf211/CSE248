@@ -7,13 +7,13 @@ import static org.junit.Assert.*;
 public class UserAccountBagTest {
 
     UserAccountBag bag = new UserAccountBag();
-    User user = bag.getUser("smurf211", bag.getUserAccountHash());
+    User user = bag.getUser("admin", bag.getUserAccountHash());
 
     @Test
     public void getUser() {
 
 
-       assertEquals("smurf211", user.emitUserName());
+       assertEquals("admin", user.emitUserName());
 
 
     }
@@ -22,7 +22,7 @@ public class UserAccountBagTest {
     public void getLoggedInUser() {
         user.setLoggedIn(true);
         User user = bag.getLoggedInUser(bag.getUserAccountHash());
-        assertEquals("smurf211", user.emitUserName());
+        assertEquals("admin", user.emitUserName());
 
 
     }
@@ -47,11 +47,11 @@ public class UserAccountBagTest {
 
     @Test
     public void removeUser() {
-        User user1 = bag.getUser("smurf211", bag.getUserAccountHash());
+        User user1 = bag.getUser("admin", bag.getUserAccountHash());
 
         bag.removeUser(user1);
 
-        user1 = bag.getUser("smurf211", bag.getUserAccountHash());
+        user1 = bag.getUser("admin", bag.getUserAccountHash());
         assertEquals(null, user1);
     }
 }

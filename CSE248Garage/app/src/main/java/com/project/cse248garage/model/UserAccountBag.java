@@ -29,8 +29,8 @@ public class UserAccountBag implements Serializable {
     public UserAccountBag() {
 
         nElems = 0;
-        createManagerAccount("smurf211", "MjsRas1118!", "mike", "spadaro", true);
-        User user = getUser("smurf211", userAccountHash);
+        createManagerAccountLoose("admin", "123", "mike", "spadaro", true);
+        User user = getUser("admin", userAccountHash);
         user.setiD(1);
 
     }
@@ -133,6 +133,21 @@ public class UserAccountBag implements Serializable {
         }
 
         return false;
+
+    }
+
+    public void createManagerAccountLoose(String userName, String password, String firstName, String lastName, boolean admin) {
+
+
+
+
+
+            Manager user = new Manager(userName, password, firstName, lastName, admin);
+            userAccountHash.put(user, user.emitUserName());
+
+
+
+
 
     }
 
