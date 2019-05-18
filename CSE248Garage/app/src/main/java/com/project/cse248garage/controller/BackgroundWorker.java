@@ -24,21 +24,10 @@ import java.net.URLEncoder;
  */
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
-    /**
-     * The Context.
-     */
+
     Context context;
-    /**
-     * The Alert dialog.
-     */
     AlertDialog alertDialog;
-    /**
-     * The Id result.
-     */
     String idResult;
-    /**
-     * The Result.
-     */
     String result;
 
 

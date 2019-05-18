@@ -20,21 +20,10 @@ import java.net.URL;
  * The type Background task history.
  */
 class BackgroundTaskHistory extends AsyncTask<String, Void, String> {
-    /**
-     * The Context.
-     */
+
     Context context;
-    /**
-     * The Json object.
-     */
     JSONObject jsonObject;
-    /**
-     * The Json array.
-     */
     JSONArray jsonArray;
-    /**
-     * The Garage.
-     */
     Garage garage;
 
     /**

@@ -24,41 +24,15 @@ import com.project.cse248garage.model.Vehicle;
  * The type Display garage activity.
  */
 public class DisplayGarageActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The Car view.
-     */
     TextView carView;
-    /**
-     * The Truck view.
-     */
     TextView truckView;
-    /**
-     * The Moto view.
-     */
     TextView motoView;
-    /**
-     * The Vehicle.
-     */
     Vehicle vehicle;
-    /**
-     * The Temp.
-     */
     String temp;
-    /**
-     * The Temp 2.
-     */
     String temp2;
-    /**
-     * The Temp span 1.
-     */
     SpannedString tempSpan1;
-    /**
-     * The Temp span 2.
-     */
     SpannedString tempSpan2;
 
 

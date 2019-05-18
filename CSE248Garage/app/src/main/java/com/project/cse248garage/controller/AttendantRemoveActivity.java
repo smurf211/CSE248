@@ -18,25 +18,11 @@ import com.project.cse248garage.model.User;
  * The type Attendant remove activity.
  */
 public class AttendantRemoveActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The Reciept.
-     */
     Reciept reciept;
-    /**
-     * The Background worker.
-     */
     BackgroundWorker backgroundWorker;
-    /**
-     * The History worker.
-     */
     BackgroundWorker historyWorker;
-    /**
-     * The Button 7.
-     */
     Button button7;
 
 

@@ -16,13 +16,8 @@ import com.project.cse248garage.model.User;
  * The type Ticket activity.
  */
 public class TicketActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The License plate.
-     */
     String licensePlate;
 
     @Override

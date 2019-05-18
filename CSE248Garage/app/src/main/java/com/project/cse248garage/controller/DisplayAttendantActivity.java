@@ -16,9 +16,7 @@ import java.util.Map;
  * The type Display attendant activity.
  */
 public class DisplayAttendantActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
 
     @Override

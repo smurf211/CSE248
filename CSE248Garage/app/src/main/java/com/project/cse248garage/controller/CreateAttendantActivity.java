@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.project.cse248garage.R;
-import com.project.cse248garage.databasePhpTest.BackgroundWorkerTest;
+
 import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.CheckCredentials;
 import com.project.cse248garage.model.Garage;
@@ -20,53 +20,18 @@ import com.project.cse248garage.model.UserAccountBag;
  */
 public class CreateAttendantActivity extends AppCompatActivity {
 
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The Check.
-     */
     CheckCredentials check;
-    /**
-     * The User name field.
-     */
     EditText userNameField;
-    /**
-     * The Password field.
-     */
     EditText passwordField;
-    /**
-     * The Firstname field.
-     */
     EditText firstname_field;
-    /**
-     * The Lastname field.
-     */
     EditText lastname_field;
-    /**
-     * The User name.
-     */
     String userName;
-    /**
-     * The Password.
-     */
     String password;
-    /**
-     * The First name.
-     */
     String firstName;
-    /**
-     * The Last name.
-     */
     String lastName;
-    /**
-     * The Result id.
-     */
     static String resultID;
-    /**
-     * The Test user.
-     */
     User testUser;
 
 
@@ -114,7 +79,7 @@ public class CreateAttendantActivity extends AppCompatActivity {
         TextView displayAttendant = findViewById(R.id.display_field);
 
 
-        displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toStringAdmin());
+        //displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toStringAdmin());
 
         userNameField.setText("");
         passwordField.setText("");

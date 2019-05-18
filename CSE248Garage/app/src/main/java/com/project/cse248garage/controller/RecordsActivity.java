@@ -23,25 +23,11 @@ import java.util.List;
  * The type Records activity.
  */
 public class RecordsActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The Spinner array plates.
-     */
     List<String> spinnerArrayPlates;
-    /**
-     * The Spinner array users.
-     */
     List<String> spinnerArrayUsers;
-    /**
-     * The Plate numbers.
-     */
     Spinner plateNumbers;
-    /**
-     * The Attendants.
-     */
     Spinner attendants;
 
     @Override

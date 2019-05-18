@@ -17,29 +17,12 @@ import java.util.Date;
 public class Ticket implements Serializable {
 
 
-    /**
-     * The Vehicle.
-     */
+
     Vehicle vehicle;
-    /**
-     * The Date.
-     */
     String date;
-    /**
-     * The Time.
-     */
     String time;
-    /**
-     * The Rate.
-     */
     double rate;
-    /**
-     * The Early bird.
-     */
     boolean earlyBird;
-    /**
-     * The Space id.
-     */
     public String spaceID;
 
 

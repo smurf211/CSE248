@@ -17,34 +17,13 @@ import com.project.cse248garage.model.User;
  */
 public class RemoveAttendantActivity extends AppCompatActivity {
 
-    /**
-     * The Garage.
-     */
-    Garage garage;
-    /**
-     * The Check.
-     */
-    CheckCredentials check;
-    /**
-     * The User name field.
-     */
-    EditText userNameField;
 
-    /**
-     * The User name.
-     */
+    Garage garage;
+    CheckCredentials check;
+    EditText userNameField;
     String userName;
-    /**
-     * The Background worker.
-     */
     BackgroundWorker backgroundWorker;
-    /**
-     * The User id.
-     */
     int userID;
-    /**
-     * The Type.
-     */
     String type = "remove attendant";
 
 

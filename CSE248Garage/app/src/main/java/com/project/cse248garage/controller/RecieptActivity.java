@@ -16,13 +16,8 @@ import com.project.cse248garage.model.User;
  * The type Reciept activity.
  */
 public class RecieptActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The Reciept.
-     */
     Reciept reciept;
 
 

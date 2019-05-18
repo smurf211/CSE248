@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.cse248garage.R;
-import com.project.cse248garage.databasePhpTest.BackgroundWorkerTest;
+
 import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.CheckCredentials;
 import com.project.cse248garage.model.Garage;
@@ -57,69 +57,22 @@ import java.util.concurrent.ExecutionException;
  */
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * The Check credentials.
-     */
+
     CheckCredentials checkCredentials = new CheckCredentials();
-    /**
-     * The Garage.
-     */
     Garage garage;
-    /**
-     * The Json string.
-     */
     String JSON_STRING;
-    /**
-     * The Json result user.
-     */
     String json_result_user;
-    /**
-     * The Json result garage.
-     */
     static String json_result_garage;
-    /**
-     * The Json result vehicles.
-     */
     static String json_result_vehicles;
-    /**
-     * The Json result history.
-     */
     static String json_result_history;
-    /**
-     * The Json object.
-     */
     JSONObject jsonObject;
-    /**
-     * The Json array.
-     */
     JSONArray jsonArray;
-    /**
-     * The Type user.
-     */
     String typeUser = "user";
-    /**
-     * The Type garage.
-     */
     String typeGarage = "garage";
-    /**
-     * The Type vehicles.
-     */
     String typeVehicles = "vehicles";
-    /**
-     * The Type history.
-     */
     String typeHistory = "history";
-    /**
-     * The Test.
-     */
     String test = "";
-    /**
-     * The Counter.
-     */
     int counter = 0;
-    /**
-     * The Button.
-     */
     Button button;
 
 

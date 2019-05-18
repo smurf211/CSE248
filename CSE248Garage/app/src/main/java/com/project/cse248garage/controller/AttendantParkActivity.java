@@ -15,7 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.project.cse248garage.R;
-import com.project.cse248garage.databasePhpTest.BackgroundWorkerTest;
+
 import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.Motorcycle;
@@ -28,85 +28,25 @@ import com.project.cse248garage.model.Vehicle;
  * The type Attendant park activity.
  */
 public class AttendantParkActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The License plate.
-     */
     String licensePlate;
-    /**
-     * The Car button.
-     */
     RadioButton carButton;
-    /**
-     * The Truck button.
-     */
     RadioButton truckButton;
-    /**
-     * The Moto button.
-     */
     RadioButton motoButton;
-    /**
-     * The License field.
-     */
     EditText licenseField;
-    /**
-     * The Early bird switch.
-     */
     Switch earlyBirdSwitch;
-    /**
-     * The Early bird.
-     */
     boolean earlyBird;
-    /**
-     * The Rg 1.
-     */
-    RadioGroup rg1;
-    /**
-     * The Category.
-     */
     String category;
-    /**
-     * The Vehicle.
-     */
     Vehicle vehicle;
-    /**
-     * The User.
-     */
     User user;
-    /**
-     * The False category.
-     */
     String falseCategory;
-    /**
-     * The Background worker.
-     */
     BackgroundWorker backgroundWorker;
-    /**
-     * The Background worker 1.
-     */
     BackgroundWorker backgroundWorker1;
-    /**
-     * The Result id.
-     */
     static String resultID;
-    /**
-     * The Type park.
-     */
     String typePark = "park vehicle";
-    /**
-     * The Open space.
-     */
     ParkingSpace openSpace;
-    /**
-     * The Parked.
-     */
     boolean parked = false;
-    /**
-     * The Button 4.
-     */
     Button button4;
 
 

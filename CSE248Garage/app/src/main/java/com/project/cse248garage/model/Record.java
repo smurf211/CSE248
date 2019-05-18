@@ -15,18 +15,9 @@ import java.util.ArrayList;
 public class Record implements Serializable {
 
 
-    /**
-     * The License plate.
-     */
-    String licensePlate;
-    /**
-     * The Vehicle.
-     */
-    Vehicle vehicle;
 
-    /**
-     * The Reciepts.
-     */
+    String licensePlate;
+    Vehicle vehicle;
     ArrayList<Reciept> reciepts;
 
 

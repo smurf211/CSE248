@@ -9,58 +9,19 @@ import java.time.LocalTime;
  */
 public class ParkingSpace implements Serializable {
 
-    /**
-     * The Category.
-     */
-    String category;
-    /**
-     * The constant carDistance.
-     */
-    public static int carDistance = 1;
-    /**
-     * The constant truckDistance.
-     */
-    public static int truckDistance = 1;
-    /**
-     * The constant motorcycleDistance.
-     */
-    public static int motorcycleDistance = 1;
-    /**
-     * The Distance.
-     */
-    public int distance;
-    /**
-     * The Early bird.
-     */
-    boolean earlyBird;
-    /**
-     * The Price.
-     */
-    double price;
-    /**
-     * The Free.
-     */
-    boolean free; // 1 = free space, 0 = full space
-    /**
-     * The Vehicle.
-     */
-    Vehicle vehicle;
-    /**
-     * The Time.
-     */
-    String time;
-    /**
-     * The Date.
-     */
-    String date;
 
-    /**
-     * The Space id.
-     */
+    String category;
+    public static int carDistance = 1;
+    public static int truckDistance = 1;
+    public static int motorcycleDistance = 1;
+    public int distance;
+    boolean earlyBird;
+    double price;
+    boolean free; // 1 = free space, 0 = full space
+    Vehicle vehicle;
+    String time;
+    String date;
     public String spaceID;
-    /**
-     * The Garage.
-     */
     Garage garage;
 
 

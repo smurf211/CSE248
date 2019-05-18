@@ -17,34 +17,14 @@ import java.util.Date;
  * The type Reciept.
  */
 public class Reciept extends Ticket implements Serializable {
-    /**
-     * The Time in.
-     */
+
     String timeIn;
-    /**
-     * The Date in.
-     */
     String dateIn;
-    /**
-     * The Time out.
-     */
     String timeOut;
-    /**
-     * The Date out.
-     */
     String dateOut;
-    /**
-     * The Payment scheme.
-     */
-    double paymentScheme;
-    /**
-     * The Garage.
-     */
+    double paymentScheme; //calculated payment
     Garage garage;
-    /**
-     * The Rate.
-     */
-    double rate;
+    double rate; //rate per hour or early bird fee
 
     /**
      * Instantiates a new Reciept.

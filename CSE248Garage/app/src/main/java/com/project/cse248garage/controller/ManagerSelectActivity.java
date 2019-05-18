@@ -32,33 +32,13 @@ import java.io.ObjectOutputStream;
  */
 public class ManagerSelectActivity extends AppCompatActivity {
 
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The Intent 1.
-     */
     Intent intent1;
-    /**
-     * The Ctx.
-     */
     Context ctx = this;
-    /**
-     * The Button 14.
-     */
     Button button14;
-    /**
-     * The Button 16.
-     */
     Button button16;
-    /**
-     * The Button 17.
-     */
     Button button17;
-    /**
-     * The Button 18.
-     */
     Button button18;
 
 

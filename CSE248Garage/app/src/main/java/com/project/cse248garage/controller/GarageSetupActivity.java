@@ -21,57 +21,19 @@ import com.project.cse248garage.model.UserAccountBag;
  */
 public class GarageSetupActivity extends AppCompatActivity {
 
-    /**
-     * The Garage.
-     */
+
     Garage garage;
-    /**
-     * The Car space field.
-     */
     EditText carSpaceField;
-    /**
-     * The Truck space field.
-     */
     EditText truckSpaceField;
-    /**
-     * The Motorcycle space field.
-     */
     EditText motorcycleSpaceField;
-    /**
-     * The Car spaces.
-     */
     int carSpaces;
-    /**
-     * The Truck spaces.
-     */
     int truckSpaces;
-    /**
-     * The Motorcycle spaces.
-     */
     int motorcycleSpaces;
-    /**
-     * The Car early bird.
-     */
     EditText carEarlyBird;
-    /**
-     * The Car per hour.
-     */
     EditText carPerHour;
-    /**
-     * The Truck early bird.
-     */
     EditText truckEarlyBird;
-    /**
-     * The Truck per hour.
-     */
     EditText truckPerHour;
-    /**
-     * The Motorcycle early bird.
-     */
     EditText motorcycleEarlyBird;
-    /**
-     * The Motorcycle per hour.
-     */
     EditText motorcyclePerHour;
 
     @Override

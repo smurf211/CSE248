@@ -21,21 +21,10 @@ import java.net.URL;
  * The type Background task garage.
  */
 class BackgroundTaskGarage extends AsyncTask<String, Void, String> {
-    /**
-     * The Context.
-     */
+
     Context context;
-    /**
-     * The Json object.
-     */
     JSONObject jsonObject;
-    /**
-     * The Json array.
-     */
     JSONArray jsonArray;
-    /**
-     * The Garage.
-     */
     Garage garage;
 
     /**
@@ -90,17 +79,9 @@ class BackgroundTaskGarage extends AsyncTask<String, Void, String> {
     }
 
 
-    /**
-     * The Json url garage.
-     */
+
     String json_url_garage;
-    /**
-     * The Json string.
-     */
     String JSON_STRING;
-    /**
-     * The Json result garage.
-     */
     String json_result_garage;
 
 

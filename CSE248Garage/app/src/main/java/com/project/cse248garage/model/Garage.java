@@ -24,64 +24,19 @@ import java.util.Date;
  */
 public class Garage implements Serializable {
 
-    /**
-     * The Exit.
-     */
+
     public int exit = 0;
-    /**
-     * The Car bag.
-     */
     public ParkingSpace[] carBag;
-    /**
-     * The Truck space bag.
-     */
     public ParkingSpace[] truckSpaceBag;
-    /**
-     * The Motorcycle space bag.
-     */
     public ParkingSpace[] motorcycleSpaceBag;
-    /**
-     * The Record bag.
-     */
     RecordBag recordBag = new RecordBag();
-
-
-    /**
-     * The Car early bird.
-     */
     public double carEarlyBird;
-    /**
-     * The Car per hour.
-     */
     public double carPerHour;
-
-    /**
-     * The Truck early bird.
-     */
     public double truckEarlyBird;
-    /**
-     * The Truck per hour.
-     */
     public double truckPerHour;
-
-    /**
-     * The Moto early bird.
-     */
     public double motoEarlyBird;
-    /**
-     * The Moto per hour.
-     */
     public double motoPerHour;
-
-    /**
-     * The Garage created.
-     */
     public boolean garageCreated;
-
-
-    /**
-     * The Bag.
-     */
     UserAccountBag bag;
 
     /**

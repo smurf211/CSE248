@@ -27,9 +27,7 @@ import java.io.ObjectOutputStream;
  * The type Attendant options activity.
  */
 public class AttendantOptionsActivity extends AppCompatActivity {
-    /**
-     * The Garage.
-     */
+
     Garage garage;
 
     @Override

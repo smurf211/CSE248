@@ -14,65 +14,21 @@ import java.io.Serializable;
  */
 public abstract class Vehicle implements Serializable {
 
-    /**
-     * The Vehicle id.
-     */
+
     int vehicleId;
-    /**
-     * The License plate.
-     */
     String licensePlate;
-    /**
-     * The Attendant first name.
-     */
     public String attendantFirstName;
-    /**
-     * The Attendant last name.
-     */
     public String attendantLastName;
-    /**
-     * The Attendant id.
-     */
     int attendantId;
-    /**
-     * The False category.
-     */
     public String falseCategory;
-    /**
-     * The Ticket.
-     */
     public Ticket ticket;
-    /**
-     * The Attendant removed first.
-     */
     String attendantRemovedFirst;
-    /**
-     * The Attendant removed last.
-     */
     String attendantRemovedLast;
-    /**
-     * The Attendant removed id.
-     */
     int attendantRemovedId;
-    /**
-     * The Time in.
-     */
     String timeIn;
-    /**
-     * The Date in.
-     */
     String dateIn;
-    /**
-     * The Space id.
-     */
     String spaceID;
-    /**
-     * The Early bird.
-     */
     boolean earlyBird;
-    /**
-     * The Rate.
-     */
     double rate;
 
 
