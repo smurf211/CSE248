@@ -324,7 +324,7 @@ public class Reciept extends Ticket implements Serializable {
         SpannableString str4 = new SpannableString(dateInStr + normalText3);
         str4.setSpan(new StyleSpan(Typeface.BOLD), 0, dateInStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        String dateOutStr = " \t\tOut: ";
+        String dateOutStr = " \t\t\tOut: ";
         String normalText4 = dateOut + "\n";
         SpannableString str5 = new SpannableString(dateOutStr + normalText4);
         str5.setSpan(new StyleSpan(Typeface.BOLD), 0, dateOutStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -339,7 +339,7 @@ public class Reciept extends Ticket implements Serializable {
         SpannableString str7 = new SpannableString(amountDue + normalText6);
         str7.setSpan(new StyleSpan(Typeface.BOLD), 0, amountDue.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        String paid = " Paid: ";
+        String paid = " \tPaid: ";
         String normalText7 = getCurrency() + "\n";
         SpannableString str8 = new SpannableString(paid + normalText7);
         str8.setSpan(new StyleSpan(Typeface.BOLD), 0, paid.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

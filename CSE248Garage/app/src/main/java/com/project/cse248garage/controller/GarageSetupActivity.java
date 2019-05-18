@@ -14,6 +14,7 @@ import com.project.cse248garage.model.Car;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.Motorcycle;
 import com.project.cse248garage.model.Truck;
+import com.project.cse248garage.model.User;
 import com.project.cse248garage.model.UserAccountBag;
 
 /**
@@ -43,6 +44,14 @@ public class GarageSetupActivity extends AppCompatActivity {
 
 
         garage = (Garage) getIntent().getSerializableExtra("Garage");
+        UserAccountBag bag = garage.getBag();
+
+            garage = new Garage();
+            garage.setBag(bag);
+
+      //  User user = garage.getBag().getUser("admin", garage.getBag().getUserAccountHash());
+     //   user.setLoggedIn(true);
+
 
 
     }

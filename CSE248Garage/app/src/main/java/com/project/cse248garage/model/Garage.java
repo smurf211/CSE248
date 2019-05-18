@@ -846,6 +846,10 @@ public class Garage implements Serializable {
         return recordBag;
     }
 
+    public void setBag(UserAccountBag bag) {
+        this.bag = bag;
+    }
+
     @Override
     public String toString() {
         return "Garage{" +

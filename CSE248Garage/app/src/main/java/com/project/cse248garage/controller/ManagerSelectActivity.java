@@ -145,9 +145,10 @@ public class ManagerSelectActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
+
+
                     BackgroundWorker backgroundWorker = new BackgroundWorker(ctx);
                     backgroundWorker.execute("destroy garage");
-
 
                     intent1.putExtra("Garage", garage);
 
