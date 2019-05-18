@@ -9,6 +9,9 @@ import com.project.cse248garage.R;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.User;
 
+import java.util.Iterator;
+import java.util.Map;
+
 public class DisplayAttendantActivity extends AppCompatActivity {
     Garage garage;
 
@@ -24,18 +27,43 @@ public class DisplayAttendantActivity extends AppCompatActivity {
 
 
     public void displayAttendants(){
+
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
 
         if(user.isAdmin()) {
 
             TextView displayField = findViewById(R.id.display_field);
-            displayField.setText(garage.getBag().displayBagAdmin());
+            //displayField.setText(garage.getBag().displayBagAdmin());
+            int i = 1;
+
+            User userTemp;
+            Iterator it = garage.getBag().getUserAccountHash().entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+
+                userTemp = (User) pair.getKey();
+                displayField.append( userTemp.toStringAdminSpan() );
+                i++;
+
+            }
         }
 
         else{
 
             TextView displayField = findViewById(R.id.display_field);
-            displayField.setText(garage.getBag().displayBagUser());
+            //displayField.setText(garage.getBag().displayBagUser());
+            int i = 1;
+
+            User userTemp;
+            Iterator it = garage.getBag().getUserAccountHash().entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+
+                userTemp = (User) pair.getKey();
+                displayField.append( userTemp.toStringSpan() );
+                i++;
+
+            }
 
 
         }

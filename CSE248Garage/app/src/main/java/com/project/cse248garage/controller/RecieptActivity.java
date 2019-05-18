@@ -34,7 +34,9 @@ public class RecieptActivity extends AppCompatActivity {
 
        // System.out.println(ticket.toString());
         TextView displayField = findViewById(R.id.display_field);
-        displayField.setText(reciept.toString());
+        displayField.setText(reciept.toStringSpan());
+
+
     }
 
     public void done(View view){

@@ -1,5 +1,12 @@
 package com.project.cse248garage.model;
 
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannedString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
+
 import java.io.Serializable;
 import java.util.Random;
 
@@ -18,31 +25,7 @@ public class User implements Serializable {
     public User() {
 
     }
-    /*
 
-    public User(String firstName, String lastName, boolean admin ) {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.admin = admin;
-
-        userName = createUserName();
-
-        generatePassword();
-    }
-
-    public User(String password, String firstName, String lastName, boolean admin) {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.admin = admin;
-        this.password = password;
-
-        userName = createUserName();
-
-        generatePassword();
-    }
-    */
 
     public User(int iD, String firstName, String lastName, String userName, String password,boolean admin) {
         this.firstName = firstName;
@@ -63,33 +46,7 @@ public class User implements Serializable {
 
     }
 
-/*
 
-    public String createUserName() {
-
-        String userName = null;
-
-        if (lastName.length() >= 4) {
-            userName = lastName.substring(0, 4);
-            userName = userName.concat(firstName.substring(0, 1));
-            userName = userName.concat(iD.substring(iD.length() - 2, iD.length()));
-
-        }
-
-        if (lastName.length() < 4) {
-
-            userName = lastName;
-            userName = userName.concat(firstName.substring(0, 1));
-            userName = userName.concat(iD.substring(iD.length() - 2, iD.length()));
-
-        }
-
-        return userName;
-    }
-
-
-
-*/
 
 
     public void generatePassword() {
@@ -166,13 +123,46 @@ public class User implements Serializable {
     }
 
 
-    public String toStringAdmin() {
-        return
-                "Name: " + firstName + " " + lastName
-                        + "\n ID: " + iD +
-                        "\n Admin: " + admin +
-                        "\n UserName: " + userName +
-                        "\n password: " + password;
+
+
+    public SpannedString toStringAdminSpan() {
+
+
+
+        String nameStr = "Name: ";
+        String normalText1 = firstName + " " + lastName;
+
+        SpannableString str2 = new SpannableString(nameStr + normalText1);
+        str2.setSpan(new StyleSpan(Typeface.BOLD), 0, nameStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String idStr = "\nID: ";
+        String normalText2 = String.valueOf(iD);
+        SpannableString str3 = new SpannableString(idStr + normalText2);
+        str3.setSpan(new StyleSpan(Typeface.BOLD), 0, idStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String adminStr = "\nAdmin: ";
+        String normalText3 = String.valueOf(admin);
+        SpannableString str4 = new SpannableString(adminStr + normalText3);
+        str4.setSpan(new StyleSpan(Typeface.BOLD), 0, adminStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String usernameStr = "\nUserName: ";
+        String normalText4 = userName;
+        SpannableString str5 = new SpannableString(usernameStr + normalText4);
+        str5.setSpan(new StyleSpan(Typeface.BOLD), 0, usernameStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String passwordStr = "\npassword: ";
+        String normalText5 = password + "\n\n";
+        SpannableString str6 = new SpannableString(passwordStr + normalText5);
+        str6.setSpan(new StyleSpan(Typeface.BOLD), 0, passwordStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        SpannedString result = (SpannedString) TextUtils.concat(str2, str3, str4, str5, str6);
+
+
+
+
+        return  result;
+
+
     }
 
     @Override
@@ -183,6 +173,55 @@ public class User implements Serializable {
                         "\n Admin: " + admin +
                         "\n UserName: " + userName +
                         "\n password: " + "*******";
+    }
+
+    public String toStringAdmin() {
+        return
+                "Name: " + firstName + " " + lastName
+                        + "\n ID: " + iD +
+                        "\n Admin: " + admin +
+                        "\n UserName: " + userName +
+                        "\n password: " + password;
+    }
+
+    public SpannedString toStringSpan() {
+
+
+
+        String nameStr = "Name: ";
+        String normalText1 = firstName + " " + lastName;
+
+        SpannableString str2 = new SpannableString(nameStr + normalText1);
+        str2.setSpan(new StyleSpan(Typeface.BOLD), 0, nameStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String idStr = "\nID: ";
+        String normalText2 = String.valueOf(iD);
+        SpannableString str3 = new SpannableString(idStr + normalText2);
+        str3.setSpan(new StyleSpan(Typeface.BOLD), 0, idStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String adminStr = "\nAdmin: ";
+        String normalText3 = String.valueOf(admin);
+        SpannableString str4 = new SpannableString(adminStr + normalText3);
+        str4.setSpan(new StyleSpan(Typeface.BOLD), 0, adminStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String usernameStr = "\nUserName: ";
+        String normalText4 = userName;
+        SpannableString str5 = new SpannableString(usernameStr + normalText4);
+        str5.setSpan(new StyleSpan(Typeface.BOLD), 0, usernameStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String passwordStr = "\npassword: ";
+        String normalText5 = "**********\n\n";
+        SpannableString str6 = new SpannableString(passwordStr + normalText5);
+        str6.setSpan(new StyleSpan(Typeface.BOLD), 0, passwordStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        SpannedString result = (SpannedString) TextUtils.concat(str2, str3, str4, str5, str6);
+
+
+
+
+        return  result;
+
+
     }
 
 

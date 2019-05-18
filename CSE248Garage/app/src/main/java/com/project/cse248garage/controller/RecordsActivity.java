@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.project.cse248garage.R;
 import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.ParkingSpace;
+import com.project.cse248garage.model.Reciept;
 import com.project.cse248garage.model.Record;
 
 import java.util.ArrayList;
@@ -79,7 +80,11 @@ public class RecordsActivity extends AppCompatActivity {
 
             displayField.setMovementMethod(new ScrollingMovementMethod());
 
-            displayField.setText(record.toStringPresent());
+            //displayField.setText(record.toStringPresent());
+
+            displayField.setText(record.toStringSpanPresent());
+
+
 
 
         }
@@ -91,7 +96,12 @@ public class RecordsActivity extends AppCompatActivity {
 
             displayField.setMovementMethod(new ScrollingMovementMethod());
 
-            displayField.setText(record.toString());
+            displayField.setText(record.toStringSpan());
+            ArrayList<Reciept> reciepts = record.getReciepts();
+            for(int i =0; i< reciepts.size(); i++){
+
+                displayField.append(reciepts.get(i).toStringSpan());
+            }
 
         }
 

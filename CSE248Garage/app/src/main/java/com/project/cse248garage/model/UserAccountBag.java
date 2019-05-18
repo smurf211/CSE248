@@ -10,6 +10,9 @@ package com.project.cse248garage.model;
  * sourceCode</A>
  */
 
+import android.text.SpannedString;
+import android.text.TextUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
@@ -200,6 +203,10 @@ public class UserAccountBag implements Serializable {
 
 
     }
+
+
+
+
 
     public String displayBagUser() {
         int i = 1;

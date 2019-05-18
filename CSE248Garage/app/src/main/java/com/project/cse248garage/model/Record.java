@@ -1,5 +1,11 @@
 package com.project.cse248garage.model;
 
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.SpannedString;
+import android.text.TextUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -62,12 +68,23 @@ public class Record implements Serializable {
     @Override
     public String toString() {
 
-
-
         return "Record: " + "\n" +
-                  vehicle + "\n" +
+                vehicle + "\n" +
+                "Receipts: " + "\n";
 
-                "Reciepts: " + "\n" +  reciepts;
+
+    }
+
+    public SpannedString toStringSpan() {
+
+
+        SpannedString result = (SpannedString) TextUtils.concat( vehicle.toStringSpan());
+
+
+
+        return result;
+
+
     }
 
     public String toStringPresent() {
@@ -79,4 +96,22 @@ public class Record implements Serializable {
 
                 "Ticket: " + vehicle.getTicket() + "\n" ;
     }
+
+    public SpannedString toStringSpanPresent() {
+
+
+
+
+        SpannedString result = (SpannedString) TextUtils.concat(vehicle.toStringSpan(), vehicle.getTicket().toStringSpan());
+
+
+
+
+
+        return result;
+
+
+    }
+
+
 }

@@ -3,6 +3,10 @@ package com.project.cse248garage.model;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.SpannedString;
+import android.text.TextUtils;
 import android.text.style.StyleSpan;
 
 import java.io.Serializable;
@@ -188,15 +192,6 @@ public class Reciept extends Ticket implements Serializable {
     @Override
     public String toString() {
 
-        /*
-
-        String boldText = "id";
-        String normalText = "name";
-        SpannableString str = new SpannableString(boldText + normalText);
-        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
-*/
 
         return  "Reciept" + "\n" +
                 "Time In: \t\t" + convertTimeFromMilitary(timeIn)  +
@@ -215,5 +210,91 @@ public class Reciept extends Ticket implements Serializable {
                 + vehicle.getAttendantRemovedLast() + " " + vehicle.getAttendantRemovedId() + "\n" +
 
                 "Space ID: " + this.spaceID;
+    }
+
+
+    public SpannedString toStringSpan(){
+        //displayField.setText(reciept.toStringSpan());
+        String reciept = "\nReceipt\n";
+
+        SpannableString str1 = new SpannableString(reciept);
+        str1.setSpan(new StyleSpan(Typeface.BOLD), 0, reciept.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String timeInStr = "Time In: \t\t";
+        String normalText1 = convertTimeFromMilitary(timeIn);
+        SpannableString str2 = new SpannableString(timeInStr + normalText1);
+        str2.setSpan(new StyleSpan(Typeface.BOLD), 0, timeInStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String timeOutStr = " \t\tOut: ";
+        String normalText2 = convertTimeFromMilitary(timeOut) + "\n";
+        SpannableString str3 = new SpannableString(timeOutStr + normalText2);
+        str3.setSpan(new StyleSpan(Typeface.BOLD), 0, timeOutStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String dateInStr = "Date In:\t\t\t";
+        String normalText3 = dateIn;
+        SpannableString str4 = new SpannableString(dateInStr + normalText3);
+        str4.setSpan(new StyleSpan(Typeface.BOLD), 0, dateInStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String dateOutStr = " \t\tOut: ";
+        String normalText4 = dateOut + "\n";
+        SpannableString str5 = new SpannableString(dateOutStr + normalText4);
+        str5.setSpan(new StyleSpan(Typeface.BOLD), 0, dateOutStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String rateStr = "Rate: ";
+        String normalText5 = Ticket.addZeroToRate(rate) + "\n";
+        SpannableString str6 = new SpannableString(rateStr + normalText5);
+        str6.setSpan(new StyleSpan(Typeface.BOLD), 0, rateStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String amountDue = "Amount " + "Due: ";
+        String normalText6 = getCurrency() + "\t\t\t";
+        SpannableString str7 = new SpannableString(amountDue + normalText6);
+        str7.setSpan(new StyleSpan(Typeface.BOLD), 0, amountDue.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String paid = " Paid: ";
+        String normalText7 = getCurrency() + "\n";
+        SpannableString str8 = new SpannableString(paid + normalText7);
+        str8.setSpan(new StyleSpan(Typeface.BOLD), 0, paid.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String earlyBird = "Early Bird: ";
+        String normalText8 = getEarlyBirdString() + "\n";
+        SpannableString str9 = new SpannableString(earlyBird + normalText8);
+        str9.setSpan(new StyleSpan(Typeface.BOLD), 0, earlyBird.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String licensePlate = "License Plate: ";
+        String normalText9 = getVehicle().getLicensePlate() + '\n';
+        SpannableString str10 = new SpannableString(licensePlate + normalText9);
+        str10.setSpan(new StyleSpan(Typeface.BOLD), 0, licensePlate.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String category =  "Category: ";
+        String normalText10 = getVehicle().getCategory() + '\n';
+        SpannableString str11 = new SpannableString(category + normalText10);
+        str11.setSpan(new StyleSpan(Typeface.BOLD), 0, category.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String aParked =  "Attendant Parked: ";
+        String normalText11 = getVehicle().getAttendantFirstName() + " " +
+                getVehicle().getAttendantLastName() + " " + getVehicle().getAttendantId() + "\n";
+        SpannableString str12 = new SpannableString(aParked + normalText11);
+        str12.setSpan(new StyleSpan(Typeface.BOLD), 0, aParked.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String aRemoved =  "Attendant Removed: ";
+        String normalText12 = vehicle.getAttendantRemovedFirst() + " "
+                + vehicle.getAttendantRemovedLast() + " " + vehicle.getAttendantRemovedId() + "\n";
+        SpannableString str13 = new SpannableString(aRemoved + normalText12);
+        str13.setSpan(new StyleSpan(Typeface.BOLD), 0, aRemoved.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String spaceID =  "Space ID: ";
+        String normalText13 = this.spaceID + "\n";
+        SpannableString str14 = new SpannableString(spaceID + normalText13);
+        str14.setSpan(new StyleSpan(Typeface.BOLD), 0, spaceID.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+
+
+        SpannedString result = (SpannedString) TextUtils.concat(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14);
+
+
+
+
+        return  result;
     }
 }

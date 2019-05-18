@@ -1,5 +1,12 @@
 package com.project.cse248garage.model;
 
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannedString;
+import android.text.TextUtils;
+import android.text.style.StyleSpan;
+
 import java.io.Serializable;
 
 public abstract class Vehicle implements Serializable {
@@ -51,6 +58,38 @@ public abstract class Vehicle implements Serializable {
                 "Category: " + getCategory()
                 ;
     }
+
+    public SpannedString toStringSpan() {
+
+        String vehicle = "Vehicle\n";
+
+        SpannableString str1 = new SpannableString(vehicle);
+        str1.setSpan(new StyleSpan(Typeface.BOLD), 0, vehicle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String IDstr = "ID: ";
+        String normalText1 = String.valueOf(vehicleId) + "\n";
+        SpannableString str2 = new SpannableString(IDstr + normalText1);
+        str2.setSpan(new StyleSpan(Typeface.BOLD), 0, IDstr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String licensePlateStr = "License Plate: ";
+        String normalText2 = licensePlate + "\n";
+        SpannableString str3 = new SpannableString(licensePlateStr + normalText2);
+        str3.setSpan(new StyleSpan(Typeface.BOLD), 0, licensePlateStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        String categoryStr = "Category: ";
+        String normalText3 = getCategory() + "\n";
+        SpannableString str4 = new SpannableString(categoryStr + normalText3);
+        str4.setSpan(new StyleSpan(Typeface.BOLD), 0, categoryStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        SpannedString result = (SpannedString) TextUtils.concat(str1, str2, str3, str4);
+
+
+
+
+        return  result;
+    }
+
+
 
     public String getFalseCategory() {
         return falseCategory;

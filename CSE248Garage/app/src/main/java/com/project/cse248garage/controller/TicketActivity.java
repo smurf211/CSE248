@@ -32,7 +32,7 @@ public class TicketActivity extends AppCompatActivity {
         Ticket ticket = garage.findByPlate(licensePlate).getVehicle().getTicket();
        // System.out.println(ticket.toString());
         TextView displayField = findViewById(R.id.display_field);
-        displayField.setText(ticket.toString());
+        displayField.setText(ticket.toStringSpan());
     }
 
     public void done(View view){
