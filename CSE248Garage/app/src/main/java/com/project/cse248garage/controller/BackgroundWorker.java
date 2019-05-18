@@ -19,14 +19,34 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+/**
+ * The type Background worker.
+ */
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
+    /**
+     * The Context.
+     */
     Context context;
+    /**
+     * The Alert dialog.
+     */
     AlertDialog alertDialog;
+    /**
+     * The Id result.
+     */
     String idResult;
+    /**
+     * The Result.
+     */
     String result;
 
 
+    /**
+     * Instantiates a new Background worker.
+     *
+     * @param ctx the ctx
+     */
     public BackgroundWorker(Context ctx) {
 
         context = ctx;
@@ -597,6 +617,11 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     }
 
+    /**
+     * Gets id result.
+     *
+     * @return the id result
+     */
     public String getIdResult() {
         return idResult;
     }

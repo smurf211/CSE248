@@ -12,8 +12,17 @@ import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.Ticket;
 import com.project.cse248garage.model.User;
 
+/**
+ * The type Ticket activity.
+ */
 public class TicketActivity extends AppCompatActivity {
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The License plate.
+     */
     String licensePlate;
 
     @Override
@@ -26,27 +35,36 @@ public class TicketActivity extends AppCompatActivity {
     }
 
 
-    public void printTicket(View view){
+    /**
+     * Print ticket.
+     *
+     * @param view the view
+     */
+    public void printTicket(View view) {
 
 
         Ticket ticket = garage.findByPlate(licensePlate).getVehicle().getTicket();
-       // System.out.println(ticket.toString());
+
         TextView displayField = findViewById(R.id.display_field);
         displayField.setText(ticket.toStringSpan());
     }
 
-    public void done(View view){
+    /**
+     * Done.
+     *
+     * @param view the view
+     */
+    public void done(View view) {
 
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
-        //garage.getBag().displayBagHash();
-        if(user.isAdmin()){
+
+        if (user.isAdmin()) {
             Intent intent = new Intent(this, ManagerSelectActivity.class);
             intent.putExtra("Garage", garage);
             startActivity(intent);
 
 
-        }
-        else {
+        } else {
 
 
             Intent intent = new Intent(this, AttendantOptionsActivity.class);
@@ -55,7 +73,6 @@ public class TicketActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }

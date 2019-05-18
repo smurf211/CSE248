@@ -16,24 +16,50 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * The type Background task history.
+ */
 class BackgroundTaskHistory extends AsyncTask<String, Void, String> {
+    /**
+     * The Context.
+     */
     Context context;
+    /**
+     * The Json object.
+     */
     JSONObject jsonObject;
+    /**
+     * The Json array.
+     */
     JSONArray jsonArray;
+    /**
+     * The Garage.
+     */
     Garage garage;
 
+    /**
+     * Instantiates a new Background task history.
+     *
+     * @param ctx the ctx
+     */
     public BackgroundTaskHistory(Context ctx) {
 
         context = ctx;
     }
 
 
-
-
+    /**
+     * The Json url history.
+     */
     String json_url_history;
+    /**
+     * The Json string.
+     */
     String JSON_STRING;
+    /**
+     * The Json result history.
+     */
     String json_result_history;
-
 
 
     @Override
@@ -48,11 +74,10 @@ class BackgroundTaskHistory extends AsyncTask<String, Void, String> {
         json_url_history = "http://smurf211.com/json_get_data_history.php";
 
 
-
         String type = param[0];
 
 
-        if(type.equals("history")){
+        if (type.equals("history")) {
 
 
             try {
@@ -89,15 +114,11 @@ class BackgroundTaskHistory extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
 
 
-
-
         json_result_history = result;
 
 
         MainActivity.setJson_result_history(result);
 
-        // garage.toString();
-        //  createGarage();
 
 
 

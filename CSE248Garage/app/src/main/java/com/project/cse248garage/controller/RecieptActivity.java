@@ -12,8 +12,17 @@ import com.project.cse248garage.model.Reciept;
 import com.project.cse248garage.model.Ticket;
 import com.project.cse248garage.model.User;
 
+/**
+ * The type Reciept activity.
+ */
 public class RecieptActivity extends AppCompatActivity {
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Reciept.
+     */
     Reciept reciept;
 
 
@@ -28,30 +37,37 @@ public class RecieptActivity extends AppCompatActivity {
     }
 
 
-    public void printReciept(View view){
+    /**
+     * Print reciept.
+     *
+     * @param view the view
+     */
+    public void printReciept(View view) {
 
 
-
-       // System.out.println(ticket.toString());
         TextView displayField = findViewById(R.id.display_field);
         displayField.setText(reciept.toStringSpan());
 
 
     }
 
-    public void done(View view){
-       // garage.getBag().displayBagHash();
+    /**
+     * Done.
+     *
+     * @param view the view
+     */
+    public void done(View view) {
+
 
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
 
-        if(user.isAdmin()){
+        if (user.isAdmin()) {
             Intent intent = new Intent(this, ManagerSelectActivity.class);
             intent.putExtra("Garage", garage);
             startActivity(intent);
 
 
-        }
-        else {
+        } else {
 
 
             Intent intent = new Intent(this, AttendantOptionsActivity.class);
@@ -60,10 +76,7 @@ public class RecieptActivity extends AppCompatActivity {
         }
 
 
-
-
     }
-
 
 
 }

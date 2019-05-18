@@ -23,7 +23,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * The type Attendant options activity.
+ */
 public class AttendantOptionsActivity extends AppCompatActivity {
+    /**
+     * The Garage.
+     */
     Garage garage;
 
     @Override
@@ -39,26 +45,23 @@ public class AttendantOptionsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu );
+        inflater.inflate(R.menu.example_menu, menu);
 
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item1:
                 Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
                 displayGarage();
-
 
 
                 return true;
             case R.id.item2:
                 Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
                 displayGarage();
-
-
 
 
                 return true;
@@ -81,14 +84,24 @@ public class AttendantOptionsActivity extends AppCompatActivity {
     }
 
 
-    public void parkOption(View view){
+    /**
+     * Park option.
+     *
+     * @param view the view
+     */
+    public void parkOption(View view) {
         Intent intent = new Intent(this, AttendantParkActivity.class);
         intent.putExtra("Garage", garage);
         startActivity(intent);
     }
 
-    public void removeCar(View view){
-        Intent intent = new Intent(this,AttendantRemoveActivity.class);
+    /**
+     * Remove car.
+     *
+     * @param view the view
+     */
+    public void removeCar(View view) {
+        Intent intent = new Intent(this, AttendantRemoveActivity.class);
         intent.putExtra("Garage", garage);
 
         startActivity(intent);
@@ -96,10 +109,15 @@ public class AttendantOptionsActivity extends AppCompatActivity {
     }
 
 
-    public void logOut(View view){
+    /**
+     * Log out.
+     *
+     * @param view the view
+     */
+    public void logOut(View view) {
 
 
-        User user =  garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
+        User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
         user.setLoggedIn(false);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("Garage", garage);
@@ -109,56 +127,11 @@ public class AttendantOptionsActivity extends AppCompatActivity {
 
     }
 
-    public void saveGarage(){
 
-
-        Context context = AttendantOptionsActivity.this;
-
-        File file = new File(context.getFilesDir(), "garage.dat");
-
-
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-
-            out.writeObject(garage);
-
-            out.flush();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
-        garage.getBag().displayBagHash();
-
-    }
-
-    public void loadGarage(){
-
-
-        Context context = AttendantOptionsActivity.this;
-
-        File file = new File(context.getFilesDir(), "garage.dat");
-
-
-        FileInputStream fis;
-        try {
-            fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            garage = (Garage) ois.readObject();
-
-            ois.close();
-        } catch (FileNotFoundException e) {
-            System.out.println( e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-        }
-
-        garage.getBag().displayBagHash();
-
-        System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
-    }
-
-    public void displayGarage(){
+    /**
+     * Display garage.
+     */
+    public void displayGarage() {
 
         Intent intent2 = new Intent(this, DisplayGarageActivity.class);
         intent2.putExtra("Garage", garage);
@@ -167,7 +140,10 @@ public class AttendantOptionsActivity extends AppCompatActivity {
 
     }
 
-    public void displayAttendants(){
+    /**
+     * Display attendants.
+     */
+    public void displayAttendants() {
 
         Intent intent2 = new Intent(this, DisplayAttendantActivity.class);
         intent2.putExtra("Garage", garage);
@@ -176,7 +152,10 @@ public class AttendantOptionsActivity extends AppCompatActivity {
 
     }
 
-    public void displayRecords(){
+    /**
+     * Display records.
+     */
+    public void displayRecords() {
 
         Intent intent2 = new Intent(this, RecordsActivity.class);
         intent2.putExtra("Garage", garage);

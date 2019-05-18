@@ -14,7 +14,6 @@ public class RecordBagTest {
     Garage garage = new Garage(2,2,2);
 
 
-
     @Test
     public void getRecord() {
 

@@ -9,17 +9,34 @@ import android.text.TextUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Record.
+ */
 public class Record implements Serializable {
 
 
+    /**
+     * The License plate.
+     */
     String licensePlate;
+    /**
+     * The Vehicle.
+     */
     Vehicle vehicle;
 
+    /**
+     * The Reciepts.
+     */
     ArrayList<Reciept> reciepts;
 
 
-
-    public Record(Vehicle vehicle, String licensePlate){
+    /**
+     * Instantiates a new Record.
+     *
+     * @param vehicle      the vehicle
+     * @param licensePlate the license plate
+     */
+    public Record(Vehicle vehicle, String licensePlate) {
 
         reciepts = new ArrayList<Reciept>();
 
@@ -29,38 +46,69 @@ public class Record implements Serializable {
     }
 
 
-
-    public void addReciept(Reciept reciept){
+    /**
+     * Add reciept.
+     *
+     * @param reciept the reciept
+     */
+    public void addReciept(Reciept reciept) {
 
         reciepts.add(reciept);
 
     }
 
 
+    /**
+     * Gets vehicle.
+     *
+     * @return the vehicle
+     */
     public Vehicle getVehicle() {
         return vehicle;
     }
 
+    /**
+     * Sets vehicle.
+     *
+     * @param vehicle the vehicle
+     */
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
 
 
-
-
-
+    /**
+     * Gets reciepts.
+     *
+     * @return the reciepts
+     */
     public ArrayList<Reciept> getReciepts() {
         return reciepts;
     }
 
+    /**
+     * Sets reciepts.
+     *
+     * @param reciepts the reciepts
+     */
     public void setReciepts(ArrayList<Reciept> reciepts) {
         this.reciepts = reciepts;
     }
 
+    /**
+     * Gets license plate.
+     *
+     * @return the license plate
+     */
     public String getLicensePlate() {
         return licensePlate;
     }
 
+    /**
+     * Sets license plate.
+     *
+     * @param licensePlate the license plate
+     */
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
@@ -75,11 +123,15 @@ public class Record implements Serializable {
 
     }
 
+    /**
+     * To string span spanned string.
+     *
+     * @return the spanned string
+     */
     public SpannedString toStringSpan() {
 
 
-        SpannedString result = (SpannedString) TextUtils.concat( vehicle.toStringSpan());
-
+        SpannedString result = (SpannedString) TextUtils.concat(vehicle.toStringSpan());
 
 
         return result;
@@ -87,25 +139,29 @@ public class Record implements Serializable {
 
     }
 
+    /**
+     * To string present string.
+     *
+     * @return the string
+     */
     public String toStringPresent() {
-
 
 
         return "Record: " + "\n" +
                 vehicle + "\n" +
 
-                "Ticket: " + vehicle.getTicket() + "\n" ;
+                "Ticket: " + vehicle.getTicket() + "\n";
     }
 
+    /**
+     * To string span present spanned string.
+     *
+     * @return the spanned string
+     */
     public SpannedString toStringSpanPresent() {
 
 
-
-
         SpannedString result = (SpannedString) TextUtils.concat(vehicle.toStringSpan(), vehicle.getTicket().toStringSpan());
-
-
-
 
 
         return result;

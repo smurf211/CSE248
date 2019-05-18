@@ -13,21 +13,65 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The type Reciept.
+ */
 public class Reciept extends Ticket implements Serializable {
+    /**
+     * The Time in.
+     */
     String timeIn;
+    /**
+     * The Date in.
+     */
     String dateIn;
+    /**
+     * The Time out.
+     */
     String timeOut;
+    /**
+     * The Date out.
+     */
     String dateOut;
+    /**
+     * The Payment scheme.
+     */
     double paymentScheme;
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Rate.
+     */
     double rate;
 
+    /**
+     * Instantiates a new Reciept.
+     *
+     * @param timeIn  the time in
+     * @param timeOut the time out
+     */
     public Reciept(String timeIn, String timeOut) {
         this.timeIn = timeIn;
         this.timeOut = timeOut;
     }
 
-    public Reciept(Vehicle vehicle, String dateIn, String dateOut, String timeIn , String timeOut, boolean earlyBird, String spaceID,  double rate, double paymentScheme, Garage garage) {
+    /**
+     * Instantiates a new Reciept.
+     *
+     * @param vehicle       the vehicle
+     * @param dateIn        the date in
+     * @param dateOut       the date out
+     * @param timeIn        the time in
+     * @param timeOut       the time out
+     * @param earlyBird     the early bird
+     * @param spaceID       the space id
+     * @param rate          the rate
+     * @param paymentScheme the payment scheme
+     * @param garage        the garage
+     */
+    public Reciept(Vehicle vehicle, String dateIn, String dateOut, String timeIn, String timeOut, boolean earlyBird, String spaceID, double rate, double paymentScheme, Garage garage) {
         super(vehicle, dateIn, timeIn, rate, earlyBird, spaceID);
         this.timeIn = timeIn;
         this.dateIn = dateIn;
@@ -39,12 +83,20 @@ public class Reciept extends Ticket implements Serializable {
         this.garage = garage;
 
 
-
     }
 
 
-
-
+    /**
+     * Instantiates a new Reciept.
+     *
+     * @param vehicle   the vehicle
+     * @param date      the date
+     * @param time      the time
+     * @param rate      the rate
+     * @param earlyBird the early bird
+     * @param spaceID   the space id
+     * @param garage    the garage
+     */
     public Reciept(Vehicle vehicle, String date, String time, double rate, boolean earlyBird, String spaceID, Garage garage) {
         super(vehicle, date, time, rate, earlyBird, spaceID);
         this.timeIn = time;
@@ -70,6 +122,11 @@ public class Reciept extends Ticket implements Serializable {
     }
 
 
+    /**
+     * Calculate payment double.
+     *
+     * @return the double
+     */
     public double calculatePayment() {
 
         double totalSeconds = getTimeSeconds();
@@ -83,6 +140,11 @@ public class Reciept extends Ticket implements Serializable {
     }
 
 
+    /**
+     * Gets time seconds.
+     *
+     * @return the time seconds
+     */
     public double getTimeSeconds() {
         double timeInMinutes;
         double timeInSeconds;
@@ -111,6 +173,12 @@ public class Reciept extends Ticket implements Serializable {
         return Math.round(totalMinutes);
     }
 
+    /**
+     * Sleep.
+     *
+     * @param millis the millis
+     * @throws InterruptedException the interrupted exception
+     */
     public static void sleep(long millis) throws InterruptedException {
         Thread.sleep(millis);
     }
@@ -125,6 +193,11 @@ public class Reciept extends Ticket implements Serializable {
     }
 
 
+    /**
+     * Gets currency.
+     *
+     * @return the currency
+     */
     public String getCurrency() {
         if (earlyBird) {
             return "$" + Ticket.addZeroToRate(paymentScheme);
@@ -134,30 +207,66 @@ public class Reciept extends Ticket implements Serializable {
         }
     }
 
+    /**
+     * Sets rate.
+     *
+     * @param rate the rate
+     */
     public void setRate(double rate) {
         this.rate = rate;
     }
 
+    /**
+     * Gets payment scheme.
+     *
+     * @return the payment scheme
+     */
     public double getPaymentScheme() {
         return paymentScheme;
     }
 
+    /**
+     * Gets time out.
+     *
+     * @return the time out
+     */
     public String getTimeOut() {
         return timeOut;
     }
 
+    /**
+     * Sets time out.
+     *
+     * @param timeOut the time out
+     */
     public void setTimeOut(String timeOut) {
         this.timeOut = timeOut;
     }
 
+    /**
+     * Gets date out.
+     *
+     * @return the date out
+     */
     public String getDateOut() {
         return dateOut;
     }
 
+    /**
+     * Sets date out.
+     *
+     * @param dateOut the date out
+     */
     public void setDateOut(String dateOut) {
         this.dateOut = dateOut;
     }
 
+    /**
+     * Convert time from military string.
+     *
+     * @param time the time
+     * @return the string
+     */
     public static String convertTimeFromMilitary(String time) {
 
         String minutes;
@@ -193,13 +302,13 @@ public class Reciept extends Ticket implements Serializable {
     public String toString() {
 
 
-        return  "Reciept" + "\n" +
-                "Time In: \t\t" + convertTimeFromMilitary(timeIn)  +
+        return "Reciept" + "\n" +
+                "Time In: \t\t" + convertTimeFromMilitary(timeIn) +
                 " \t\tOut: " + convertTimeFromMilitary(timeOut) + '\n' +
-                "Date In: \t\t\t" + dateIn  +
+                "Date In: \t\t\t" + dateIn +
                 " \t\tOut: " + dateOut + '\n' +
                 "Rate: " + Ticket.addZeroToRate(rate) + '\n' +
-                "Amount " + "Due: " + getCurrency()  +
+                "Amount " + "Due: " + getCurrency() +
                 " Paid: " + getCurrency() + "\n" +
                 "Early Bird: " + getEarlyBirdString() + "\n" +
                 "License Plate: " + getVehicle().getLicensePlate() + '\n' +
@@ -213,7 +322,7 @@ public class Reciept extends Ticket implements Serializable {
     }
 
 
-    public SpannedString toStringSpan(){
+    public SpannedString toStringSpan() {
         //displayField.setText(reciept.toStringSpan());
         String reciept = "\nReceipt\n";
 
@@ -265,36 +374,32 @@ public class Reciept extends Ticket implements Serializable {
         SpannableString str10 = new SpannableString(licensePlate + normalText9);
         str10.setSpan(new StyleSpan(Typeface.BOLD), 0, licensePlate.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        String category =  "Category: ";
+        String category = "Category: ";
         String normalText10 = getVehicle().getCategory() + '\n';
         SpannableString str11 = new SpannableString(category + normalText10);
         str11.setSpan(new StyleSpan(Typeface.BOLD), 0, category.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        String aParked =  "Attendant Parked: ";
+        String aParked = "Attendant Parked: ";
         String normalText11 = getVehicle().getAttendantFirstName() + " " +
                 getVehicle().getAttendantLastName() + " " + getVehicle().getAttendantId() + "\n";
         SpannableString str12 = new SpannableString(aParked + normalText11);
         str12.setSpan(new StyleSpan(Typeface.BOLD), 0, aParked.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        String aRemoved =  "Attendant Removed: ";
+        String aRemoved = "Attendant Removed: ";
         String normalText12 = vehicle.getAttendantRemovedFirst() + " "
                 + vehicle.getAttendantRemovedLast() + " " + vehicle.getAttendantRemovedId() + "\n";
         SpannableString str13 = new SpannableString(aRemoved + normalText12);
         str13.setSpan(new StyleSpan(Typeface.BOLD), 0, aRemoved.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        String spaceID =  "Space ID: ";
+        String spaceID = "Space ID: ";
         String normalText13 = this.spaceID + "\n";
         SpannableString str14 = new SpannableString(spaceID + normalText13);
         str14.setSpan(new StyleSpan(Typeface.BOLD), 0, spaceID.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
-
-
         SpannedString result = (SpannedString) TextUtils.concat(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14);
 
 
-
-
-        return  result;
+        return result;
     }
 }

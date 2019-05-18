@@ -15,19 +15,58 @@ import com.project.cse248garage.model.Garage;
 import com.project.cse248garage.model.User;
 import com.project.cse248garage.model.UserAccountBag;
 
+/**
+ * The type Create attendant activity.
+ */
 public class CreateAttendantActivity extends AppCompatActivity {
 
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Check.
+     */
     CheckCredentials check;
+    /**
+     * The User name field.
+     */
     EditText userNameField;
+    /**
+     * The Password field.
+     */
     EditText passwordField;
+    /**
+     * The Firstname field.
+     */
     EditText firstname_field;
+    /**
+     * The Lastname field.
+     */
     EditText lastname_field;
+    /**
+     * The User name.
+     */
     String userName;
+    /**
+     * The Password.
+     */
     String password;
+    /**
+     * The First name.
+     */
     String firstName;
+    /**
+     * The Last name.
+     */
     String lastName;
+    /**
+     * The Result id.
+     */
     static String resultID;
+    /**
+     * The Test user.
+     */
     User testUser;
 
 
@@ -35,29 +74,33 @@ public class CreateAttendantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_attendant);
-        // bag  = (UserAccountBag) getIntent().getSerializableExtra("UserAccountBag");
-        garage  = (Garage) getIntent().getSerializableExtra("Garage");
+
+        garage = (Garage) getIntent().getSerializableExtra("Garage");
         check = new CheckCredentials();
 
     }
 
 
-
-    public void createAttendant(View view){
+    /**
+     * Create attendant.
+     *
+     * @param view the view
+     */
+    public void createAttendant(View view) {
 
         String type = "register";
 
-         userNameField = findViewById(R.id.username_field);
-         passwordField = findViewById(R.id.password_field);
-         firstname_field = findViewById(R.id.firstname_field);
-         lastname_field = findViewById(R.id.lastname_field);
+        userNameField = findViewById(R.id.username_field);
+        passwordField = findViewById(R.id.password_field);
+        firstname_field = findViewById(R.id.firstname_field);
+        lastname_field = findViewById(R.id.lastname_field);
 
         userName = userNameField.getText().toString();
         password = passwordField.getText().toString();
         firstName = firstname_field.getText().toString();
         lastName = lastname_field.getText().toString();
 
-        if(!checkLogin()){
+        if (!checkLogin()) {
             return;
         }
 
@@ -68,24 +111,26 @@ public class CreateAttendantActivity extends AppCompatActivity {
         testUser = garage.getBag().getUser(userName, garage.getBag().getUserAccountHash());
 
 
+        TextView displayAttendant = findViewById(R.id.display_field);
 
 
+        displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toStringAdmin());
 
-       TextView displayAttendant = findViewById(R.id.display_field);
-
-
-         displayAttendant.setText(garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash()).toStringAdmin());
-
-         userNameField.setText("");
-         passwordField.setText("");
-         firstname_field.setText("");
-         lastname_field.setText("");
+        userNameField.setText("");
+        passwordField.setText("");
+        firstname_field.setText("");
+        lastname_field.setText("");
 
 
     }
 
-    public void nextView(View view){
-        if(testUser != null) {
+    /**
+     * Next view.
+     *
+     * @param view the view
+     */
+    public void nextView(View view) {
+        if (testUser != null) {
             System.out.println("*******************************" + resultID);
             String[] resultTokens = resultID.split(" ");
             resultID = resultTokens[2];
@@ -100,27 +145,30 @@ public class CreateAttendantActivity extends AppCompatActivity {
 
     }
 
-    public boolean checkLogin(){
+    /**
+     * Check login boolean.
+     *
+     * @return the boolean
+     */
+    public boolean checkLogin() {
 
-        if(!check.checkUserNameHash(userName, garage.getBag().getUserAccountHash())){
+        if (!check.checkUserNameHash(userName, garage.getBag().getUserAccountHash())) {
 
-            if(userName.equals("")){
+            if (userName.equals("")) {
                 userNameField.setError("Enter a username");
                 return false;
-            }
-            else {
+            } else {
                 userNameField.setError("Username in use");
                 return false;
             }
         }
 
-        if(!check.checkPassword(password)){
+        if (!check.checkPassword(password)) {
 
-            if(password.equals("")){
+            if (password.equals("")) {
                 passwordField.setError("Enter a password");
                 return false;
-            }
-            else {
+            } else {
                 passwordField.setError("Password must be 8 characters, contain a capital letter, lowercase letter and a special character");
                 return false;
             }
@@ -128,25 +176,35 @@ public class CreateAttendantActivity extends AppCompatActivity {
 
         }
 
-        if(firstName.equals("")){
+        if (firstName.equals("")) {
             firstname_field.setError("enter a first name");
             return false;
         }
 
-        if(lastName.equals("")){
+        if (lastName.equals("")) {
             lastname_field.setError("enter a last name");
             return false;
         }
 
 
-    return true;
+        return true;
 
     }
 
+    /**
+     * Gets result id.
+     *
+     * @return the result id
+     */
     public static String getResultID() {
         return resultID;
     }
 
+    /**
+     * Sets result id.
+     *
+     * @param resultID the result id
+     */
     public static void setResultID(String resultID) {
         CreateAttendantActivity.resultID = resultID;
     }

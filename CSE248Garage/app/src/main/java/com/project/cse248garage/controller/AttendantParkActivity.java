@@ -24,26 +24,89 @@ import com.project.cse248garage.model.Truck;
 import com.project.cse248garage.model.User;
 import com.project.cse248garage.model.Vehicle;
 
+/**
+ * The type Attendant park activity.
+ */
 public class AttendantParkActivity extends AppCompatActivity {
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The License plate.
+     */
     String licensePlate;
+    /**
+     * The Car button.
+     */
     RadioButton carButton;
+    /**
+     * The Truck button.
+     */
     RadioButton truckButton;
+    /**
+     * The Moto button.
+     */
     RadioButton motoButton;
+    /**
+     * The License field.
+     */
     EditText licenseField;
+    /**
+     * The Early bird switch.
+     */
     Switch earlyBirdSwitch;
+    /**
+     * The Early bird.
+     */
     boolean earlyBird;
+    /**
+     * The Rg 1.
+     */
     RadioGroup rg1;
+    /**
+     * The Category.
+     */
     String category;
+    /**
+     * The Vehicle.
+     */
     Vehicle vehicle;
+    /**
+     * The User.
+     */
     User user;
+    /**
+     * The False category.
+     */
     String falseCategory;
+    /**
+     * The Background worker.
+     */
     BackgroundWorker backgroundWorker;
+    /**
+     * The Background worker 1.
+     */
     BackgroundWorker backgroundWorker1;
+    /**
+     * The Result id.
+     */
     static String resultID;
+    /**
+     * The Type park.
+     */
     String typePark = "park vehicle";
+    /**
+     * The Open space.
+     */
     ParkingSpace openSpace;
+    /**
+     * The Parked.
+     */
     boolean parked = false;
+    /**
+     * The Button 4.
+     */
     Button button4;
 
 
@@ -62,6 +125,11 @@ public class AttendantParkActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Park vehicle.
+     *
+     * @param view the view
+     */
     public void parkVehicle(View view) {
 
 
@@ -154,6 +222,11 @@ public class AttendantParkActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Park car.
+     *
+     * @param category the category
+     */
     public void parkCar(String category) {
 
 
@@ -181,8 +254,7 @@ public class AttendantParkActivity extends AppCompatActivity {
             builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // carButton.setChecked(false);
-                    //  truckButton.setChecked(true);
+
                     parkTruck(falseCategory);
 
 
@@ -207,9 +279,14 @@ public class AttendantParkActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Park truck.
+     *
+     * @param category the category
+     */
     public void parkTruck(String category) {
 
-        // category = truckButton.getText().toString().toLowerCase();
+
         vehicle = new Truck(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
         vehicle.setFalseCategory(category);
 
@@ -256,10 +333,15 @@ public class AttendantParkActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Park moto.
+     *
+     * @param category the category
+     */
     public void parkMoto(String category) {
         falseCategory = category;
 
-        // category = motoButton.getText().toString().toLowerCase();
+
         vehicle = new Motorcycle(licensePlate, user.emitFirstName(), user.emitLastName(), user.emitID());
         vehicle.setFalseCategory(category);
 
@@ -283,8 +365,7 @@ public class AttendantParkActivity extends AppCompatActivity {
             builder.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // motoButton.setChecked(false);
-                    // carButton.setChecked(true);
+
 
                     if (garage.findClosestSpace("car") == null) {
                         parkTruck(falseCategory);
@@ -308,46 +389,46 @@ public class AttendantParkActivity extends AppCompatActivity {
             button4.setAlpha(alpha);
 
 
-
         }
 
 
     }
 
 
+    /**
+     * Next view.
+     *
+     * @param view the view
+     */
     public void nextView(View view) {
 
-       // System.out.println("*******************************" + resultID);
+
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
 
 
-        if(parked) {
+        if (parked) {
             String[] resultTokens = resultID.split(" ");
             resultID = resultTokens[2];
             ParkingSpace space = garage.findByPlate(licensePlate);
             space.getVehicle().setVehicleId(Integer.valueOf(resultID));
             System.out.println(space.getVehicle());
 
-             backgroundWorker1.execute(typePark, openSpace.getCategory(), String.valueOf(openSpace.getCarDistance()), String.valueOf(openSpace.getTruckDistance()), String.valueOf(openSpace.getMotorcycleDistance()),
-            String.valueOf(openSpace.getDistance()), Garage.convertBoolean(earlyBird), Garage.convertBoolean(openSpace.isFree()),
-            String.valueOf(vehicle.getVehicleId()), String.valueOf(openSpace.getTime()), String.valueOf(openSpace.getDate()), openSpace.getSpaceID());
+            backgroundWorker1.execute(typePark, openSpace.getCategory(), String.valueOf(openSpace.getCarDistance()), String.valueOf(openSpace.getTruckDistance()), String.valueOf(openSpace.getMotorcycleDistance()),
+                    String.valueOf(openSpace.getDistance()), Garage.convertBoolean(earlyBird), Garage.convertBoolean(openSpace.isFree()),
+                    String.valueOf(vehicle.getVehicleId()), String.valueOf(openSpace.getTime()), String.valueOf(openSpace.getDate()), openSpace.getSpaceID());
 
             Intent intent = new Intent(this, TicketActivity.class);
             intent.putExtra("Garage", garage);
             intent.putExtra("LicensePlate", licensePlate);
             startActivity(intent);
 
-}
-
-
-        else if(user.isAdmin()){
+        } else if (user.isAdmin()) {
             Intent intent = new Intent(this, ManagerSelectActivity.class);
             intent.putExtra("Garage", garage);
             startActivity(intent);
 
 
-        }
-        else {
+        } else {
 
 
             Intent intent = new Intent(this, AttendantOptionsActivity.class);
@@ -356,13 +437,22 @@ public class AttendantParkActivity extends AppCompatActivity {
         }
 
 
-
     }
 
+    /**
+     * Gets result id.
+     *
+     * @return the result id
+     */
     public static String getResultID() {
         return resultID;
     }
 
+    /**
+     * Sets result id.
+     *
+     * @param resultID the result id
+     */
     public static void setResultID(String resultID) {
         AttendantParkActivity.resultID = resultID;
     }

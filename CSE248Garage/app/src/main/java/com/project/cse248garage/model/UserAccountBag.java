@@ -24,11 +24,20 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
+/**
+ * The type User account bag.
+ */
 public class UserAccountBag implements Serializable {
 
     private int nElems;
+    /**
+     * The User account hash.
+     */
     public HashMap<User, String> userAccountHash = new HashMap<User, String>();
 
+    /**
+     * Instantiates a new User account bag.
+     */
     public UserAccountBag() {
 
         nElems = 0;
@@ -39,9 +48,14 @@ public class UserAccountBag implements Serializable {
     }
 
 
-
-
-
+    /**
+     * Gets user.
+     *
+     * @param userName the user name
+     * @param password the password
+     * @param map      the map
+     * @return the user
+     */
     public User getUser(String userName, String password, HashMap<User, String> map) {
 
         User user = null;
@@ -62,6 +76,13 @@ public class UserAccountBag implements Serializable {
 
     }
 
+    /**
+     * Gets user.
+     *
+     * @param userName the user name
+     * @param map      the map
+     * @return the user
+     */
     public User getUser(String userName, HashMap<User, String> map) {
 
         User user = null;
@@ -84,8 +105,12 @@ public class UserAccountBag implements Serializable {
     }
 
 
-
-
+    /**
+     * Gets users array list.
+     *
+     * @param map the map
+     * @return the users array list
+     */
     public ArrayList<String> getUsersArrayList(HashMap<User, String> map) {
 
         ArrayList<String> userNames = new ArrayList<String>();
@@ -104,6 +129,12 @@ public class UserAccountBag implements Serializable {
 
     }
 
+    /**
+     * Gets logged in user.
+     *
+     * @param map the map
+     * @return the logged in user
+     */
     public User getLoggedInUser(HashMap<User, String> map) {
 
         String userName;
@@ -124,6 +155,16 @@ public class UserAccountBag implements Serializable {
     }
 
 
+    /**
+     * Create manager account boolean.
+     *
+     * @param userName  the user name
+     * @param password  the password
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param admin     the admin
+     * @return the boolean
+     */
     public boolean createManagerAccount(String userName, String password, String firstName, String lastName, boolean admin) {
 
         CheckCredentials create = new CheckCredentials();
@@ -139,21 +180,33 @@ public class UserAccountBag implements Serializable {
 
     }
 
+    /**
+     * Create manager account loose.
+     *
+     * @param userName  the user name
+     * @param password  the password
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param admin     the admin
+     */
     public void createManagerAccountLoose(String userName, String password, String firstName, String lastName, boolean admin) {
 
 
-
-
-
-            Manager user = new Manager(userName, password, firstName, lastName, admin);
-            userAccountHash.put(user, user.emitUserName());
-
-
-
+        Manager user = new Manager(userName, password, firstName, lastName, admin);
+        userAccountHash.put(user, user.emitUserName());
 
 
     }
 
+    /**
+     * Create attendant account boolean.
+     *
+     * @param userName  the user name
+     * @param password  the password
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @return the boolean
+     */
     public boolean createAttendantAccount(String userName, String password, String firstName, String lastName) {
 
 
@@ -171,19 +224,31 @@ public class UserAccountBag implements Serializable {
     }
 
 
-
+    /**
+     * Remove user.
+     *
+     * @param user the user
+     */
     public void removeUser(User user) {
 
         userAccountHash.remove(user);
     }
 
 
+    /**
+     * Display bag hash.
+     */
     public void displayBagHash() {
 
         System.out.println(Arrays.asList(userAccountHash));
 
     }
 
+    /**
+     * Display bag admin string.
+     *
+     * @return the string
+     */
     public String displayBagAdmin() {
         int i = 1;
         String display = "";
@@ -205,9 +270,11 @@ public class UserAccountBag implements Serializable {
     }
 
 
-
-
-
+    /**
+     * Display bag user string.
+     *
+     * @return the string
+     */
     public String displayBagUser() {
         int i = 1;
         String display = "";
@@ -228,10 +295,20 @@ public class UserAccountBag implements Serializable {
 
     }
 
+    /**
+     * Gets elems.
+     *
+     * @return the elems
+     */
     public int getnElems() {
         return nElems;
     }
 
+    /**
+     * Gets user account hash.
+     *
+     * @return the user account hash
+     */
     public HashMap<User, String> getUserAccountHash() {
         return userAccountHash;
     }

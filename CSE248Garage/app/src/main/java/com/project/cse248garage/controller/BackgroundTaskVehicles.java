@@ -21,24 +21,50 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * The type Background task vehicles.
+ */
 class BackgroundTaskVehicles extends AsyncTask<String, Void, String> {
+    /**
+     * The Context.
+     */
     Context context;
+    /**
+     * The Json object.
+     */
     JSONObject jsonObject;
+    /**
+     * The Json array.
+     */
     JSONArray jsonArray;
+    /**
+     * The Garage.
+     */
     Garage garage;
 
+    /**
+     * Instantiates a new Background task vehicles.
+     *
+     * @param ctx the ctx
+     */
     public BackgroundTaskVehicles(Context ctx) {
 
         context = ctx;
     }
 
 
-
-
+    /**
+     * The Json url vehicles.
+     */
     String json_url_vehicles;
+    /**
+     * The Json string.
+     */
     String JSON_STRING;
+    /**
+     * The Json result vehicles.
+     */
     String json_result_vehicles;
-
 
 
     @Override
@@ -53,11 +79,10 @@ class BackgroundTaskVehicles extends AsyncTask<String, Void, String> {
         json_url_vehicles = "http://smurf211.com/json_get_data_vehicles.php";
 
 
-
         String type = param[0];
 
 
-        if(type.equals("vehicles")){
+        if (type.equals("vehicles")) {
 
 
             try {
@@ -94,8 +119,6 @@ class BackgroundTaskVehicles extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
 
 
-
-
         json_result_vehicles = result;
 
 
@@ -103,7 +126,6 @@ class BackgroundTaskVehicles extends AsyncTask<String, Void, String> {
 
         // garage.toString();
         //  createGarage();
-
 
 
     }

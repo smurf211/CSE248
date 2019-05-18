@@ -10,6 +10,9 @@ import android.text.style.StyleSpan;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * The type User.
+ */
 public class User implements Serializable {
 
     private String firstName;
@@ -22,12 +25,25 @@ public class User implements Serializable {
     private String password;
 
 
+    /**
+     * Instantiates a new User.
+     */
     public User() {
 
     }
 
 
-    public User(int iD, String firstName, String lastName, String userName, String password,boolean admin) {
+    /**
+     * Instantiates a new User.
+     *
+     * @param iD        the d
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param userName  the user name
+     * @param password  the password
+     * @param admin     the admin
+     */
+    public User(int iD, String firstName, String lastName, String userName, String password, boolean admin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.iD = iD;
@@ -36,6 +52,15 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    /**
+     * Instantiates a new User.
+     *
+     * @param userName  the user name
+     * @param password  the password
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param admin     the admin
+     */
     public User(String userName, String password, String firstName, String lastName, boolean admin) {
         this.userName = userName;
         this.password = password;
@@ -47,8 +72,9 @@ public class User implements Serializable {
     }
 
 
-
-
+    /**
+     * Generate password.
+     */
     public void generatePassword() {
 
         int length = 8;
@@ -83,50 +109,97 @@ public class User implements Serializable {
 
     }
 
+    /**
+     * Emit first name string.
+     *
+     * @return the string
+     */
     public String emitFirstName() {
         return firstName;
     }
 
 
+    /**
+     * Emit last name string.
+     *
+     * @return the string
+     */
     public String emitLastName() {
         return lastName;
     }
 
 
+    /**
+     * Emit id int.
+     *
+     * @return the int
+     */
     public int emitID() {
         return iD;
     }
 
+    /**
+     * Sets d.
+     *
+     * @param iD the d
+     */
     public void setiD(int iD) {
         this.iD = iD;
     }
 
+    /**
+     * Emit user name string.
+     *
+     * @return the string
+     */
     public String emitUserName() {
         return userName;
     }
 
 
+    /**
+     * Emit password string.
+     *
+     * @return the string
+     */
     public String emitPassword() {
         return password;
     }
 
+    /**
+     * Is admin boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAdmin() {
         return admin;
     }
 
+    /**
+     * Is logged in boolean.
+     *
+     * @return the boolean
+     */
     public boolean isLoggedIn() {
         return loggedIn;
     }
 
+    /**
+     * Sets logged in.
+     *
+     * @param loggedIn the logged in
+     */
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
 
-
-
+    /**
+     * To string admin span spanned string.
+     *
+     * @return the spanned string
+     */
     public SpannedString toStringAdminSpan() {
-
 
 
         String nameStr = "Name: ";
@@ -158,9 +231,7 @@ public class User implements Serializable {
         SpannedString result = (SpannedString) TextUtils.concat(str2, str3, str4, str5, str6);
 
 
-
-
-        return  result;
+        return result;
 
 
     }
@@ -175,6 +246,11 @@ public class User implements Serializable {
                         "\n password: " + "*******";
     }
 
+    /**
+     * To string admin string.
+     *
+     * @return the string
+     */
     public String toStringAdmin() {
         return
                 "Name: " + firstName + " " + lastName
@@ -184,8 +260,12 @@ public class User implements Serializable {
                         "\n password: " + password;
     }
 
+    /**
+     * To string span spanned string.
+     *
+     * @return the spanned string
+     */
     public SpannedString toStringSpan() {
-
 
 
         String nameStr = "Name: ";
@@ -217,9 +297,7 @@ public class User implements Serializable {
         SpannedString result = (SpannedString) TextUtils.concat(str2, str3, str4, str5, str6);
 
 
-
-
-        return  result;
+        return result;
 
 
     }

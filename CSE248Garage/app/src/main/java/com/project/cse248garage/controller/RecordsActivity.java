@@ -19,11 +19,29 @@ import com.project.cse248garage.model.Record;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Records activity.
+ */
 public class RecordsActivity extends AppCompatActivity {
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Spinner array plates.
+     */
     List<String> spinnerArrayPlates;
+    /**
+     * The Spinner array users.
+     */
     List<String> spinnerArrayUsers;
+    /**
+     * The Plate numbers.
+     */
     Spinner plateNumbers;
+    /**
+     * The Attendants.
+     */
     Spinner attendants;
 
     @Override
@@ -33,12 +51,11 @@ public class RecordsActivity extends AppCompatActivity {
 
         garage = (Garage) getIntent().getSerializableExtra("Garage");
 
-        if(garage.getGarageSize() > 0) {
+        if (garage.getGarageSize() > 0) {
 
             spinnerArrayPlates = garage.getRecordBag().getLicensePlates(garage);
 
-        }
-        else{
+        } else {
             spinnerArrayPlates = new ArrayList<String>();
 
         }
@@ -52,26 +69,28 @@ public class RecordsActivity extends AppCompatActivity {
         plateNumbers.setAdapter(adapter);
 
 
-
-
-
     }
 
 
-    public void displayByPlate(View view){
+    /**
+     * Display by plate.
+     *
+     * @param view the view
+     */
+    public void displayByPlate(View view) {
         TextView displayField = findViewById(R.id.display_field);
 
         displayField.setText("");
 
 
-        if(plateNumbers.getSelectedItem() == null){
+        if (plateNumbers.getSelectedItem() == null) {
             return;
         }
 
         String selected = plateNumbers.getSelectedItem().toString();
-        if(selected.contains("(")){
-           String[] tokens = selected.split("[(]");
-           selected = tokens[0].trim();
+        if (selected.contains("(")) {
+            String[] tokens = selected.split("[(]");
+            selected = tokens[0].trim();
 
             Record record = garage.getRecordBag().getRecord(selected);
 
@@ -80,15 +99,11 @@ public class RecordsActivity extends AppCompatActivity {
 
             displayField.setMovementMethod(new ScrollingMovementMethod());
 
-            //displayField.setText(record.toStringPresent());
 
             displayField.setText(record.toStringSpanPresent());
 
 
-
-
-        }
-        else {
+        } else {
             Record record = garage.getRecordBag().getRecord(selected);
 
             System.out.println(selected);
@@ -98,32 +113,12 @@ public class RecordsActivity extends AppCompatActivity {
 
             displayField.setText(record.toStringSpan());
             ArrayList<Reciept> reciepts = record.getReciepts();
-            for(int i =0; i< reciepts.size(); i++){
+            for (int i = 0; i < reciepts.size(); i++) {
 
                 displayField.append(reciepts.get(i).toStringSpan());
             }
 
         }
-
-
-    }
-
-    public void displayByUser(View view){
-
-
-        if(attendants.getSelectedItem() == null){
-            return;
-        }
-
-        String selected = attendants.getSelectedItem().toString();
-        Record record = garage.getRecordBag().getRecord(selected);
-
-        TextView displayField = findViewById(R.id.display_field);
-
-        displayField.setMovementMethod(new ScrollingMovementMethod());
-        displayField.setText(record.toString());
-        System.out.println(record.toString());
-
 
 
     }

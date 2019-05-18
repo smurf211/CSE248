@@ -14,13 +14,30 @@ import com.project.cse248garage.model.ParkingSpace;
 import com.project.cse248garage.model.Reciept;
 import com.project.cse248garage.model.User;
 
+/**
+ * The type Attendant remove activity.
+ */
 public class AttendantRemoveActivity extends AppCompatActivity {
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Reciept.
+     */
     Reciept reciept;
+    /**
+     * The Background worker.
+     */
     BackgroundWorker backgroundWorker;
+    /**
+     * The History worker.
+     */
     BackgroundWorker historyWorker;
+    /**
+     * The Button 7.
+     */
     Button button7;
-
 
 
     @Override
@@ -34,19 +51,22 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         button7 = findViewById(R.id.button7);
     }
 
-    public void removeVehicle(View view){
+    /**
+     * Remove vehicle.
+     *
+     * @param view the view
+     */
+    public void removeVehicle(View view) {
 
         EditText licenseField = findViewById(R.id.license_field);
         String licensePlate = licenseField.getText().toString();
 
 
-        if(garage.findByPlate(licensePlate) == null){
+        if (garage.findByPlate(licensePlate) == null) {
 
             licenseField.setError("Vehicle not found..");
             return;
         }
-
-
 
 
         reciept = garage.removeCar(licensePlate, backgroundWorker, historyWorker);
@@ -55,21 +75,14 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         button7.setAlpha(alpha);
 
 
-      //  TextView displayField = findViewById(R.id.display_field);
-      // displayField.setText(reciept.toString());
-
-
-
-
-
-
-
-
-
-
     }
 
-    public void done(View view){
+    /**
+     * Done.
+     *
+     * @param view the view
+     */
+    public void done(View view) {
 
         Intent intent = new Intent(this, AttendantOptionsActivity.class);
         intent.putExtra("Garage", garage);
@@ -77,10 +90,12 @@ public class AttendantRemoveActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void nextView(View view){
-
-
-
+    /**
+     * Next view.
+     *
+     * @param view the view
+     */
+    public void nextView(View view) {
 
 
         Intent intent = new Intent(this, RecieptActivity.class);

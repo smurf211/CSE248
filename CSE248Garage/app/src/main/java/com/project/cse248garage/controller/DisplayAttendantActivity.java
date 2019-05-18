@@ -12,7 +12,13 @@ import com.project.cse248garage.model.User;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * The type Display attendant activity.
+ */
 public class DisplayAttendantActivity extends AppCompatActivity {
+    /**
+     * The Garage.
+     */
     Garage garage;
 
     @Override
@@ -26,14 +32,17 @@ public class DisplayAttendantActivity extends AppCompatActivity {
     }
 
 
-    public void displayAttendants(){
+    /**
+     * Display attendants.
+     */
+    public void displayAttendants() {
 
         User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
 
-        if(user.isAdmin()) {
+        if (user.isAdmin()) {
 
             TextView displayField = findViewById(R.id.display_field);
-            //displayField.setText(garage.getBag().displayBagAdmin());
+
             int i = 1;
 
             User userTemp;
@@ -42,16 +51,14 @@ public class DisplayAttendantActivity extends AppCompatActivity {
                 Map.Entry pair = (Map.Entry) it.next();
 
                 userTemp = (User) pair.getKey();
-                displayField.append( userTemp.toStringAdminSpan() );
+                displayField.append(userTemp.toStringAdminSpan());
                 i++;
 
             }
-        }
-
-        else{
+        } else {
 
             TextView displayField = findViewById(R.id.display_field);
-            //displayField.setText(garage.getBag().displayBagUser());
+
             int i = 1;
 
             User userTemp;
@@ -60,7 +67,7 @@ public class DisplayAttendantActivity extends AppCompatActivity {
                 Map.Entry pair = (Map.Entry) it.next();
 
                 userTemp = (User) pair.getKey();
-                displayField.append( userTemp.toStringSpan() );
+                displayField.append(userTemp.toStringSpan());
                 i++;
 
             }

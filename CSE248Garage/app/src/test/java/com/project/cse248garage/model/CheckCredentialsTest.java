@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 public class CheckCredentialsTest {
 
 
-
     @Test
     public void checkPassword() {
         CheckCredentials create = new CheckCredentials();

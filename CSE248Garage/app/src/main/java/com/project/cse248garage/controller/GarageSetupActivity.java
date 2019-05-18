@@ -16,20 +16,62 @@ import com.project.cse248garage.model.Motorcycle;
 import com.project.cse248garage.model.Truck;
 import com.project.cse248garage.model.UserAccountBag;
 
+/**
+ * The type Garage setup activity.
+ */
 public class GarageSetupActivity extends AppCompatActivity {
 
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Car space field.
+     */
     EditText carSpaceField;
+    /**
+     * The Truck space field.
+     */
     EditText truckSpaceField;
+    /**
+     * The Motorcycle space field.
+     */
     EditText motorcycleSpaceField;
+    /**
+     * The Car spaces.
+     */
     int carSpaces;
+    /**
+     * The Truck spaces.
+     */
     int truckSpaces;
+    /**
+     * The Motorcycle spaces.
+     */
     int motorcycleSpaces;
+    /**
+     * The Car early bird.
+     */
     EditText carEarlyBird;
+    /**
+     * The Car per hour.
+     */
     EditText carPerHour;
+    /**
+     * The Truck early bird.
+     */
     EditText truckEarlyBird;
+    /**
+     * The Truck per hour.
+     */
     EditText truckPerHour;
+    /**
+     * The Motorcycle early bird.
+     */
     EditText motorcycleEarlyBird;
+    /**
+     * The Motorcycle per hour.
+     */
     EditText motorcyclePerHour;
 
     @Override
@@ -38,17 +80,22 @@ public class GarageSetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_garagesetup);
 
 
-          garage = (Garage) getIntent().getSerializableExtra("Garage");
+        garage = (Garage) getIntent().getSerializableExtra("Garage");
 
 
     }
 
-    public void createGarage(View view){
+    /**
+     * Create garage.
+     *
+     * @param view the view
+     */
+    public void createGarage(View view) {
 
 
-         carSpaceField = findViewById(R.id.carspace_field);
-         truckSpaceField = findViewById(R.id.truckspace_field);
-         motorcycleSpaceField = findViewById(R.id.motorcyclespace_field);
+        carSpaceField = findViewById(R.id.carspace_field);
+        truckSpaceField = findViewById(R.id.truckspace_field);
+        motorcycleSpaceField = findViewById(R.id.motorcyclespace_field);
         carEarlyBird = findViewById(R.id.car_earlybird);
         carPerHour = findViewById(R.id.car_perhour);
         truckEarlyBird = findViewById(R.id.truck_earlybird);
@@ -56,7 +103,7 @@ public class GarageSetupActivity extends AppCompatActivity {
         motorcycleEarlyBird = findViewById(R.id.motorcycle_earlybird);
         motorcyclePerHour = findViewById(R.id.motorcycle_perhour);
 
-        if(!checkEmptyValues()){
+        if (!checkEmptyValues()) {
             return;
         }
 
@@ -65,37 +112,27 @@ public class GarageSetupActivity extends AppCompatActivity {
         truckSpaces = Integer.parseInt(truckSpaceField.getText().toString());
         motorcycleSpaces = Integer.parseInt(motorcycleSpaceField.getText().toString());
 
-         garage.setSpaces(carSpaces, truckSpaces, motorcycleSpaces);
-
-
-
-
-
+        garage.setSpaces(carSpaces, truckSpaces, motorcycleSpaces);
 
 
         String carValueEarlyBird = carEarlyBird.getText().toString();
         garage.setCarEarlyBird(Double.valueOf(carValueEarlyBird));
 
 
-
         String carValuePerHour = carPerHour.getText().toString();
         garage.setCarPerHour(Double.valueOf(carValuePerHour));
-
 
 
         String truckValueEarlyBird = truckEarlyBird.getText().toString();
         garage.setTruckEarlyBird(Double.valueOf(truckValueEarlyBird));
 
 
-
         String truckValuePerHour = truckPerHour.getText().toString();
         garage.setTruckPerHour(Double.valueOf(truckValuePerHour));
 
 
-
         String motoValueEarlyBird = motorcycleEarlyBird.getText().toString();
         garage.setMotoEarlyBird(Double.valueOf(motoValueEarlyBird));
-
 
 
         String motoValuePerHour = motorcyclePerHour.getText().toString();
@@ -106,35 +143,38 @@ public class GarageSetupActivity extends AppCompatActivity {
 
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         backgroundWorker.execute(type, String.valueOf(carSpaces), String.valueOf(truckSpaces), String.valueOf(motorcycleSpaces), carValueEarlyBird,
-                carValuePerHour, truckValueEarlyBird,truckValuePerHour, motoValueEarlyBird, motoValuePerHour);
+                carValuePerHour, truckValueEarlyBird, truckValuePerHour, motoValueEarlyBird, motoValuePerHour);
 
 
         System.out.println("**************************************************************************");
 
-
-
-        //System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
-      //  System.out.println(garage.toString());
 
         TextView displayGarage = findViewById(R.id.display_field);
         displayGarage.setText("Garage Created!");
 
     }
 
-    public void nextView(View view){
+    /**
+     * Next view.
+     *
+     * @param view the view
+     */
+    public void nextView(View view) {
 
 
         Intent intent = new Intent(this, CreateAttendantActivity.class);
-
-
 
 
         intent.putExtra("Garage", garage);
         startActivity(intent);
     }
 
-    public boolean checkEmptyValues(){
-
+    /**
+     * Check empty values boolean.
+     *
+     * @return the boolean
+     */
+    public boolean checkEmptyValues() {
 
 
         EditText[] arrayText = new EditText[12];
@@ -152,28 +192,27 @@ public class GarageSetupActivity extends AppCompatActivity {
         arrayText[11] = truckSpaceField;
 
 
+        for (int i = 0; i < arrayText.length; i++) {
 
-
-        for(int i =0; i < arrayText.length; i++){
-
-            if(arrayText[i].getText().toString().equals("") ||arrayText[i].getText().toString().equals("0")){
+            if (arrayText[i].getText().toString().equals("") || arrayText[i].getText().toString().equals("0")) {
                 alert();
                 return false;
 
             }
 
 
-
         }
 
 
-
-   return true;
+        return true;
 
 
     }
 
-    public void alert(){
+    /**
+     * Alert.
+     */
+    public void alert() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(GarageSetupActivity.this);
         builder.setCancelable(true);
@@ -187,7 +226,6 @@ public class GarageSetupActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         builder.show();

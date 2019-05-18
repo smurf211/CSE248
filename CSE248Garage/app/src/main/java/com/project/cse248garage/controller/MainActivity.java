@@ -5,8 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
-import android.os.Environment;
-import android.renderscript.ScriptGroup;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -53,26 +52,75 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * The Check credentials.
+     */
     CheckCredentials checkCredentials = new CheckCredentials();
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Json string.
+     */
     String JSON_STRING;
+    /**
+     * The Json result user.
+     */
     String json_result_user;
+    /**
+     * The Json result garage.
+     */
     static String json_result_garage;
+    /**
+     * The Json result vehicles.
+     */
     static String json_result_vehicles;
+    /**
+     * The Json result history.
+     */
     static String json_result_history;
+    /**
+     * The Json object.
+     */
     JSONObject jsonObject;
+    /**
+     * The Json array.
+     */
     JSONArray jsonArray;
+    /**
+     * The Type user.
+     */
     String typeUser = "user";
+    /**
+     * The Type garage.
+     */
     String typeGarage = "garage";
+    /**
+     * The Type vehicles.
+     */
     String typeVehicles = "vehicles";
+    /**
+     * The Type history.
+     */
     String typeHistory = "history";
-    String test ="";
+    /**
+     * The Test.
+     */
+    String test = "";
+    /**
+     * The Counter.
+     */
     int counter = 0;
+    /**
+     * The Button.
+     */
     Button button;
-
-
 
 
     @Override
@@ -86,21 +134,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         button = findViewById(R.id.button);
-      //  buttonEffect(button);
-
 
 
         Intent intent = getIntent();
 
-      //  if(intent.hasExtra("Garage")) {
-      //      garage = (Garage) getIntent().getSerializableExtra("Garage");
-     //   }
-      //  else{
-           garage = new Garage();
-       //     System.out.println("NEW GARAGE");
-      //  }
 
-
+        garage = new Garage();
 
 
         getJSON(typeUser);
@@ -112,28 +151,25 @@ public class MainActivity extends AppCompatActivity {
         b3.execute(typeHistory);
 
 
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_mainactivity,menu );
+        inflater.inflate(R.menu.menu_mainactivity, menu);
 
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item1:
 
                 Toast.makeText(this, "Load Garage", Toast.LENGTH_SHORT).show();
 
 
-               return true;
+                return true;
 
 
             default:
@@ -143,8 +179,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void adminLogin(View view){
-        if(counter== 0 ){
+    /**
+     * Admin login.
+     *
+     * @param view the view
+     */
+    public void adminLogin(View view) {
+        if (counter == 0) {
             createUsers();
             createGarage();
             createVehicles();
@@ -153,35 +194,26 @@ public class MainActivity extends AppCompatActivity {
         counter++;
 
 
-
-
-
         EditText userNameField = findViewById(R.id.username_field);
-    EditText passwordField = findViewById(R.id.password_field);
+        EditText passwordField = findViewById(R.id.password_field);
 
 
-
-    String userName = userNameField.getText().toString();
-    String password = passwordField.getText().toString();
-    String type = "login";
-
-
-     System.out.println(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() ));
-
-        if(checkCredentials.login(userName, password, garage.getBag().getUserAccountHash() )) {
+        String userName = userNameField.getText().toString();
+        String password = passwordField.getText().toString();
+        String type = "login";
 
 
+        if (checkCredentials.login(userName, password, garage.getBag().getUserAccountHash())) {
 
 
             User user = garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash());
 
 
-            if(user.isAdmin()) {
+            if (user.isAdmin()) {
 
 
                 BackgroundWorker backgroundWorker = new BackgroundWorker(this);
                 backgroundWorker.execute(type, userName, password);
-
 
 
                 user.setLoggedIn(true);
@@ -189,10 +221,8 @@ public class MainActivity extends AppCompatActivity {
                 intent1.putExtra("Garage", garage);
 
 
-               startActivity(intent1);
-            }
-
-            else {
+                startActivity(intent1);
+            } else {
                 BackgroundWorker backgroundWorker = new BackgroundWorker(this);
                 backgroundWorker.execute(type, userName, password);
 
@@ -203,8 +233,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-        }
-        else{
+        } else {
             userNameField.setText("");
             passwordField.setText("");
             userNameField.setError("Invalid username or password...");
@@ -218,15 +247,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    public void createUsers(){
+    /**
+     * Create users.
+     */
+    public void createUsers() {
 
 
         try {
             jsonObject = new JSONObject((json_result_user));
             jsonArray = jsonObject.getJSONArray("server_response");
-            if(jsonArray.length()> 0) {
+            if (jsonArray.length() > 0) {
 
                 int count = 0;
                 String id, firstname, lastname, username, password, admin;
@@ -245,22 +275,24 @@ public class MainActivity extends AppCompatActivity {
                     count++;
                 }
             }
-            } catch(JSONException e){
-                e.printStackTrace();
-            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            // garage.getBag().displayBagHash();
 
     }
 
-    public void createGarage(){
+    /**
+     * Create garage.
+     */
+    public void createGarage() {
 
 
         try {
             jsonObject = new JSONObject((json_result_garage));
-            jsonArray =jsonObject.getJSONArray("server_response");
+            jsonArray = jsonObject.getJSONArray("server_response");
 
-            if(jsonArray.length()> 0) {
+            if (jsonArray.length() > 0) {
                 int count = 0;
                 String carsize, trucksize, motosize, car_early, car_per_hour, truck_early, truck_per_hour, moto_early, moto_per_hour;
                 while (count < jsonArray.length()) {
@@ -294,14 +326,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void createVehicles(){
+    /**
+     * Create vehicles.
+     */
+    public void createVehicles() {
         Vehicle vehicle = null;
 
         System.out.println(json_result_vehicles);
         try {
             jsonObject = new JSONObject((json_result_vehicles));
-            jsonArray =jsonObject.getJSONArray("server_response");
-            if(jsonArray.length()> 0) {
+            jsonArray = jsonObject.getJSONArray("server_response");
+            if (jsonArray.length() > 0) {
                 int count = 0;
                 String ID, user_id, license_plate, f_category, category, space_id, date_in, date_out, time_in, time_out, early_bird, rate, firstname, lastname;
                 while (count < jsonArray.length()) {
@@ -357,15 +392,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void createHistory(){
+    /**
+     * Create history.
+     */
+    public void createHistory() {
 
         Vehicle vehicle = null;
 
         System.out.println(json_result_history);
         try {
             jsonObject = new JSONObject((json_result_history));
-            jsonArray =jsonObject.getJSONArray("server_response");
-            if(jsonArray.length()> 0) {
+            jsonArray = jsonObject.getJSONArray("server_response");
+            if (jsonArray.length() > 0) {
                 int count = 0;
                 String date_in, date_out, time_in, time_out, early_bird, space_id, license_plate, user_parked_id, user_removed_id, category,
                         false_category, rate, payment_scheme, vehicle_id, id1, firstname1, lastname1, username1, password1, id2, firstname2, lastname2, username2, password2;
@@ -437,11 +475,6 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-
-
-
-
-
                     Reciept reciept = new Reciept(vehicle, date_in, date_out,
                             time_in, time_out, Boolean.valueOf(early_bird), space_id, Double.valueOf(rate), Double.valueOf(payment_scheme), garage);
 
@@ -456,8 +489,6 @@ public class MainActivity extends AppCompatActivity {
                     record.addReciept(reciept);
 
 
-
-
                     count++;
                 }
             }
@@ -468,22 +499,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void getJSON(String type){
+    /**
+     * Gets json.
+     *
+     * @param type the type
+     */
+    public void getJSON(String type) {
 
         new BackgroundTask().execute(type);
-
-
-
 
 
     }
 
 
-    class BackgroundTask extends AsyncTask<String, Void, String>
-    {
+    /**
+     * The type Background task.
+     */
+    class BackgroundTask extends AsyncTask<String, Void, String> {
+        /**
+         * The Json url user.
+         */
         String json_url_user;
+        /**
+         * The Json url garage.
+         */
         String json_url_garage;
-
 
 
         @Override
@@ -498,10 +538,9 @@ public class MainActivity extends AppCompatActivity {
             json_url_garage = "http://smurf211.com/json_get_data_garage.php";
 
 
-
             String type = param[0];
 
-            if(type.equals("user")) {
+            if (type.equals("user")) {
                 test = typeUser;
 
                 try {
@@ -537,12 +576,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
 
 
-                json_result_user = result;
-               // System.out.println("USERS " + json_result_user );
-              //  garage.getBag().displayBagHash();
-              //  createUsers();
-
-
+            json_result_user = result;
 
 
         }
@@ -553,40 +587,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets json result garage.
+     *
+     * @param json_result_garage the json result garage
+     */
     public static void setJson_result_garage(String json_result_garage) {
         MainActivity.json_result_garage = json_result_garage;
     }
 
+    /**
+     * Sets garage.
+     *
+     * @param garage the garage
+     */
     public void setGarage(Garage garage) {
         this.garage = garage;
     }
 
+    /**
+     * Sets json result vehicles.
+     *
+     * @param json_result_vehicles the json result vehicles
+     */
     public static void setJson_result_vehicles(String json_result_vehicles) {
         MainActivity.json_result_vehicles = json_result_vehicles;
     }
 
+    /**
+     * Sets json result history.
+     *
+     * @param json_result_history the json result history
+     */
     public static void setJson_result_history(String json_result_history) {
         MainActivity.json_result_history = json_result_history;
     }
-    public static void buttonEffect(View button){
-        button.setOnTouchListener(new View.OnTouchListener() {
 
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
 
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        v.getBackground().clearColorFilter();
-                        v.invalidate();
-                        break;
-                    }
-                }
-                return false;
-            }
-        });
-    }
 }

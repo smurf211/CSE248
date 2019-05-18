@@ -27,16 +27,39 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * The type Manager select activity.
+ */
 public class ManagerSelectActivity extends AppCompatActivity {
 
+    /**
+     * The Garage.
+     */
     Garage garage;
+    /**
+     * The Intent 1.
+     */
     Intent intent1;
+    /**
+     * The Ctx.
+     */
     Context ctx = this;
+    /**
+     * The Button 14.
+     */
     Button button14;
+    /**
+     * The Button 16.
+     */
     Button button16;
+    /**
+     * The Button 17.
+     */
     Button button17;
+    /**
+     * The Button 18.
+     */
     Button button18;
-
 
 
     @Override
@@ -44,13 +67,13 @@ public class ManagerSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_select);
 
-        garage  = (Garage) getIntent().getSerializableExtra("Garage");
+        garage = (Garage) getIntent().getSerializableExtra("Garage");
         intent1 = new Intent(this, GarageSetupActivity.class);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(garage.getGarageSize() == 0){
+        if (garage.getGarageSize() == 0) {
 
             button14 = findViewById(R.id.button14);
             button16 = findViewById(R.id.button16);
@@ -68,7 +91,6 @@ public class ManagerSelectActivity extends AppCompatActivity {
             button18.setAlpha(alpha);
 
 
-
         }
     }
 
@@ -76,26 +98,23 @@ public class ManagerSelectActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu );
+        inflater.inflate(R.menu.example_menu, menu);
 
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item1:
                 Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
                 displayGarage();
-
 
 
                 return true;
             case R.id.item2:
                 Toast.makeText(this, "Display Garage", Toast.LENGTH_SHORT).show();
                 displayGarage();
-
-
 
 
                 return true;
@@ -117,10 +136,15 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
     }
 
-    public void createGarage(View view){
+    /**
+     * Create garage.
+     *
+     * @param view the view
+     */
+    public void createGarage(View view) {
 
 
-        if(garage.isGarageCreated()){
+        if (garage.isGarageCreated()) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(ManagerSelectActivity.this);
             builder.setCancelable(true);
@@ -145,21 +169,16 @@ public class ManagerSelectActivity extends AppCompatActivity {
                     backgroundWorker.execute("destroy garage");
 
 
-
                     intent1.putExtra("Garage", garage);
 
                     startActivity(intent1);
-
 
 
                 }
             });
 
             builder.show();
-        }
-
-
-    else {
+        } else {
             intent1.putExtra("Garage", garage);
 
             startActivity(intent1);
@@ -169,7 +188,12 @@ public class ManagerSelectActivity extends AppCompatActivity {
     }
 
 
-    public void parkCar(View view){
+    /**
+     * Park car.
+     *
+     * @param view the view
+     */
+    public void parkCar(View view) {
 
 
         Intent intent2 = new Intent(this, AttendantParkActivity.class);
@@ -177,11 +201,14 @@ public class ManagerSelectActivity extends AppCompatActivity {
         startActivity(intent2);
 
 
-
     }
 
-    public void removeCar(View view){
-
+    /**
+     * Remove car.
+     *
+     * @param view the view
+     */
+    public void removeCar(View view) {
 
 
         Intent intent2 = new Intent(this, AttendantRemoveActivity.class);
@@ -189,11 +216,14 @@ public class ManagerSelectActivity extends AppCompatActivity {
         startActivity(intent2);
 
 
-
     }
 
-    public void addAttendant(View view){
-
+    /**
+     * Add attendant.
+     *
+     * @param view the view
+     */
+    public void addAttendant(View view) {
 
 
         Intent intent2 = new Intent(this, CreateAttendantActivity.class);
@@ -202,7 +232,12 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
     }
 
-    public void removeAttendant(View view){
+    /**
+     * Remove attendant.
+     *
+     * @param view the view
+     */
+    public void removeAttendant(View view) {
 
         Intent intent2 = new Intent(this, RemoveAttendantActivity.class);
         intent2.putExtra("Garage", garage);
@@ -211,70 +246,30 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
     }
 
-        public void logOut(View view){
-            garage.getBag().displayBagHash();
-
-
-            User user =  garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
-            user.setLoggedIn(false);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("Garage", garage);
-
-            startActivity(intent);
-
-
-        }
-
-    public void saveGarage(){
-
-
-        Context context = ManagerSelectActivity.this;
-
-        File file = new File(context.getFilesDir(), "garage.dat");
-
-
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-
-            out.writeObject(garage);
-
-            out.flush();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
+    /**
+     * Log out.
+     *
+     * @param view the view
+     */
+    public void logOut(View view) {
         garage.getBag().displayBagHash();
+
+
+        User user = garage.getBag().getLoggedInUser(garage.getBag().getUserAccountHash());
+        user.setLoggedIn(false);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Garage", garage);
+
+        startActivity(intent);
+
 
     }
 
-    public void loadGarage(){
 
-
-        Context context = ManagerSelectActivity.this;
-
-        File file = new File(context.getFilesDir(), "garage.dat");
-
-
-        FileInputStream fis;
-        try {
-            fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            garage = (Garage) ois.readObject();
-
-            ois.close();
-        } catch (FileNotFoundException e) {
-            System.out.println( e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-        }
-
-        garage.getBag().displayBagHash();
-
-        System.out.println(garage.getCarEarlyBird() + " " + garage.getCarPerHour());
-    }
-
-    public void displayGarage(){
+    /**
+     * Display garage.
+     */
+    public void displayGarage() {
 
         Intent intent2 = new Intent(this, DisplayGarageActivity.class);
         intent2.putExtra("Garage", garage);
@@ -283,7 +278,10 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
     }
 
-    public void displayAttendants(){
+    /**
+     * Display attendants.
+     */
+    public void displayAttendants() {
 
         Intent intent2 = new Intent(this, DisplayAttendantActivity.class);
         intent2.putExtra("Garage", garage);
@@ -292,7 +290,10 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
     }
 
-    public void displayRecords(){
+    /**
+     * Display records.
+     */
+    public void displayRecords() {
 
         Intent intent2 = new Intent(this, RecordsActivity.class);
         intent2.putExtra("Garage", garage);
@@ -300,9 +301,6 @@ public class ManagerSelectActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
 
 }
