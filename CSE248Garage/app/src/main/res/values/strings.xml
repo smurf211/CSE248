@@ -56,4 +56,5 @@
     <string name="vehicle">Vehicles</string>
     <string name="Attendant">Attendants</string>
     <string name="usernamehint">enter a username...</string>
+    <string name="carspaces">Car Spaces</string>
 </resources>

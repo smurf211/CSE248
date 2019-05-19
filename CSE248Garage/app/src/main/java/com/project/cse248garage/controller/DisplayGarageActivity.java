@@ -10,6 +10,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannedString;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
@@ -42,6 +43,7 @@ public class DisplayGarageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_garage);
 
         garage = (Garage) getIntent().getSerializableExtra("Garage");
+        displayGarage();
     }
 
     /**
@@ -49,7 +51,7 @@ public class DisplayGarageActivity extends AppCompatActivity {
      *
      * @param view the view
      */
-    public void displayGarage(View view) {
+    public void displayGarage() {
 
 
         if (garage.getCarBag() == null || garage.getTruckSpaceBag() == null || garage.getMotorcycleSpaceBag() == null) {
@@ -77,8 +79,11 @@ public class DisplayGarageActivity extends AppCompatActivity {
 
 
         carView = findViewById(R.id.display_field1);
+        carView.setMovementMethod(new ScrollingMovementMethod());
         truckView = findViewById(R.id.display_field2);
+        truckView.setMovementMethod(new ScrollingMovementMethod());
         motoView = findViewById(R.id.display_field3);
+        motoView.setMovementMethod(new ScrollingMovementMethod());
 
 
         for (int i = 0; i < garage.getCarBag().length; i++) {

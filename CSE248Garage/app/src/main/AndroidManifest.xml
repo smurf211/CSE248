@@ -11,9 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".databasePhpTest.RegisterActivity"></activity>
-        <activity android:name=".databasePhpTest.DataBaseLoginActivity" />
+        android:usesCleartextTraffic="true"
+        android:screenOrientation="portrait">
         <activity android:name=".controller.RecordsActivity" />
         <activity android:name=".controller.DisplayAttendantActivity" />
         <activity android:name=".controller.DisplayGarageActivity" />

@@ -274,6 +274,7 @@ public class Garage implements Serializable {
         openSpace.setVehicle(vehicle);
 
 
+
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         String[] tokens = timeStamp.split(" ");
         String date = tokens[0];
