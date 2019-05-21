@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.project.cse248garage.R;
 
 import com.project.cse248garage.model.Car;
@@ -160,26 +161,22 @@ public class MainActivity extends AppCompatActivity {
 
 
             User user = garage.getBag().getUser(userName, password, garage.getBag().getUserAccountHash());
+            user.setLoggedIn(true);
+            BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+            backgroundWorker.execute(type, userName, password);
 
 
             if (user.isAdmin()) {
 
 
-                BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-                backgroundWorker.execute(type, userName, password);
-
-
-                user.setLoggedIn(true);
                 Intent intent1 = new Intent(this, ManagerSelectActivity.class);
                 intent1.putExtra("Garage", garage);
 
 
                 startActivity(intent1);
             } else {
-                BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-                backgroundWorker.execute(type, userName, password);
 
-                user.setLoggedIn(true);
+
                 Intent intent2 = new Intent(this, AttendantOptionsActivity.class);
                 intent2.putExtra("Garage", garage);
                 startActivity(intent2);
